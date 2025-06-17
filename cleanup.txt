@@ -1660,3 +1660,28 @@ Converting ./testdata/glass_blur_medium_blur.svg → ./testdata/glass_blur_mediu
 === Release process started for version v1.4.0 ===
 python -m uv run hatch clean
 git add .
+git commit -m "Release v1.4.0"
+[main 8f3ca03] Release v1.4.0
+ 25 files changed, 21167 insertions(+), 20598 deletions(-)
+git tag v1.4.0
+git push
+To https://github.com/fontlaborg/vexylicon.git
+   f9171c9..8f3ca03  main -> main
+git push --tags
+To https://github.com/fontlaborg/vexylicon.git
+ * [new tag]         v1.1.0 -> v1.1.0
+ * [new tag]         v1.1.1 -> v1.1.1
+ * [new tag]         v1.1.3 -> v1.1.3
+ * [new tag]         v1.1.4 -> v1.1.4
+ * [new tag]         v1.3.0 -> v1.3.0
+ * [new tag]         v1.4.0 -> v1.4.0
+python -m uv run hatch build
+─────────────────────────────────────────────────────────── sdist ───────────────────────────────────────────────────────────
+dist/vexylicon-1.4.1.dev0+g8f3ca03.d20250617.tar.gz
+─────────────────────────────────────────────────────────── wheel ───────────────────────────────────────────────────────────
+dist/vexylicon-1.4.1.dev0+g8f3ca03.d20250617-py3-none-any.whl
+python -m uv run hatch publish
+dist/vexylicon-1.4.1.dev0+g8f3ca03.d20250617-py3-none-any.whl ... failed
+Error uploading to repository: https://upload.pypi.org/legacy/ - Client error '400 The use of local versions in <Version('1.4.1.dev0+g8f3ca03.d20250617')> is not allowed. See https://packaging.python.org/specifications/core-metadata for more information.' for url 'https://upload.pypi.org/legacy/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+=== Release v1.4.0 completed at Tue Jun 17 23:58:44 CEST 2025 ===

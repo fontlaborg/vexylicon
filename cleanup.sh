@@ -54,20 +54,20 @@ if [ -n "$1" ]; then
     VERSION="$1"
     echo "=== Release process started for version $VERSION ==="
 
-    echo "python -m uv run hatch clean"
-    python -m uv run hatch clean
-
     echo "git add ."
     git add .
+
+    echo "python -m uv run hatch clean"
+    python -m uv run hatch clean
 
     echo "git commit -m \"Release $VERSION\""
     git commit -m "Release $VERSION"
 
-    echo "git tag $VERSION"
-    git tag "$VERSION"
-
     echo "git push"
     git push
+
+    echo "git tag $VERSION"
+    git tag "$VERSION"
 
     echo "git push --tags"
     git push --tags

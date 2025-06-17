@@ -49,14 +49,18 @@ from svgpathtools import (  # type: ignore
 
 
 def path_bbox(d: str) -> Tuple[float, float]:
-    """Return (width, height) of the path bounding box."""
+    """Return (width, height) of the path bounding box.
+
+"""
     p = parse_path(d)
     xmin, xmax, ymin, ymax = p.bbox()
     return xmax - xmin, ymax - ymin
 
 
 def interpolate_segment(a, b, t):
-    """Interpolate between two path segments (CubicBezier or Line)."""
+    """Interpolate between two path segments (CubicBezier or Line).
+
+"""
     if isinstance(a, CubicBezier):
         # CubicBezier is not iterable by default (for type checker), interpolate manually
         return CubicBezier(  # type: ignore[arg-type]
@@ -71,7 +75,9 @@ def interpolate_segment(a, b, t):
 
 
 def to_cubic_list(path: Path) -> List[CubicBezier]:
-    """Return segments where Lines stay lines, CubicBezier unchanged."""
+    """Return segments where Lines stay lines, CubicBezier unchanged.
+
+"""
     segs = []
     for seg in path:
         if isinstance(seg, Line):
@@ -87,7 +93,9 @@ def to_cubic_list(path: Path) -> List[CubicBezier]:
 
 
 def parse_dual_contour_path(d: str) -> Tuple[str, str]:
-    """Split a path with two contours (separated by Z M or M commands)."""
+    """Split a path with two contours (separated by Z M or M commands).
+
+"""
     # Handle both " Z M " and " M " separations
     if " Z M " in d:
         parts = d.split(" Z M ")
@@ -112,7 +120,9 @@ def parse_dual_contour_path(d: str) -> Tuple[str, str]:
 
 
 def get_path_data_from_element(elem: ET.Element, tree: ET.ElementTree) -> str:
-    """Extract path data from either a <path> element or a <use> element that references a path."""
+    """Extract path data from either a <path> element or a <use> element that references a path.
+
+"""
     if elem.tag.endswith("path"):
         return elem.get("d", "")
     elif elem.tag.endswith("use"):
@@ -129,10 +139,13 @@ def get_path_data_from_element(elem: ET.Element, tree: ET.ElementTree) -> str:
 
 
 def round_svg_coordinates(d_string: str, precision: int = 2) -> str:
-    """Round all numeric coordinates in SVG path string to specified precision."""
+    """Round all numeric coordinates in SVG path string to specified precision.
+
+"""
     import re
 
     def round_match(match):
+        """    """
         return str(round(float(match.group()), precision))
 
     # Match floating point numbers (including scientific notation)
@@ -140,7 +153,9 @@ def round_svg_coordinates(d_string: str, precision: int = 2) -> str:
 
 
 def align_path_start(p_outer: Path, p_inner: Path) -> Path:
-    """Rotate p_outer so that its first point is closest to p_inner[0].start."""
+    """Rotate p_outer so that its first point is closest to p_inner[0].start.
+
+"""
     target = p_inner[0].start
     # Find segment whose start-point is nearest to target
     idx = min(range(len(p_outer)), key=lambda i: abs(p_outer[i].start - target))
@@ -156,6 +171,7 @@ def generate_ring_paths(
 
     The outer contour is first reversed to align its vertex ordering with the
     inner contour so that point-wise interpolation makes sense.
+
     """
     # Parse both contours into Paths
     outer_path = parse_path(outer_contour)
@@ -201,6 +217,7 @@ def generate_ring_paths(
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """    """
     p = argparse.ArgumentParser(
         description="Insert blended bevel steps into the SVG icon",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -276,6 +293,7 @@ def locate_paths(
     Strategy:
     1. Try to find paths with given id attributes.
     2. Fallback to area-based detection (largest two paths).
+
     """
     ns_path = ".//{http://www.w3.org/2000/svg}path"
     # Try ID-based lookup first - check both path and use elements
@@ -318,6 +336,9 @@ def locate_paths(
 
 
 def main() -> None:
+    """    Used in:
+    - old/older/icon_masker.py
+    """
     args = build_parser().parse_args()
 
     tree = ET.parse(args.input_svg)

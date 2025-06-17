@@ -42,12 +42,16 @@ ET.register_namespace("", NS)
 
 
 def _ns(tag: str) -> str:
-    """Return namespaced tag."""
+    """Return namespaced tag.
+
+"""
     return f"{{{NS}}}{tag}"
 
 
 def run_blender(src: FsPath, steps: int) -> ET.ElementTree:
-    """Invoke icon_blender.main() and return parsed ElementTree of result."""
+    """Invoke icon_blender.main() and return parsed ElementTree of result.
+
+"""
     with tempfile.NamedTemporaryFile("w+", suffix=".svg", delete=False) as tmp:
         tmp_path = FsPath(tmp.name)
     args = [
@@ -67,7 +71,9 @@ def run_blender(src: FsPath, steps: int) -> ET.ElementTree:
 
 
 def duplicate_gradient(elem: ET.Element, suffix: str) -> ET.Element:
-    """Return a *copy* of `elem` with its id suffixed."""
+    """Return a *copy* of `elem` with its id suffixed.
+
+"""
     new_elem = ET.fromstring(ET.tostring(elem, encoding="unicode"))
     gid = new_elem.get("id", "")
     new_elem.set("id", f"{gid}-{suffix}")
@@ -75,6 +81,7 @@ def duplicate_gradient(elem: ET.Element, suffix: str) -> ET.Element:
 
 
 def post_process(tree: ET.ElementTree, payload_svg: FsPath | None) -> ET.ElementTree:
+    """    """
     root = tree.getroot()
 
     # 1. Collect <defs> (create if missing)
@@ -185,6 +192,7 @@ def post_process(tree: ET.ElementTree, payload_svg: FsPath | None) -> ET.Element
 
 
 def write_variants(tree: ET.ElementTree, outdir: FsPath):
+    """    """
     outdir.mkdir(parents=True, exist_ok=True)
     light_path = outdir / "mask-light.svg"
     dark_path = outdir / "mask-dark.svg"
@@ -217,6 +225,7 @@ def build_mask(
         outdir: Directory for outputs
         steps: Number of bevel interpolation steps
         mask_svg: Path to base mask SVG file
+
     """
     base_svg = FsPath(mask_svg)
     if not base_svg.exists():

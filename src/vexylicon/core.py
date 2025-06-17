@@ -163,6 +163,16 @@ class VexyliconGenerator:
         # Generate ring paths
         ring_paths = generate_ring_paths(outer_contour, inner_contour, self.params.steps)
 
+        # Ensure an <path id="inner"> exists for clipping masks
+        if processor.find_by_id("inner") is None:
+            inner_path_elem = processor.create_element(
+                "path",
+                id="inner",
+                d=inner_contour,
+                fill="none",
+            )
+            processor.get_defs().append(inner_path_elem)
+
         # Create bevel steps group
         bevel_group = processor.create_element("g", id="bevelSteps")
 

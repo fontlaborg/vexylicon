@@ -21,6 +21,7 @@ from vexylicon import VexyliconGenerator, VexyliconParams
 
 
 def main():
+    """    """
     # Create generator with default theme
     generator = VexyliconGenerator(theme="default")
 

@@ -25,6 +25,7 @@ def slice_image(input_image: str):
         - {base}-10.png: Top right quarter
         - {base}-01.png: Bottom left quarter
         - {base}-11.png: Bottom right quarter
+
     """
     # Load the image
     img = Image.open(input_image)

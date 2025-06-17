@@ -19,7 +19,10 @@ def test_vexylicon_generator_creation():
 def test_vexylicon_params():
     """Test parameter configuration."""
     params = VexyliconParams(
-        steps=16, opacity_start=0.8, opacity_end=0.1, opacity_progression=OpacityProgression.LINEAR
+        steps=16,
+        opacity_start=0.8,
+        opacity_end=0.1,
+        opacity_progression=OpacityProgression.LINEAR,
     )
     assert params.steps == 16
     assert params.opacity_start == 0.8

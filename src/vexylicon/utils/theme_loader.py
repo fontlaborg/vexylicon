@@ -233,7 +233,11 @@ class ThemeLoader:
         """
         if hasattr(self.theme_dir, "iterdir"):
             # Handle importlib.resources path
-            return [f.name[:-5] for f in self.theme_dir.iterdir() if f.name.endswith(".json")]
+            return [
+                f.name[:-5]
+                for f in self.theme_dir.iterdir()
+                if f.name.endswith(".json")
+            ]
         # Handle regular Path
         return [f.stem for f in self.theme_dir.glob("*.json")]
 

@@ -94,6 +94,11 @@ docs = [
     "myst-parser>=3.0.0", # Markdown support in Sphinx
 ]
 
+# Gradio-lite for web interface
+lite = [
+    "gradio>=4.47.0",
+]
+
 # All optional dependencies combined
 all = [
 ]
@@ -125,7 +130,8 @@ build-backend = 'hatchling.build' # Specifies Hatchling as the build backend
 # how to handle versioning.
 #------------------------------------------------------------------------------
 [tool.hatch.build]
-exclude = ["**/__pycache__", "**/.pytest_cache", "**/.mypy_cache"]
+exclude = ["**/__pycache__", "**/.pytest_cache", "**/.mypy_cache", "tests", ".github", "docs/**/node_modules"]
+include = ["docs/**"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/vexylicon"]

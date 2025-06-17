@@ -95,7 +95,9 @@ class VexyliconCLI:
                     )
                     print(f"[green]✓ Created PNG: {output_path}")
                 except ImportError:
-                    print("[red]Error: PNG output requires cairosvg. Install with: pip install cairosvg")
+                    print(
+                        "[red]Error: PNG output requires cairosvg. Install with: pip install cairosvg"
+                    )
                     sys.exit(1)
             else:
                 print(f"[red]Error: Unknown format '{format}'. Use 'svg' or 'png'.")
@@ -211,7 +213,9 @@ class VexyliconCLI:
         try:
             import cairosvg
         except ImportError:
-            print("[red]Error: Preview requires cairosvg. Install with: pip install cairosvg")
+            print(
+                "[red]Error: Preview requires cairosvg. Install with: pip install cairosvg"
+            )
             sys.exit(1)
 
         svg_path = Path(svg_file)
@@ -223,7 +227,12 @@ class VexyliconCLI:
 
         try:
             print(f"[blue]Generating preview of {svg_file}")
-            cairosvg.svg2png(url=str(svg_path), write_to=str(output_path), output_width=1200, output_height=1200)
+            cairosvg.svg2png(
+                url=str(svg_path),
+                write_to=str(output_path),
+                output_width=1200,
+                output_height=1200,
+            )
             print(f"[green]✓ Preview saved to: {output_path}")
         except Exception as e:
             print(f"[red]Error generating preview: {e}")

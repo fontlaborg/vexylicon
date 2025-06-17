@@ -76,7 +76,9 @@ class ThemeValidationError(VexyliconError):
 class VexyliconGenerator:
     """Main class for generating liquid-glass SVG effects."""
 
-    def __init__(self, theme: Theme | str = "default", params: VexyliconParams | None = None):
+    def __init__(
+        self, theme: Theme | str = "default", params: VexyliconParams | None = None
+    ):
         """Initialize generator with theme and parameters.
 
         Args:
@@ -163,7 +165,9 @@ class VexyliconGenerator:
             raise InvalidSVGError(msg) from e
 
         # Generate ring paths
-        ring_paths = generate_ring_paths(outer_contour, inner_contour, self.params.steps)
+        ring_paths = generate_ring_paths(
+            outer_contour, inner_contour, self.params.steps
+        )
 
         # Ensure an <path id="inner"> exists for clipping masks
         if processor.find_by_id("inner") is None:
@@ -196,7 +200,9 @@ class VexyliconGenerator:
             main_shape.set("fill-opacity", f"{min_opacity:.3f}")
 
         # Create bevel step paths (single set, themeable via gradients)
-        for i, (path_d, opacity) in enumerate(zip(ring_paths, opacities, strict=False), 1):
+        for i, (path_d, opacity) in enumerate(
+            zip(ring_paths, opacities, strict=False), 1
+        ):
             step = processor.create_element(
                 "path",
                 d=path_d,
@@ -214,7 +220,9 @@ class VexyliconGenerator:
                 if processor.find_by_id(blur_filter_id) is None:
                     defs = processor.get_defs()
                     blur_filter = processor.create_element("filter", id=blur_filter_id)
-                    blur_elem = processor.create_element("feGaussianBlur", stdDeviation=f"{self.params.blur}")
+                    blur_elem = processor.create_element(
+                        "feGaussianBlur", stdDeviation=f"{self.params.blur}"
+                    )
                     blur_filter.append(blur_elem)
                     defs.append(blur_filter)
 
@@ -238,7 +246,9 @@ class VexyliconGenerator:
             small_shape.set("fill-opacity", f"{min_opacity:.3f}")
 
             # Create small bevel step paths using cornerHighlight gradient
-            for i, (path_d, opacity) in enumerate(zip(ring_paths, opacities, strict=False), 1):
+            for i, (path_d, opacity) in enumerate(
+                zip(ring_paths, opacities, strict=False), 1
+            ):
                 small_step = processor.create_element(
                     "path",
                     d=path_d,
@@ -361,8 +371,14 @@ class VexyliconGenerator:
         # Parse payload SVG
         try:
             if isinstance(payload_svg, str | Path):
-                payload_path = Path(payload_svg) if isinstance(payload_svg, str) else payload_svg
-                payload_processor = SVGProcessor(payload_path) if payload_path.exists() else SVGProcessor(payload_svg)
+                payload_path = (
+                    Path(payload_svg) if isinstance(payload_svg, str) else payload_svg
+                )
+                payload_processor = (
+                    SVGProcessor(payload_path)
+                    if payload_path.exists()
+                    else SVGProcessor(payload_svg)
+                )
             else:
                 payload_processor = SVGProcessor(payload_svg)
         except etree.XMLSyntaxError as e:

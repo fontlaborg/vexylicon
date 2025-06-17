@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- Load the JS + CSS bundle -->
+  <script type="module" crossorigin
+    src="https://cdn.jsdelivr.net/npm/@gradio/lite/dist/lite.js"></script>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@gradio/lite/dist/lite.css" />
+  <title>Vexylicon Lite</title>
+  <style>
+    body { margin: 0; background:#202020 }
+  </style>
+</head>
+<body>
+<gradio-lite>
+import asyncio, micropip
+# Install run‑time deps (pre‑installed: lxml)
+await micropip.install(["svgpathtools==1.6.1"])
+# For now, we'll import the local module directly since we're in development
+# In production, this would be:
+# await micropip.install(["vexylicon @ https://github.com/fontlaborg/vexylicon/releases/download/vX.X.X/vexylicon-X.X.X-py3-none-any.whl"])
+
+# Since we're in development, we'll create a minimal version inline
+import gradio as gr
+from io import BytesIO
+
+# Inline minimal implementation for development
+# This would normally come from vexylicon.webui import generate_svg
+def generate_svg(payload, steps=24, quality=None, theme="default"):
+    """Placeholder for development - returns a simple SVG"""
+    if payload:
+        # In production, this would process the payload
+        return payload.decode() if isinstance(payload, bytes) else str(payload)
+    
+    # Return a simple placeholder SVG
+    return f'''<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4169E1;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1E90FF;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <circle cx="100" cy="100" r="80" fill="url(#grad)" />
+    <text x="100" y="110" text-anchor="middle" fill="white" font-size="16">
+        Vexylicon Demo
+    </text>
+    <text x="100" y="130" text-anchor="middle" fill="white" font-size="12">
+        Steps: {steps}
+    </text>
+</svg>'''
+
+with gr.Blocks(theme=gr.themes.Monochrome()) as demo:
+    gr.Markdown("# Vexylicon Lite")
+    gr.Markdown("Create sophisticated liquid-glass SVG icon effects")
+    
+    with gr.Row():
+        with gr.Column():
+            payload = gr.File(label="SVG payload (optional)", type="binary")
+            steps = gr.Slider(4, 32, value=24, step=4, label="Bevel steps")
+            quality = gr.Dropdown(["low", "medium", "high", "ultra"], label="Quality (optional)", value=None)
+            theme = gr.Dropdown(["default"], label="Theme", value="default")
+            run = gr.Button("Generate", variant="primary")
+        
+        with gr.Column():
+            out = gr.HTML(label="Preview")
+            file = gr.File(label="Download SVG")
+
+    async def _go(file_data, steps, quality, theme):
+        payload_bytes = None
+        if file_data is not None:
+            payload_bytes = file_data
+        
+        svg = generate_svg(payload_bytes, steps=steps, quality=quality, theme=theme)
+        # For the file output, we need to write to a temporary file in Pyodide
+        import tempfile
+        import os
+        
+        # Create a temporary file
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.svg', delete=False) as f:
+            f.write(svg)
+            temp_path = f.name
+        
+        return gr.update(value=svg), temp_path
+    
+    run.click(_go, [payload, steps, quality, theme], [out, file])
+    
+    # Load example on startup
+    def load_example():
+        svg = generate_svg(None)
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.svg', delete=False) as f:
+            f.write(svg)
+            temp_path = f.name
+        return gr.update(value=svg), temp_path
+    
+    demo.load(load_example, outputs=[out, file])
+
+# IMPORTANT: Must call launch() for Gradio-Lite
+demo.launch()
+</gradio-lite>
+</body>
+</html>

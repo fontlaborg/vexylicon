@@ -8,7 +8,9 @@
 This script demonstrates:
 1. Loading a payload SVG (book icon)
 2. Generating a glass effect with the payload
-3. Saving the output for use in HTML demos
+3. Generating quality variants (different step counts)
+4. Generating blur variants (different blur effects)
+5. Saving the output for use in HTML demos
 """
 
 import sys
@@ -20,8 +22,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from vexylicon import VexyliconGenerator, VexyliconParams
 
 
-def main():
-    """    """
+def main() -> None:
+    """"""
     # Create generator with default theme
     generator = VexyliconGenerator(theme="default")
 
@@ -63,6 +65,22 @@ def main():
             f.write(svg_quality)
 
         print(f"✓ {quality_name.capitalize()} quality ({steps} steps) saved to: {quality_path}")
+
+    # Generate blur variants to demonstrate the blur effect
+    print("\nGenerating blur variants...")
+    blur_variants = {"no_blur": 0.0, "light_blur": 1.0, "medium_blur": 2.0, "heavy_blur": 3.5}
+
+    for blur_name, blur_value in blur_variants.items():
+        params = VexyliconParams(steps=16, blur=blur_value)
+        gen = VexyliconGenerator(theme="default", params=params)
+        svg_blur = gen.generate(payload_svg=payload_path)
+
+        blur_path = Path(__file__).parent / f"glass_blur_{blur_name}.svg"
+        with open(blur_path, "w") as f:
+            f.write(svg_blur)
+
+        blur_desc = f"blur={blur_value}" if blur_value > 0 else "no blur"
+        print(f"✓ {blur_name.replace('_', ' ').title()} ({blur_desc}) saved to: {blur_path}")
 
     print("\n✅ All examples generated successfully!")
     print("\nTo view in browser, open test.html")

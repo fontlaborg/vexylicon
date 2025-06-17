@@ -37,6 +37,7 @@ class VexyliconCLI:
         opacity_progression: int = 4,
         quality: str | None = None,
         format: str = "svg",
+        blur: float = 0.0,
     ) -> None:
         """Create liquid-glass icon mask with optional payload.
 
@@ -50,6 +51,7 @@ class VexyliconCLI:
             opacity_progression: Opacity progression mode (1-4)
             quality: Preset quality level (low/medium/high/ultra)
             format: Output format (svg or png - png requires cairosvg)
+            blur: Blur radius for bevel steps in pixels (default: 0)
         """
         try:
             # Create parameters
@@ -59,6 +61,7 @@ class VexyliconCLI:
                 opacity_end=opacity_end,
                 opacity_progression=OpacityProgression(opacity_progression),
                 quality=quality,
+                blur=blur,
             )
 
             # Create generator
@@ -113,6 +116,7 @@ class VexyliconCLI:
         steps: int = 24,
         quality: str | None = None,
         recursive: bool = False,
+        blur: float = 0.0,
     ) -> None:
         """Process multiple SVGs in batch mode.
 
@@ -123,6 +127,7 @@ class VexyliconCLI:
             steps: Number of bevel steps
             quality: Preset quality level
             recursive: Process subdirectories recursively
+            blur: Blur radius for bevel steps in pixels (default: 0)
         """
         input_path = Path(input_dir)
         output_path = Path(output_dir)
@@ -145,7 +150,7 @@ class VexyliconCLI:
         print(f"[blue]Found {len(svg_files)} SVG files to process")
 
         # Create parameters
-        params = VexyliconParams(steps=steps, quality=quality)
+        params = VexyliconParams(steps=steps, quality=quality, blur=blur)
         generator = VexyliconGenerator(theme=theme, params=params)
 
         # Process each file

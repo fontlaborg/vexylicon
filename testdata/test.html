@@ -106,7 +106,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Clip path will be applied via JavaScript */
+            /* Will be clipped using SVG clipPath from the glass effect */
         }
         
         /* Glass overlay */
@@ -117,6 +117,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 10;
         }
         
         .label {
@@ -279,11 +280,7 @@
             document.body.classList.toggle('light-theme');
             const theme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
             localStorage.setItem('theme', theme);
-            updateSvgTheme(theme);
-        }
-        
-        // Update SVG data-theme attribute
-        function updateSvgTheme(theme) {
+            // Update SVG themes
             document.querySelectorAll('.glass-overlay svg').forEach(svg => {
                 svg.setAttribute('data-theme', theme);
             });
@@ -298,27 +295,13 @@
         // Load the glass effect SVG
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // Try to load generated glass effect with payload first
-                let response = await fetch('glass_with_payload.svg');
+                // Load the plain glass effect (without payload) for overlay
+                let response = await fetch('glass_plain.svg');
                 let svgText;
                 
                 if (!response.ok) {
-                    console.log('Generated file not found, falling back to placeholder...');
-                    // Create a simple glass effect placeholder
-                    svgText = `
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
-                            <defs>
-                                <clipPath id="iconClip">
-                                    <path d="M600 100 C 900 100, 1100 300, 1100 600 C 1100 900, 900 1100, 600 1100 C 300 1100, 100 900, 100 600 C 100 300, 300 100, 600 100 Z M600 300 C 400 300, 300 400, 300 600 C 300 800, 400 900, 600 900 C 800 900, 900 800, 900 600 C 900 400, 800 300, 600 300 Z"/>
-                                </clipPath>
-                                <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:white;stop-opacity:0.3" />
-                                    <stop offset="100%" style="stop-color:white;stop-opacity:0.1" />
-                                </linearGradient>
-                            </defs>
-                            <rect width="1200" height="1200" fill="url(#glassGradient)" opacity="0.5"/>
-                        </svg>
-                    `;
+                    console.log('Glass effect file not found, creating minimal placeholder...');
+                    return;
                 } else {
                     svgText = await response.text();
                 }
@@ -326,49 +309,96 @@
                 // Apply to all glass overlays
                 const overlays = document.querySelectorAll('.glass-overlay');
                 overlays.forEach((overlay, index) => {
-                    // Make IDs unique for each instance
-                    let instanceSvgText = svgText.replace(/id="([^"]+)"/g, (match, id) => {
-                        return `id="${id}-${index}"`;
-                    });
-                    instanceSvgText = instanceSvgText.replace(/href="#([^"]+)"/g, (match, href) => {
-                        return `href="#${href.replace(/-\d+$/, '')}-${index}"`;
-                    });
-                    instanceSvgText = instanceSvgText.replace(/url\(#([^)]+)\)/g, (match, url) => {
-                        return `url(#${url.replace(/-\d+$/, '')}-${index})`;
-                    });
-                    instanceSvgText = instanceSvgText.replace(/clip-path="url\(#([^)]+)\)"/g, (match, url) => {
-                        return `clip-path="url(#${url.replace(/-\d+$/, '')}-${index})"`;
+                    // Parse the SVG
+                    const parser = new DOMParser();
+                    const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+                    const svgElement = svgDoc.documentElement.cloneNode(true);
+                    
+                    // Make all IDs unique for this instance
+                    const elementsWithIds = svgElement.querySelectorAll('[id]');
+                    const idMap = new Map();
+                    
+                    elementsWithIds.forEach(element => {
+                        const oldId = element.getAttribute('id');
+                        const newId = `${oldId}-${index}`;
+                        idMap.set(oldId, newId);
+                        element.setAttribute('id', newId);
                     });
                     
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = instanceSvgText;
-                    const svgElement = tempDiv.querySelector('svg');
-                    
-                    if (svgElement) {
-                        // Extract clip path from SVG if it exists
-                        const clipPath = svgElement.querySelector('clipPath[id*="innerClip"]');
-                        if (clipPath) {
-                            // Apply clip path to the background content
-                            const clippedContent = overlay.previousElementSibling;
-                            if (clippedContent && clippedContent.classList.contains('clipped-content')) {
-                                const clipId = clipPath.getAttribute('id');
-                                clippedContent.style.clipPath = `url(#${clipId})`;
+                    // Update all references to use new IDs
+                    const elementsWithHrefs = svgElement.querySelectorAll('[href]');
+                    elementsWithHrefs.forEach(element => {
+                        const href = element.getAttribute('href');
+                        if (href.startsWith('#')) {
+                            const refId = href.substring(1);
+                            if (idMap.has(refId)) {
+                                element.setAttribute('href', `#${idMap.get(refId)}`);
                             }
                         }
+                    });
+                    
+                    // Update URL references in fill, stroke, clip-path, etc.
+                    const allElements = svgElement.querySelectorAll('*');
+                    allElements.forEach(element => {
+                        ['fill', 'stroke', 'clip-path', 'filter'].forEach(attr => {
+                            const value = element.getAttribute(attr);
+                            if (value && value.includes('url(#')) {
+                                const updatedValue = value.replace(/url\(#([^)]+)\)/g, (match, refId) => {
+                                    return idMap.has(refId) ? `url(#${idMap.get(refId)})` : match;
+                                });
+                                element.setAttribute(attr, updatedValue);
+                            }
+                        });
+                    });
+                    
+                    // Set up the SVG element
+                    svgElement.setAttribute('viewBox', '0 0 1200 1200');
+                    svgElement.removeAttribute('width');
+                    svgElement.removeAttribute('height');
+                    svgElement.style.width = '100%';
+                    svgElement.style.height = '100%';
+                    
+                    // Find the borderClip definition and apply it to the background
+                    const borderClipId = `borderClip-${index}`;
+                    const clippedContent = overlay.previousElementSibling;
+                    
+                    if (clippedContent && clippedContent.classList.contains('clipped-content')) {
+                        // Create a hidden SVG with just the clip path for the background
+                        const clipSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                        clipSvg.style.position = 'absolute';
+                        clipSvg.style.width = '0';
+                        clipSvg.style.height = '0';
                         
-                        // Set theme attribute
-                        const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
-                        svgElement.setAttribute('data-theme', currentTheme);
+                        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                        const clipPath = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
+                        clipPath.setAttribute('id', `bgClip-${index}`);
+                        clipPath.setAttribute('clipPathUnits', 'objectBoundingBox');
                         
-                        // Replace placeholder with actual SVG
-                        svgElement.setAttribute('viewBox', '0 0 1200 1200');
-                        svgElement.removeAttribute('width');
-                        svgElement.removeAttribute('height');
-                        overlay.parentNode.replaceChild(svgElement, overlay);
+                        // Create a scaled version of the border shape for CSS clip-path
+                        const clipPathElement = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        // This is the borderShape path scaled to 0-1 coordinates
+                        clipPathElement.setAttribute('d', 'M 0.927 0.348 L 0.927 0.652 C 0.927 0.754 0.907 0.816 0.862 0.862 C 0.816 0.907 0.754 0.927 0.652 0.927 L 0.348 0.927 C 0.24 0.927 0.187 0.91 0.138 0.862 C 0.09 0.813 0.073 0.76 0.073 0.652 L 0.073 0.348 C 0.073 0.24 0.09 0.187 0.138 0.138 C 0.187 0.09 0.24 0.073 0.348 0.073 L 0.652 0.073 C 0.757 0.073 0.814 0.091 0.862 0.138 C 0.909 0.186 0.927 0.243 0.927 0.348');
+                        
+                        clipPath.appendChild(clipPathElement);
+                        defs.appendChild(clipPath);
+                        clipSvg.appendChild(defs);
+                        
+                        // Insert the clip SVG before the container
+                        overlay.parentNode.insertBefore(clipSvg, overlay.parentNode.firstChild);
+                        
+                        // Apply the clip path to the background content
+                        clippedContent.style.clipPath = `url(#bgClip-${index})`;
                     }
+                    
+                    // Set theme attribute
+                    const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+                    svgElement.setAttribute('data-theme', currentTheme);
+                    
+                    // Replace the placeholder with the actual SVG
+                    overlay.appendChild(svgElement);
                 });
                 
-                console.log('Glass effect loaded successfully!');
+                console.log('Glass effect loaded and applied successfully!');
                 
             } catch (error) {
                 console.error('Failed to load glass effect:', error);

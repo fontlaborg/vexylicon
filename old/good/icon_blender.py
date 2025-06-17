@@ -86,9 +86,7 @@ def to_cubic_list(path: Path) -> List[CubicBezier]:
         elif isinstance(seg, CubicBezier):
             segs.append(seg)
         else:
-            raise TypeError(
-                "Unsupported segment type in path; please flatten arcs first"
-            )
+            raise TypeError("Unsupported segment type in path; please flatten arcs first")
     return segs
 
 
@@ -108,9 +106,7 @@ def parse_dual_contour_path(d: str) -> Tuple[str, str]:
     parts = d.split(" M ")
 
     if len(parts) != 2:
-        sys.exit(
-            f"[red]Error:[/] Expected exactly 2 contours (M commands), got {len(parts)}"
-        )
+        sys.exit(f"[red]Error:[/] Expected exactly 2 contours (M commands), got {len(parts)}")
 
     # parts[0] is actually the inner contour, parts[1] is the outer contour
     inner_contour = parts[0].strip()
@@ -145,7 +141,7 @@ def round_svg_coordinates(d_string: str, precision: int = 2) -> str:
     import re
 
     def round_match(match):
-        """    """
+        """"""
         return str(round(float(match.group()), precision))
 
     # Match floating point numbers (including scientific notation)
@@ -164,9 +160,7 @@ def align_path_start(p_outer: Path, p_inner: Path) -> Path:
     return Path(*segs)
 
 
-def generate_ring_paths(
-    outer_contour: str, inner_contour: str, steps: int
-) -> List[str]:
+def generate_ring_paths(outer_contour: str, inner_contour: str, steps: int) -> List[str]:
     """Generate *steps* rings by pushing the inner contour outward.
 
     The outer contour is first reversed to align its vertex ordering with the
@@ -187,9 +181,7 @@ def generate_ring_paths(
     p_inner = to_cubic_list(inner_path)
 
     if len(p_outer) != len(p_inner):
-        sys.exit(
-            "[red]Error:[/] outer and inner contours have incompatible segment counts"
-        )
+        sys.exit("[red]Error:[/] outer and inner contours have incompatible segment counts")
 
     t_vals = [(i + 1) / (steps + 1) for i in range(steps)]
     d_list: List[str] = []
@@ -197,9 +189,7 @@ def generate_ring_paths(
     for t in t_vals:
         # Interpolate inner contour → aligned reversed outer contour
         # This makes inner contour move outward toward fixed outer contour
-        inter_segs = [
-            interpolate_segment(s_in, s_out, t) for s_in, s_out in zip(p_inner, p_outer)
-        ]
+        inter_segs = [interpolate_segment(s_in, s_out, t) for s_in, s_out in zip(p_inner, p_outer)]
 
         ring_inner = Path(*inter_segs)
         # Round coordinates to 2 decimal places to avoid precision artifacts
@@ -217,7 +207,7 @@ def generate_ring_paths(
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """    """
+    """"""
     p = argparse.ArgumentParser(
         description="Insert blended bevel steps into the SVG icon",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -232,7 +222,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument(
         "--canvas_fill",
-        default="#666666",
+        default="none",
         help="Canvas background fill (color or 'none' to disable)",
     )
     p.add_argument(
@@ -242,7 +232,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument(
         "--border_fill",
-        default="#131313",
+        default="none",
         help="Border fill (color or 'none' to disable)",
     )
     p.add_argument(
@@ -298,15 +288,9 @@ def locate_paths(
     ns_path = ".//{http://www.w3.org/2000/svg}path"
     # Try ID-based lookup first - check both path and use elements
     ns_use = ".//{http://www.w3.org/2000/svg}use"
-    outer_elem = tree.find(f"{ns_path}[@id='{outer_id}']") or tree.find(
-        f"{ns_use}[@id='{outer_id}']"
-    )
-    inner_elem = tree.find(f"{ns_path}[@id='{inner_id}']") or tree.find(
-        f"{ns_use}[@id='{inner_id}']"
-    )
-    small_elem = tree.find(f"{ns_path}[@id='{small_id}']") or tree.find(
-        f"{ns_use}[@id='{small_id}']"
-    )
+    outer_elem = tree.find(f"{ns_path}[@id='{outer_id}']") or tree.find(f"{ns_use}[@id='{outer_id}']")
+    inner_elem = tree.find(f"{ns_path}[@id='{inner_id}']") or tree.find(f"{ns_use}[@id='{inner_id}']")
+    small_elem = tree.find(f"{ns_path}[@id='{small_id}']") or tree.find(f"{ns_use}[@id='{small_id}']")
 
     if outer_elem is not None:
         # If outer found but no separate inner, use outer for both (dual contour case)
@@ -336,7 +320,10 @@ def locate_paths(
 
 
 def main() -> None:
-    """    Used in:
+    """Used in:
+    - old/older/icon_masker.py
+
+    Used in:
     - old/older/icon_masker.py
     """
     args = build_parser().parse_args()
@@ -344,9 +331,7 @@ def main() -> None:
     tree = ET.parse(args.input_svg)
     root = tree.getroot()
 
-    outer_path, inner_path, small_path = locate_paths(
-        tree, args.outer_id, args.inner_id
-    )
+    outer_path, inner_path, small_path = locate_paths(tree, args.outer_id, args.inner_id)
 
     print("[green]Identified outer path with dual contours")
 
@@ -455,9 +440,7 @@ def main() -> None:
         op_vals.append(opacity)
 
     prog_name = progression_names[args.opacity_progression]
-    print(
-        f"[blue]{prog_name.title()} bevel opacity: {op_vals[0]:.3f} → {op_vals[-1]:.3f}"
-    )
+    print(f"[blue]{prog_name.title()} bevel opacity: {op_vals[0]:.3f} → {op_vals[-1]:.3f}")
 
     if args.glass_mode:
         print("[blue]Glass mode: using blend modes for transparency effect")
@@ -504,9 +487,7 @@ def main() -> None:
 
             # Parse dual contours for small path
             small_outer_contour, small_inner_contour = parse_dual_contour_path(small_d)
-            small_d_steps = generate_ring_paths(
-                small_outer_contour, small_inner_contour, args.steps
-            )
+            small_d_steps = generate_ring_paths(small_outer_contour, small_inner_contour, args.steps)
 
             # Create bevel group for small path
             small_g = ET.Element("{%s}g" % ns, attrib={"id": "smallBevelSteps"})
@@ -539,9 +520,7 @@ def main() -> None:
         else:
             print("[yellow]Small path found but no dual contours - skipping")
 
-    FsPath(args.output_svg).write_text(
-        ET.tostring(root, encoding="unicode"), encoding="utf-8"
-    )
+    FsPath(args.output_svg).write_text(ET.tostring(root, encoding="unicode"), encoding="utf-8")
     mode_desc = "glass-effect" if args.glass_mode else "normal"
     print(f"[bold green]Wrote {mode_desc} blended SVG → {args.output_svg}")
 

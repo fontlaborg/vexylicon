@@ -43,6 +43,7 @@ class VexyliconParams:
         opacity_end: Ending opacity for bevel (default: 0.05)
         opacity_progression: How opacity changes across steps (default: MORE_EXPONENTIAL)
         quality: Preset quality level ('low', 'medium', 'high')
+        blur: Blur radius for bevel steps in pixels (default: 0, no blur)
     """
 
     steps: int = 24
@@ -50,6 +51,7 @@ class VexyliconParams:
     opacity_end: float = 0.05
     opacity_progression: OpacityProgression = OpacityProgression.MORE_EXPONENTIAL
     quality: str | None = None
+    blur: float = 0.0
 
     def __post_init__(self):
         """Apply quality presets if specified."""
@@ -204,11 +206,61 @@ class VexyliconGenerator:
             )
             step.set("fill-opacity", f"{opacity:.3f}")
             step.set("mix-blend-mode", "screen")
+
+            # Apply blur filter if specified
+            if self.params.blur > 0:
+                # Create blur filter if it doesn't exist
+                blur_filter_id = f"blur-{self.params.blur}"
+                if processor.find_by_id(blur_filter_id) is None:
+                    defs = processor.get_defs()
+                    blur_filter = processor.create_element("filter", id=blur_filter_id)
+                    blur_elem = processor.create_element("feGaussianBlur", stdDeviation=f"{self.params.blur}")
+                    blur_filter.append(blur_elem)
+                    defs.append(blur_filter)
+
+                # Apply filter to step
+                step.set("filter", f"url(#{blur_filter_id})")
+
             bevel_group.append(step)
 
         # Insert bevel group into document
         root = processor.root
         root.append(bevel_group)
+
+        # Process small shape if it exists and has dual contours (corner highlight)
+        small_shape = processor.find_by_id("small")
+        if small_shape is not None:
+            # The small shape references the same mainShape path, so we use the
+            # same contours but create separate bevel steps with cornerHighlight
+            small_bevel_group = processor.create_element("g", id="smallBevelSteps")
+
+            # Apply minimal opacity to small shape as well
+            small_shape.set("fill-opacity", f"{min_opacity:.3f}")
+
+            # Create small bevel step paths using cornerHighlight gradient
+            for i, (path_d, opacity) in enumerate(zip(ring_paths, opacities, strict=False), 1):
+                small_step = processor.create_element(
+                    "path",
+                    d=path_d,
+                    id=f"smallBevelStep-{i}",
+                    fill="url(#cornerHighlight)",
+                    pointer_events="none",
+                )
+                small_step.set("fill-opacity", f"{opacity:.3f}")
+                small_step.set("mix-blend-mode", "screen")
+
+                # Apply blur filter if specified
+                if self.params.blur > 0:
+                    blur_filter_id = f"blur-{self.params.blur}"
+                    small_step.set("filter", f"url(#{blur_filter_id})")
+
+                small_bevel_group.append(small_step)
+
+            # Insert small bevel group before the small shape
+            small_parent = small_shape.getparent()
+            if small_parent is not None:
+                small_idx = list(small_parent).index(small_shape)
+                small_parent.insert(small_idx, small_bevel_group)
 
     def _calculate_opacities(self) -> list[float]:
         """Calculate opacity values for each bevel step.
@@ -281,14 +333,16 @@ class VexyliconGenerator:
         Args:
             processor: SVG processor instance
         """
-        # Create clip path for payload
-        inner_path = processor.find_by_id("inner") or processor.find_by_id("mainShape")
-        if inner_path is not None:
+        # Create clip path for payload using the outer border shape
+        border_shape = processor.find_by_id("borderShape")
+        if border_shape is not None:
             defs = processor.get_defs()
-            clip_path = processor.create_element("clipPath", id="innerClip")
-            clip_use = processor.create_element("use", href="#inner")
-            clip_path.append(clip_use)
-            defs.append(clip_path)
+            # Check if borderClip already exists (it should in our base SVG)
+            if processor.find_by_id("borderClip") is None:
+                clip_path = processor.create_element("clipPath", id="borderClip")
+                clip_use = processor.create_element("use", href="#borderShape")
+                clip_path.append(clip_use)
+                defs.append(clip_path)
 
     def _inject_payload(self, processor: SVGProcessor, payload_svg: Path | str) -> None:
         """Inject payload SVG into the mask.
@@ -300,8 +354,9 @@ class VexyliconGenerator:
         Raises:
             InvalidSVGError: If payload SVG is invalid
         """
-        # Create payload group
-        payload_group = processor.create_element("g", id="payload", clip_path="url(#innerClip)")
+        # Create payload group with proper SVG clip-path attribute
+        payload_group = processor.create_element("g", id="payload")
+        payload_group.set("clip-path", "url(#borderClip)")
 
         # Parse payload SVG
         try:

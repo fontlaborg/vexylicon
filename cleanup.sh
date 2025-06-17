@@ -46,5 +46,7 @@ python -m uv run hatch test
 
 echo "=== Cleanup completed at $(date) ==="
 
+python ./old/good/icon_blender.py --input_svg ./src/vexylicon/assets/best_base.svg --output_svg ./testdata/old.svg --glass_mode --canvas_fill "gray"
+
 python ./testdata/example.py
 fd -e svg -x svg2png-adam.sh {} 1200

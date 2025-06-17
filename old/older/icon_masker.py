@@ -81,7 +81,7 @@ def duplicate_gradient(elem: ET.Element, suffix: str) -> ET.Element:
 
 
 def post_process(tree: ET.ElementTree, payload_svg: FsPath | None) -> ET.ElementTree:
-    """    """
+    """"""
     root = tree.getroot()
 
     # 1. Collect <defs> (create if missing)
@@ -192,7 +192,7 @@ def post_process(tree: ET.ElementTree, payload_svg: FsPath | None) -> ET.Element
 
 
 def write_variants(tree: ET.ElementTree, outdir: FsPath):
-    """    """
+    """"""
     outdir.mkdir(parents=True, exist_ok=True)
     light_path = outdir / "mask-light.svg"
     dark_path = outdir / "mask-dark.svg"

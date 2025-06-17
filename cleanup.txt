@@ -917,3 +917,594 @@ Cache: enabled
 └───────────────────────┴──────────┴────────────┘
 find . -name *.py -exec python -m uv run autoflake -i {} +
 find . -name *.py -exec python -m uv run pyupgrade --py311-plus {} +
+Rewriting src/vexylicon/__version__.py
+src/vexylicon/utils/path_tools.py is non-utf-8 (not supported)
+find . -name *.py -exec python -m uv run ruff check --output-format=github --fix --unsafe-fixes {} +
+::error title=Ruff (UP035),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=5,endLine=8,endColumn=36::src/vexylicon/__version__.py:8:5: UP035 `typing.Tuple` is deprecated, use `tuple` instead
+::error title=Ruff (F401),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=24,endLine=8,endColumn=29::src/vexylicon/__version__.py:8:24: F401 `typing.Tuple` imported but unused
+::error title=Ruff (F401),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=31,endLine=8,endColumn=36::src/vexylicon/__version__.py:8:31: F401 `typing.Union` imported but unused
+::error title=Ruff (A004),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=15,col=18,endLine=15,endColumn=23::src/vexylicon/cli.py:15:18: A004 Import `print` is shadowing a Python builtin
+::error title=Ruff (A002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=39,col=9,endLine=39,endColumn=15::src/vexylicon/cli.py:39:9: A002 Function argument `format` is shadowing a Python builtin
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=84,col=21,endLine=84,endColumn=36::src/vexylicon/cli.py:84:21: PLC0415 `import` should be at the top-level of a file
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=115,col=9,endLine=115,endColumn=18::src/vexylicon/cli.py:115:9: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=115,col=9,endLine=115,endColumn=18::src/vexylicon/cli.py:115:9: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=207,col=13,endLine=207,endColumn=28::src/vexylicon/cli.py:207:13: PLC0415 `import` should be at the top-level of a file
+::error title=Ruff (E902),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/path_tools.py,line=1,col=1,endLine=1,endColumn=1::src/vexylicon/utils/path_tools.py:1:1: E902 stream did not contain valid UTF-8
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=80,col=24,endLine=80,endColumn=30::src/vexylicon/utils/svg_processor.py:80:24: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=80,col=24,endLine=80,endColumn=30::src/vexylicon/utils/svg_processor.py:80:24: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=180,col=25,endLine=180,endColumn=37::src/vexylicon/utils/svg_processor.py:180:25: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=180,col=25,endLine=180,endColumn=37::src/vexylicon/utils/svg_processor.py:180:25: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=194,col=40,endLine=194,endColumn=52::src/vexylicon/utils/svg_processor.py:194:40: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=194,col=40,endLine=194,endColumn=52::src/vexylicon/utils/svg_processor.py:194:40: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (ARG001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/vexylicon.py,line=27,col=35,endLine=27,endColumn=41::src/vexylicon/vexylicon.py:27:35: ARG001 Unused function argument: `config`
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py,line=8,col=5,endLine=8,endColumn=21::tests/test_package.py:8:5: PLC0415 `import` should be at the top-level of a file
+find . -name *.py -exec python -m uv run ruff format --respect-gitignore --target-version py311 {} +
+error: Failed to read src/vexylicon/utils/path_tools.py: stream did not contain valid UTF-8
+1 file reformatted, 7 files left unchanged
+2 files reformatted, 2 files left unchanged
+python -m uv run ty check
+WARN ty is pre-release software and not ready for production use. Expect to encounter bugs, missing features, and fatal errors.
+error[invalid-argument-type]: Argument to function `locate_paths` is incorrect
+   --> old/good/icon_blender.py:348:9
+    |
+347 |     outer_path, inner_path, small_path = locate_paths(
+348 |         tree, args.outer_id, args.inner_id
+    |         ^^^^ Expected `ElementTree[Element[str] | None]`, found `ElementTree[Element[str]]`
+349 |     )
+    |
+info: Function defined here
+   --> old/good/icon_blender.py:285:5
+    |
+285 | def locate_paths(
+    |     ^^^^^^^^^^^^
+286 |     tree: ET.ElementTree,
+    |     -------------------- Parameter declared here
+287 |     outer_id: str = "outer",
+288 |     inner_id: str = "inner",
+    |
+info: rule `invalid-argument-type` is enabled by default
+
+error[invalid-argument-type]: Argument to function `locate_paths` is incorrect
+   --> old/good/icon_blender.py:348:9
+    |
+347 |     outer_path, inner_path, small_path = locate_paths(
+348 |         tree, args.outer_id, args.inner_id
+    |         ^^^^ Expected `ElementTree[Element[str] | None]`, found `ElementTree[Element[str]]`
+349 |     )
+    |
+info: Function defined here
+   --> old/good/icon_blender.py:285:5
+    |
+285 | def locate_paths(
+    |     ^^^^^^^^^^^^
+286 |     tree: ET.ElementTree,
+    |     -------------------- Parameter declared here
+287 |     outer_id: str = "outer",
+288 |     inner_id: str = "inner",
+    |
+info: rule `invalid-argument-type` is enabled by default
+
+error[invalid-argument-type]: Argument to function `locate_paths` is incorrect
+   --> old/good/icon_blender.py:348:9
+    |
+347 |     outer_path, inner_path, small_path = locate_paths(
+348 |         tree, args.outer_id, args.inner_id
+    |         ^^^^ Expected `ElementTree[Element[str] | None]`, found `ElementTree[Element[str]]`
+349 |     )
+    |
+info: Function defined here
+   --> old/good/icon_blender.py:285:5
+    |
+285 | def locate_paths(
+    |     ^^^^^^^^^^^^
+286 |     tree: ET.ElementTree,
+    |     -------------------- Parameter declared here
+287 |     outer_id: str = "outer",
+288 |     inner_id: str = "inner",
+    |
+info: rule `invalid-argument-type` is enabled by default
+
+error[invalid-argument-type]: Argument to function `locate_paths` is incorrect
+   --> old/good/icon_blender.py:348:9
+    |
+347 |     outer_path, inner_path, small_path = locate_paths(
+348 |         tree, args.outer_id, args.inner_id
+    |         ^^^^ Expected `ElementTree[Element[str] | None]`, found `ElementTree[Element[str]]`
+349 |     )
+    |
+info: Function defined here
+   --> old/good/icon_blender.py:285:5
+    |
+285 | def locate_paths(
+    |     ^^^^^^^^^^^^
+286 |     tree: ET.ElementTree,
+    |     -------------------- Parameter declared here
+287 |     outer_id: str = "outer",
+288 |     inner_id: str = "inner",
+    |
+info: rule `invalid-argument-type` is enabled by default
+
+error[invalid-argument-type]: Argument to function `get_path_data_from_element` is incorrect
+   --> old/good/icon_blender.py:354:54
+    |
+353 |     # Parse the dual-contour outer path (handles both <path> and <use> elements)
+354 |     outer_d = get_path_data_from_element(outer_path, tree)
+    |                                                      ^^^^ Expected `ElementTree[Element[str] | None]`, found `ElementTree[Element[str]]`
+355 |     if not outer_d:
+356 |         sys.exit("[red]Error:[/] Outer path has no 'd' attribute or referenced path")
+    |
+info: Function defined here
+   --> old/good/icon_blender.py:122:5
+    |
+122 | def get_path_data_from_element(elem: ET.Element, tree: ET.ElementTree) -> str:
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^                   -------------------- Parameter declared here
+123 |     """Extract path data from either a <path> element or a <use> element that references a path.
+    |
+info: rule `invalid-argument-type` is enabled by default
+
+error[no-matching-overload]: No overload of bound method `__init__` matches arguments
+   --> old/good/icon_blender.py:492:11
+    |
+490 |         sys.exit("[red]Error:[/] Could not locate parent of inner path")
+491 |
+492 |     idx = list(parent).index(inner_path)
+    |           ^^^^^^^^^^^^
+493 |     parent.insert(idx, g)
+    |
+info: First overload defined here
+    --> stdlib/builtins.pyi:1084:9
+     |
+1082 | class list(MutableSequence[_T]):
+1083 |     @overload
+1084 |     def __init__(self) -> None: ...
+     |         ^^^^^^^^^^^^^^^^^^^^^^
+1085 |     @overload
+1086 |     def __init__(self, iterable: Iterable[_T], /) -> None: ...
+     |
+info: Possible overloads for bound method `__init__`:
+info:   (self) -> None
+info:   (self, iterable: Iterable[_T], /) -> None
+info: rule `no-matching-overload` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `insert` on type `None | Element[str]` is possibly unbound
+   --> old/good/icon_blender.py:493:5
+    |
+492 |     idx = list(parent).index(inner_path)
+493 |     parent.insert(idx, g)
+    |     ^^^^^^^^^^^^^
+494 |
+495 |     # Process small path if it exists and has dual contours
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+error[invalid-argument-type]: Argument to function `get_path_data_from_element` is incorrect
+   --> old/good/icon_blender.py:497:58
+    |
+495 |     # Process small path if it exists and has dual contours
+496 |     if small_path is not None:
+497 |         small_d = get_path_data_from_element(small_path, tree)
+    |                                                          ^^^^ Expected `ElementTree[Element[str] | None]`, found `ElementTree[Element[str]]`
+498 |         if small_d and " M " in small_d:
+499 |             print("[green]Processing small path with dual contours")
+    |
+info: Function defined here
+   --> old/good/icon_blender.py:122:5
+    |
+122 | def get_path_data_from_element(elem: ET.Element, tree: ET.ElementTree) -> str:
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^                   -------------------- Parameter declared here
+123 |     """Extract path data from either a <path> element or a <use> element that references a path.
+    |
+info: rule `invalid-argument-type` is enabled by default
+
+error[unresolved-import]: Cannot resolve imported module `icon_blender`
+  --> old/older/icon_masker.py:38:8
+   |
+36 | # Ensure we can import sibling cli
+37 | sys.path.append(str(FsPath(__file__).resolve().parent.parent))
+38 | import icon_blender  # noqa: E402
+   |        ^^^^^^^^^^^^
+39 |
+40 | NS = "http://www.w3.org/2000/svg"
+   |
+info: make sure your Python environment is properly configured: https://github.com/astral-sh/ty/blob/main/docs/README.md#python-environment
+info: rule `unresolved-import` is enabled by default
+
+error[invalid-return-type]: Return type does not match returned value
+  --> old/older/icon_masker.py:70:12
+   |
+68 |     tree = ET.parse(tmp_path)
+69 |     tmp_path.unlink(missing_ok=True)
+70 |     return tree
+   |            ^^^^ expected `ElementTree[Element[str] | None]`, found `ElementTree[Element[str]]`
+   |
+  ::: old/older/icon_masker.py:51:45
+   |
+51 | def run_blender(src: FsPath, steps: int) -> ET.ElementTree:
+   |                                             -------------- Expected `ElementTree[Element[str] | None]` because of return type
+52 |     """Invoke icon_blender.main() and return parsed ElementTree of result.
+   |
+info: rule `invalid-return-type` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `find` on type `Element[str] | None` is possibly unbound
+  --> old/older/icon_masker.py:88:12
+   |
+87 |     # 1. Collect <defs> (create if missing)
+88 |     defs = root.find(_ns("defs"))
+   |            ^^^^^^^^^
+89 |     if defs is None:
+90 |         defs = ET.SubElement(root, _ns("defs"))
+   |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+error[invalid-argument-type]: Argument to function `SubElement` is incorrect
+  --> old/older/icon_masker.py:90:30
+   |
+88 |     defs = root.find(_ns("defs"))
+89 |     if defs is None:
+90 |         defs = ET.SubElement(root, _ns("defs"))
+   |                              ^^^^ Expected `Element[str]`, found `Element[str] | None`
+91 |
+92 |     # Rename existing gradients to *-light and duplicate for *-dark ---------
+   |
+info: Function defined here
+   --> stdlib/xml/etree/ElementTree.pyi:140:5
+    |
+138 |     def __bool__(self) -> bool: ...
+139 |
+140 | def SubElement(parent: Element, tag: str, attrib: dict[str, str] = ..., **extra: str) -> Element: ...
+    |     ^^^^^^^^^^ --------------- Parameter declared here
+141 | def Comment(text: str | None = None) -> _CallableElement: ...
+142 | def ProcessingInstruction(target: str, text: str | None = None) -> _CallableElement: ...
+    |
+info: rule `invalid-argument-type` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `find` on type `Element[str] | None` is possibly unbound
+   --> old/older/icon_masker.py:128:13
+    |
+127 |     # 2. Insert clipPath ----------------------------------------------------
+128 |     inner = root.find(f".//{_ns('path')}[@id='inner']")
+    |             ^^^^^^^^^
+129 |     if inner is None:
+130 |         raise SystemExit("[red]Could not locate path with id='inner'")
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `extend` on type `Element[str] | None` is possibly unbound
+   --> old/older/icon_masker.py:189:5
+    |
+188 |     # 6. Append new groups at end of root -----------------------------------
+189 |     root.extend([light_grp, dark_grp, payload_svg_grp])
+    |     ^^^^^^^^^^^
+190 |
+191 |     return tree
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+error[unresolved-import]: Cannot resolve imported module `PIL`
+  --> old/older/imgquart.py:12:6
+   |
+11 | import fire
+12 | from PIL import Image
+   |      ^^^
+13 | import os
+   |
+info: make sure your Python environment is properly configured: https://github.com/astral-sh/ty/blob/main/docs/README.md#python-environment
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Cannot resolve imported module `cairosvg`
+  --> src/vexylicon/cli.py:84:28
+   |
+82 |                 # Convert to PNG using cairosvg
+83 |                 try:
+84 |                     import cairosvg
+   |                            ^^^^^^^^
+85 |
+86 |                     output_path = output_path.with_suffix(".png")
+   |
+info: make sure your Python environment is properly configured: https://github.com/astral-sh/ty/blob/main/docs/README.md#python-environment
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Cannot resolve imported module `cairosvg`
+   --> src/vexylicon/cli.py:207:20
+    |
+205 |         """
+206 |         try:
+207 |             import cairosvg
+    |                    ^^^^^^^^
+208 |         except ImportError:
+209 |             print("[red]Error: Preview requires cairosvg. Install with: pip install cairosvg")
+    |
+info: make sure your Python environment is properly configured: https://github.com/astral-sh/ty/blob/main/docs/README.md#python-environment
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `lxml` has no member `etree`
+  --> src/vexylicon/core.py:16:18
+   |
+14 | from pathlib import Path
+15 |
+16 | from lxml import etree
+   |                  ^^^^^
+17 |
+18 | from vexylicon.utils import (
+   |
+info: rule `unresolved-import` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `append` on type `Unknown | None` is possibly unbound
+   --> src/vexylicon/core.py:174:13
+    |
+172 |                 fill="none",
+173 |             )
+174 |             processor.get_defs().append(inner_path_elem)
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+175 |
+176 |         # Create bevel steps group
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `append` on type `Unknown | None` is possibly unbound
+   --> src/vexylicon/core.py:291:13
+    |
+289 |             clip_use = processor.create_element("use", href="#inner")
+290 |             clip_path.append(clip_use)
+291 |             defs.append(clip_path)
+    |             ^^^^^^^^^^^
+292 |
+293 |     def _inject_payload(self, processor: SVGProcessor, payload_svg: Path | str) -> None:
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `align_path_start`
+ --> src/vexylicon/utils/__init__.py:6:5
+  |
+5 | from vexylicon.utils.path_tools import (
+6 |     align_path_start,
+  |     ^^^^^^^^^^^^^^^^
+7 |     generate_ring_paths,
+8 |     interpolate_segment,
+  |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `generate_ring_paths`
+ --> src/vexylicon/utils/__init__.py:7:5
+  |
+5 | from vexylicon.utils.path_tools import (
+6 |     align_path_start,
+7 |     generate_ring_paths,
+  |     ^^^^^^^^^^^^^^^^^^^
+8 |     interpolate_segment,
+9 |     parse_dual_contour_path,
+  |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `interpolate_segment`
+  --> src/vexylicon/utils/__init__.py:8:5
+   |
+ 6 |     align_path_start,
+ 7 |     generate_ring_paths,
+ 8 |     interpolate_segment,
+   |     ^^^^^^^^^^^^^^^^^^^
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `parse_dual_contour_path`
+  --> src/vexylicon/utils/__init__.py:9:5
+   |
+ 7 |     generate_ring_paths,
+ 8 |     interpolate_segment,
+ 9 |     parse_dual_contour_path,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `path_bbox`
+  --> src/vexylicon/utils/__init__.py:10:5
+   |
+ 8 |     interpolate_segment,
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+   |     ^^^^^^^^^
+11 |     round_svg_coordinates,
+12 |     to_cubic_list,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `round_svg_coordinates`
+  --> src/vexylicon/utils/__init__.py:11:5
+   |
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+   |     ^^^^^^^^^^^^^^^^^^^^^
+12 |     to_cubic_list,
+13 | )
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `to_cubic_list`
+  --> src/vexylicon/utils/__init__.py:12:5
+   |
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+12 |     to_cubic_list,
+   |     ^^^^^^^^^^^^^
+13 | )
+14 | from vexylicon.utils.svg_processor import SVGProcessor
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[io]: Failed to read file: stream did not contain valid UTF-8
+--> src/vexylicon/utils/path_tools.py:1:1
+ |
+ |
+
+error[unresolved-import]: Module `lxml` has no member `etree`
+  --> src/vexylicon/utils/svg_processor.py:14:18
+   |
+12 | from pathlib import Path
+13 |
+14 | from lxml import etree
+   |                  ^^^^^
+15 |
+16 | # SVG namespace
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[missing-argument]: No arguments provided for required parameters `canvas`, `border`
+   --> src/vexylicon/utils/theme_loader.py:118:22
+    |
+116 |         # Convert nested structures to dataclasses if necessary
+117 |         if not isinstance(colors, ThemeColors):
+118 |             colors = ThemeColors(**colors)
+    |                      ^^^^^^^^^^^^^^^^^^^^^
+119 |         if not isinstance(effects, ThemeEffects):
+120 |             effects = ThemeEffects(**effects)
+    |
+info: rule `missing-argument` is enabled by default
+
+Found 30 diagnostics
+python -m uv run mypy --config-file pyproject.toml src/imgcolorshine tests
+mypy: can't read file 'src/imgcolorshine': No such file or directory
+npx repomix -i varia,.specstory,AGENT.md,CLAUDE.md,PLAN.md,SPEC.md,llms.txt,.cursorrules,docs -o llms.txt .
+
+📦 Repomix v0.3.7
+
+No custom config found at repomix.config.json or global config at /Users/adam/.config/repomix/repomix.config.json.
+You can add a config file for additional settings. Please check https://github.com/yamadashy/repomix for more information.
+⠙ Collecting files...
+[2K[1A[2K[G⠹ Collecting files...
+[2K[1A[2K[G⠸ Collect file... (30/63) testdata/glass_payload_high.png
+[2K[1A[2K[G⠼ Collect file... (54/63) cleanup.sh
+[2K[1A[2K[G⠴ Running security check...
+[2K[1A[2K[G⠦ Running security check... (24/48) testdata/example.py
+[2K[1A[2K[G⠧ Running security check... (30/48) testdata/glass_with_payload.svg
+[2K[1A[2K[G⠇ Processing files...
+[2K[1A[2K[G⠏ Generating output...
+[2K[1A[2K[G⠋ Calculating metrics...
+[2K[1A[2K[G⠙ Calculating metrics...
+[2K[1A[2K[G⠹ Calculating metrics...
+[2K[1A[2K[G⠸ Calculating metrics...
+[2K[1A[2K[G⠼ Calculating metrics...
+[2K[1A[2K[G⠴ Calculating metrics...
+[2K[1A[2K[G⠦ Calculating metrics...
+[2K[1A[2K[G⠧ Calculating metrics...
+[2K[1A[2K[G⠇ Calculating metrics... (4/48) old/good/best_base copy.svg
+[2K[1A[2K[G⠏ Calculating metrics... (6/48) old/good/best.svg
+[2K[1A[2K[G⠋ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠙ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠹ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠸ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠼ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠴ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠦ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠧ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠇ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠏ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠋ Calculating metrics... (24/48) testdata/example.py
+[2K[1A[2K[G⠙ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠹ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠸ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠼ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠴ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠦ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠧ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠇ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠏ Calculating metrics... (25/48) testdata/glass_payload_high.svg
+[2K[1A[2K[G⠋ Calculating metrics... (26/48) testdata/glass_payload_low.svg
+[2K[1A[2K[G⠙ Calculating metrics... (26/48) testdata/glass_payload_low.svg
+[2K[1A[2K[G⠹ Calculating metrics... (26/48) testdata/glass_payload_low.svg
+[2K[1A[2K[G⠸ Calculating metrics... (26/48) testdata/glass_payload_low.svg
+[2K[1A[2K[G⠼ Calculating metrics... (26/48) testdata/glass_payload_low.svg
+[2K[1A[2K[G⠴ Calculating metrics... (26/48) testdata/glass_payload_low.svg
+[2K[1A[2K[G⠦ Calculating metrics... (26/48) testdata/glass_payload_low.svg
+[2K[1A[2K[G⠧ Calculating metrics... (27/48) testdata/glass_payload_medium.svg
+[2K[1A[2K[G⠇ Calculating metrics... (27/48) testdata/glass_payload_medium.svg
+[2K[1A[2K[G⠏ Calculating metrics... (27/48) testdata/glass_payload_medium.svg
+[2K[1A[2K[G⠋ Calculating metrics... (27/48) testdata/glass_payload_medium.svg
+[2K[1A[2K[G⠙ Calculating metrics... (27/48) testdata/glass_payload_medium.svg
+[2K[1A[2K[G⠹ Calculating metrics... (27/48) testdata/glass_payload_medium.svg
+[2K[1A[2K[G⠸ Calculating metrics... (27/48) testdata/glass_payload_medium.svg
+[2K[1A[2K[G⠼ Calculating metrics... (27/48) testdata/glass_payload_medium.svg
+[2K[1A[2K[G⠴ Calculating metrics... (29/48) testdata/glass_plain.svg
+[2K[1A[2K[G⠦ Calculating metrics... (29/48) testdata/glass_plain.svg
+[2K[1A[2K[G⠧ Calculating metrics... (29/48) testdata/glass_plain.svg
+[2K[1A[2K[G⠇ Calculating metrics... (29/48) testdata/glass_plain.svg
+[2K[1A[2K[G⠏ Calculating metrics... (29/48) testdata/glass_plain.svg
+[2K[1A[2K[G⠋ Calculating metrics... (29/48) testdata/glass_plain.svg
+[2K[1A[2K[G⠙ Calculating metrics... (29/48) testdata/glass_plain.svg
+[2K[1A[2K[G⠹ Calculating metrics... (29/48) testdata/glass_plain.svg
+[2K[1A[2K[G⠸ Calculating metrics... (30/48) testdata/glass_with_payload.svg
+[2K[1A[2K[G⠼ Calculating metrics... (30/48) testdata/glass_with_payload.svg
+[2K[1A[2K[G⠴ Calculating metrics... (30/48) testdata/glass_with_payload.svg
+[2K[1A[2K[G⠦ Calculating metrics... (30/48) testdata/glass_with_payload.svg
+[2K[1A[2K[G⠧ Calculating metrics... (30/48) testdata/glass_with_payload.svg
+[2K[1A[2K[G⠇ Calculating metrics... (30/48) testdata/glass_with_payload.svg
+[2K[1A[2K[G⠏ Calculating metrics... (30/48) testdata/glass_with_payload.svg
+[2K[1A[2K[G⠋ Calculating metrics... (40/48) cleanup.sh
+[2K[1A[2K[G✔ Packing completed successfully!
+
+📈 Top 5 Files by Character Count and Token Count:
+──────────────────────────────────────────────────
+1.  testdata/glass_payload_ultra.svg (776,660 chars, 640,417 tokens, 16.2%)
+2.  testdata/glass_payload_high.svg (767,832 chars, 635,369 tokens, 16%)
+3.  testdata/glass_with_payload.svg (767,832 chars, 635,369 tokens, 16%)
+4.  testdata/glass_payload_medium.svg (759,592 chars, 630,321 tokens, 15.9%)
+5.  testdata/glass_payload_low.svg (751,301 chars, 625,273 tokens, 15.8%)
+
+🔎 Security Check:
+──────────────────
+✔ No suspicious files detected.
+
+📊 Pack Summary:
+────────────────
+  Total Files: 48 files
+  Total Chars: 5,037,781 chars
+ Total Tokens: 3,965,437 tokens
+       Output: llms.txt
+     Security: ✔ No suspicious files detected
+
+🎉 All Done!
+Your repository has been successfully packed.
+
+💡 Repomix is now available in your browser! Try it at https://repomix.com
+python -m uv run hatch test
+============================= test session starts ==============================
+platform darwin -- Python 3.12.8, pytest-8.4.0, pluggy-1.6.0 -- /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/.venv/bin/python3
+cachedir: .pytest_cache
+benchmark: 5.1.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+configfile: pyproject.toml
+plugins: xdist-3.7.0, cov-6.2.1, benchmark-5.1.0, asyncio-1.0.0
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 7 items
+
+tests/test_core.py::test_vexylicon_generator_creation PASSED             [ 14%]
+tests/test_core.py::test_vexylicon_params PASSED                         [ 28%]
+tests/test_core.py::test_quality_presets PASSED                          [ 42%]
+tests/test_core.py::test_basic_generation PASSED                         [ 57%]
+tests/test_core.py::test_invalid_svg_handling PASSED                     [ 71%]
+tests/test_core.py::test_opacity_calculation PASSED                      [ 85%]
+tests/test_package.py::test_version PASSED                               [100%]
+
+=============================== warnings summary ===============================
+tests/test_core.py::test_basic_generation
+tests/test_core.py::test_invalid_svg_handling
+  /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/core.py:189: FutureWarning: Truth-testing of elements was a source of confusion and will always return True in future versions. Use specific 'len(elem)' or 'elem is not None' test instead.
+    target_elem = outer_use or main_shape
+
+tests/test_core.py::test_basic_generation
+tests/test_core.py::test_invalid_svg_handling
+  /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/core.py:285: FutureWarning: Truth-testing of elements was a source of confusion and will always return True in future versions. Use specific 'len(elem)' or 'elem is not None' test instead.
+    inner_path = processor.find_by_id("inner") or processor.find_by_id("mainShape")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================= slowest 10 durations =============================
+0.01s call     tests/test_core.py::test_basic_generation
+0.01s call     tests/test_core.py::test_invalid_svg_handling
+
+(8 durations < 0.005s hidden.  Use -vv to show these durations.)
+======================== 7 passed, 4 warnings in 0.68s =========================
+=== Cleanup completed at Tue Jun 17 20:38:22 CEST 2025 ===

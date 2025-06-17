@@ -54,14 +54,11 @@ if [ -n "$1" ]; then
     VERSION="$1"
     echo "=== Release process started for version $VERSION ==="
 
-    echo "git add ."
-    git add .
-
     echo "python -m uv run hatch clean"
     python -m uv run hatch clean
 
-    echo "git commit -m \"Release $VERSION\""
-    git commit -m "Release $VERSION"
+    echo "git commit -am \"Release $VERSION\""
+    git commit -am "Release $VERSION"
 
     echo "git push"
     git push

@@ -13,6 +13,7 @@ from vexylicon.utils.path_tools import (
 )
 from vexylicon.utils.svg_processor import SVGProcessor
 from vexylicon.utils.theme_loader import Theme, ThemeLoader
+from vexylicon.utils.base_builder import BaseSVGBuilder
 
 __all__ = [
     # svg_processor
@@ -28,4 +29,6 @@ __all__ = [
     "path_bbox",
     "round_svg_coordinates",
     "to_cubic_list",
+    # base_builder
+    "BaseSVGBuilder",
 ]

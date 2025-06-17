@@ -18,7 +18,7 @@ from rich.table import Table
 
 from vexylicon import VexyliconGenerator, VexyliconParams
 from vexylicon.core import OpacityProgression, VexyliconError
-from vexylicon.utils import ThemeLoader
+from vexylicon.utils import ThemeLoader, BaseSVGBuilder
 
 console = Console()
 
@@ -95,9 +95,7 @@ class VexyliconCLI:
                     )
                     print(f"[green]✓ Created PNG: {output_path}")
                 except ImportError:
-                    print(
-                        "[red]Error: PNG output requires cairosvg. Install with: pip install cairosvg"
-                    )
+                    print("[red]Error: PNG output requires cairosvg. Install with: pip install cairosvg")
                     sys.exit(1)
             else:
                 print(f"[red]Error: Unknown format '{format}'. Use 'svg' or 'png'.")
@@ -203,6 +201,25 @@ class VexyliconCLI:
 
         console.print(table)
 
+    def shape2base(
+        self,
+        svg_in: str,
+        out: str | None = None,
+        inset: float = 0.03,
+    ) -> None:
+        """Convert a *flat* SVG into a dual-contour base template.
+
+        Args:
+            svg_in: Path to the source SVG.
+            out:   Output path.  Defaults to ``<stem>_base.svg`` next to input.
+            inset: Inner offset ratio relative to shortest side (default 3 %).
+        """
+        builder = BaseSVGBuilder(inset_ratio=inset)
+        dst_path = Path(out) if out else Path(svg_in).with_stem(f"{Path(svg_in).stem}_base")
+        svg_text = builder.build(svg_in)
+        dst_path.write_text(svg_text, encoding="utf-8")
+        print(f"[green]✓ Wrote base SVG → {dst_path}")
+
     def preview(self, svg_file: str, output: str | None = None) -> None:
         """Generate a preview PNG of an SVG file.
 
@@ -213,9 +230,7 @@ class VexyliconCLI:
         try:
             import cairosvg
         except ImportError:
-            print(
-                "[red]Error: Preview requires cairosvg. Install with: pip install cairosvg"
-            )
+            print("[red]Error: Preview requires cairosvg. Install with: pip install cairosvg")
             sys.exit(1)
 
         svg_path = Path(svg_file)

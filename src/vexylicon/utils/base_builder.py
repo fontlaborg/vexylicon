@@ -1,5 +1,6 @@
 #!/usr/bin/env -S uv run -s
 # this_file: src/vexylicon/utils/base_builder.py
+# ruff: noqa: E501
 """Convert a *single-contour* SVG into a `best_base` dual-contour template.
 
 The emitted SVG keeps the structure of ``assets/best_base.svg``:

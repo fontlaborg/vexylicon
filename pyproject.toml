@@ -125,11 +125,6 @@ build-backend = 'hatchling.build' # Specifies Hatchling as the build backend
 # how to handle versioning.
 #------------------------------------------------------------------------------
 [tool.hatch.build]
-# Include package data files
-include = [
-    "src/vexylicon/py.typed", # For better type checking support
-    "src/vexylicon/assets/**/*", # Include SVG assets and theme files
-]
 exclude = ["**/__pycache__", "**/.pytest_cache", "**/.mypy_cache"]
 
 [tool.hatch.build.targets.wheel]

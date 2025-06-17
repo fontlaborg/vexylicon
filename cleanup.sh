@@ -16,10 +16,6 @@ fi
 
 echo "python -m uv sync --all-extras"
 python -m uv sync --all-extras
-echo "python -m uv run hatch clean"
-python -m uv run hatch clean
-echo "python -m uv run hatch build"
-python -m uv run hatch build
 echo "python -m uzpy run -e src"
 python -m uzpy run -e src
 
@@ -50,3 +46,43 @@ python ./old/good/icon_blender.py --input_svg ./src/vexylicon/assets/best_base.s
 
 python ./testdata/example.py
 fd -e svg -x svg2png-adam.sh {} 1200
+
+## HERE
+
+# Check if version identifier is provided
+if [ -n "$1" ]; then
+    VERSION="$1"
+    echo "=== Release process started for version $VERSION ==="
+
+    echo "python -m uv run hatch clean"
+    python -m uv run hatch clean
+
+    echo "git add ."
+    git add .
+
+    echo "git commit -m \"Release $VERSION\""
+    git commit -m "Release $VERSION"
+
+    echo "git tag $VERSION"
+    git tag "$VERSION"
+
+    echo "git push"
+    git push
+
+    echo "git push --tags"
+    git push --tags
+
+    echo "python -m uv run hatch build"
+    python -m uv run hatch build
+
+    echo "python -m uv run hatch publish"
+    python -m uv run hatch publish
+
+    echo "=== Release $VERSION completed at $(date) ==="
+else
+    echo "No version provided, skipping release process"
+    echo "python -m uv run hatch clean"
+    python -m uv run hatch clean
+    echo "python -m uv run hatch build"
+    python -m uv run hatch build
+fi

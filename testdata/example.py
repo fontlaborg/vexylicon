@@ -23,7 +23,11 @@ from vexylicon import VexyliconGenerator, VexyliconParams
 
 
 def main() -> None:
-    """"""
+    """Used in:
+- old/good/icon_blender.py
+- old/older/icon_masker.py
+- old/older/imgquart.py
+"""
     # Create generator with default theme
     generator = VexyliconGenerator(theme="default")
 

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vexylicon Glass Effect Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+            color: #999;
+            line-height: 1.6;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .demo-item {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .icon-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #333;
+        }
+        
+        /* Different background styles */
+        .bg-gradient-sunset {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+        }
+        
+        .bg-gradient-ocean {
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+        }
+        
+        .bg-gradient-purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .bg-gradient-green {
+            background: linear-gradient(135deg, #96e6a1 0%, #006644 100%);
+        }
+        
+        .bg-pattern-dots {
+            background-color: #4158D0;
+            background-image: 
+                radial-gradient(circle at 20% 20%, #ff00ff 2px, transparent 2px),
+                radial-gradient(circle at 80% 80%, #00ffff 2px, transparent 2px);
+            background-size: 50px 50px;
+        }
+        
+        .bg-pattern-waves {
+            background-color: #ee5A24;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .bg-animated {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .bg-image {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23FFD93D"/><circle cx="50" cy="50" r="30" fill="%236BCB77"/><circle cx="150" cy="50" r="30" fill="%234D96FF"/><circle cx="50" cy="150" r="30" fill="%23FF6B6B"/><circle cx="150" cy="150" r="30" fill="%23C76BFF"/></svg>');
+            background-size: cover;
+        }
+        
+        /* Clipped content layer */
+        .clipped-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Clip path will be applied via JavaScript */
+        }
+        
+        /* Glass overlay */
+        .glass-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .label {
+            text-align: center;
+            font-weight: 500;
+            color: #ccc;
+            margin-bottom: 5px;
+        }
+        
+        .sublabel {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #444;
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .theme-toggle:hover {
+            background: #555;
+        }
+        
+        /* Light theme */
+        body.light-theme {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        body.light-theme h1 {
+            color: #222;
+        }
+        
+        body.light-theme .description {
+            color: #666;
+        }
+        
+        body.light-theme .demo-item {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .icon-container {
+            background: #f0f0f0;
+        }
+        
+        body.light-theme .label {
+            color: #444;
+        }
+        
+        body.light-theme .sublabel {
+            color: #999;
+        }
+        
+        body.light-theme .theme-toggle {
+            background: #666;
+        }
+        
+        body.light-theme .theme-toggle:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+    
+    <h1>Vexylicon Glass Effect Demo</h1>
+    <div class="description">
+        This demo shows how the glass effect works with different backgrounds. The colorful content is clipped
+        to the icon shape, and the glass effect SVG is overlaid on top to create a liquid-glass appearance.
+    </div>
+    
+    <div class="demo-grid">
+        <div class="demo-item">
+            <div class="icon-container">
+                <div class="clipped-content bg-gradient-sunset"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200"></svg>
+            </div>
+            <div class="label">Sunset Gradient</div>
+            <div class="sublabel">Warm orange to red transition</div>
+        </div>
+        
+        <div class="demo-item">
+            <div class="icon-container">
+                <div class="clipped-content bg-gradient-ocean"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200"></svg>
+            </div>
+            <div class="label">Ocean Gradient</div>
+            <div class="sublabel">Cool teal to green blend</div>
+        </div>
+        
+        <div class="demo-item">
+            <div class="icon-container">
+                <div class="clipped-content bg-gradient-purple"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200"></svg>
+            </div>
+            <div class="label">Purple Dream</div>
+            <div class="sublabel">Vibrant purple gradient</div>
+        </div>
+        
+        <div class="demo-item">
+            <div class="icon-container">
+                <div class="clipped-content bg-gradient-green"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200"></svg>
+            </div>
+            <div class="label">Forest Green</div>
+            <div class="sublabel">Natural green tones</div>
+        </div>
+        
+        <div class="demo-item">
+            <div class="icon-container">
+                <div class="clipped-content bg-pattern-dots"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200"></svg>
+            </div>
+            <div class="label">Dot Pattern</div>
+            <div class="sublabel">Geometric dot overlay</div>
+        </div>
+        
+        <div class="demo-item">
+            <div class="icon-container">
+                <div class="clipped-content bg-pattern-waves"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200"></svg>
+            </div>
+            <div class="label">Wave Pattern</div>
+            <div class="sublabel">Flowing wave design</div>
+        </div>
+        
+        <div class="demo-item">
+            <div class="icon-container">
+                <div class="clipped-content bg-animated"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200"></svg>
+            </div>
+            <div class="label">Animated Gradient</div>
+            <div class="sublabel">Dynamic color flow</div>
+        </div>
+        
+        <div class="demo-item">
+            <div class="icon-container">
+                <div class="clipped-content bg-image"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200"></svg>
+            </div>
+            <div class="label">SVG Pattern</div>
+            <div class="sublabel">Colorful geometric shapes</div>
+        </div>
+    </div>
+    
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const theme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+            localStorage.setItem('theme', theme);
+            updateSvgTheme(theme);
+        }
+        
+        // Update SVG data-theme attribute
+        function updateSvgTheme(theme) {
+            document.querySelectorAll('.glass-overlay svg').forEach(svg => {
+                svg.setAttribute('data-theme', theme);
+            });
+        }
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
+        // Load the glass effect SVG
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Try to load generated glass effect with payload first
+                let response = await fetch('glass_with_payload.svg');
+                let svgText;
+                
+                if (!response.ok) {
+                    console.log('Generated file not found, falling back to placeholder...');
+                    // Create a simple glass effect placeholder
+                    svgText = `
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
+                            <defs>
+                                <clipPath id="iconClip">
+                                    <path d="M600 100 C 900 100, 1100 300, 1100 600 C 1100 900, 900 1100, 600 1100 C 300 1100, 100 900, 100 600 C 100 300, 300 100, 600 100 Z M600 300 C 400 300, 300 400, 300 600 C 300 800, 400 900, 600 900 C 800 900, 900 800, 900 600 C 900 400, 800 300, 600 300 Z"/>
+                                </clipPath>
+                                <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:white;stop-opacity:0.3" />
+                                    <stop offset="100%" style="stop-color:white;stop-opacity:0.1" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="1200" height="1200" fill="url(#glassGradient)" opacity="0.5"/>
+                        </svg>
+                    `;
+                } else {
+                    svgText = await response.text();
+                }
+                
+                // Apply to all glass overlays
+                const overlays = document.querySelectorAll('.glass-overlay');
+                overlays.forEach((overlay, index) => {
+                    // Make IDs unique for each instance
+                    let instanceSvgText = svgText.replace(/id="([^"]+)"/g, (match, id) => {
+                        return `id="${id}-${index}"`;
+                    });
+                    instanceSvgText = instanceSvgText.replace(/href="#([^"]+)"/g, (match, href) => {
+                        return `href="#${href.replace(/-\d+$/, '')}-${index}"`;
+                    });
+                    instanceSvgText = instanceSvgText.replace(/url\(#([^)]+)\)/g, (match, url) => {
+                        return `url(#${url.replace(/-\d+$/, '')}-${index})`;
+                    });
+                    instanceSvgText = instanceSvgText.replace(/clip-path="url\(#([^)]+)\)"/g, (match, url) => {
+                        return `clip-path="url(#${url.replace(/-\d+$/, '')}-${index})"`;
+                    });
+                    
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = instanceSvgText;
+                    const svgElement = tempDiv.querySelector('svg');
+                    
+                    if (svgElement) {
+                        // Extract clip path from SVG if it exists
+                        const clipPath = svgElement.querySelector('clipPath[id*="innerClip"]');
+                        if (clipPath) {
+                            // Apply clip path to the background content
+                            const clippedContent = overlay.previousElementSibling;
+                            if (clippedContent && clippedContent.classList.contains('clipped-content')) {
+                                const clipId = clipPath.getAttribute('id');
+                                clippedContent.style.clipPath = `url(#${clipId})`;
+                            }
+                        }
+                        
+                        // Set theme attribute
+                        const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+                        svgElement.setAttribute('data-theme', currentTheme);
+                        
+                        // Replace placeholder with actual SVG
+                        svgElement.setAttribute('viewBox', '0 0 1200 1200');
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        overlay.parentNode.replaceChild(svgElement, overlay);
+                    }
+                });
+                
+                console.log('Glass effect loaded successfully!');
+                
+            } catch (error) {
+                console.error('Failed to load glass effect:', error);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,3855 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: varia, .specstory, AGENT.md, CLAUDE.md, PLAN.md, SPEC.md, llms.txt, .cursorrules, docs, .log
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.giga/
+  specifications.json
+.github/
+  workflows/
+    push.yml
+    release.yml
+src/
+  vexylicon/
+    assets/
+      themes/
+        default.json
+      best_base.svg
+    utils/
+      __init__.py
+      path_tools.py
+      svg_processor.py
+      theme_loader.py
+    __init__.py
+    cli.py
+    core.py
+    vexylicon.py
+testdata/
+  payload.svg
+  test.html
+tests/
+  test_core.py
+  test_package.py
+.cursorindexingignore
+.gitignore
+.pre-commit-config.yaml
+CHANGELOG.md
+cleanup.sh
+cleanup.txt
+LICENSE
+package.toml
+pyproject.toml
+pyrightconfig.json
+README.md
+TODO.md
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".giga/specifications.json">
+[
+  {
+    "fileName": "main-overview.mdc",
+    "description": "Complete system overview documenting the SVG icon transformation system, including the overall architecture, component interactions, and high-level workflow"
+  },
+  {
+    "fileName": "svg-bevel-algorithm.mdc",
+    "description": "Detailed documentation of the SVG bevel generation algorithm, including path interpolation, opacity progression calculations, and glass effect implementation"
+  },
+  {
+    "fileName": "mask-transformation.mdc",
+    "description": "Comprehensive documentation of the theme-aware mask creation process, including gradient modifications, clipPath handling, and payload injection mechanisms"
+  },
+  {
+    "fileName": "data-flow.mdc",
+    "description": "Documentation of the data flow between components, including how SVG data is processed, transformed, and modified through the various stages of the icon transformation pipeline"
+  }
+]
+</file>
+
+<file path="src/vexylicon/assets/themes/default.json">
+{
+  "name": "default",
+  "version": "1.0",
+  "gradients": {
+    "baseFill": {
+      "type": "linear",
+      "x1": 600,
+      "y1": 0,
+      "x2": 600,
+      "y2": 1000,
+      "stops": [
+        {"offset": 0, "color": "white", "opacity": 0.12},
+        {"offset": 1, "color": "white", "opacity": 0.02}
+      ]
+    },
+    "edgeGlow": {
+      "type": "radial",
+      "cx": 35,
+      "cy": -75,
+      "r": 1200,
+      "stops": [
+        {"offset": 0.01, "color": "white", "opacity": 0.6},
+        {"offset": 0.05, "color": "white", "opacity": 0.3},
+        {"offset": 0.06, "color": "white", "opacity": 0.2},
+        {"offset": 1, "color": "white", "opacity": 0}
+      ]
+    },
+    "cornerHighlight": {
+      "type": "radial",
+      "cx": 990,
+      "cy": 980,
+      "r": 256,
+      "stops": [
+        {"offset": 0, "color": "white", "opacity": 0.2},
+        {"offset": 0.4, "color": "white", "opacity": 0.1},
+        {"offset": 1, "color": "white", "opacity": 0.02}
+      ]
+    }
+  },
+  "colors": {
+    "canvas": "#666666",
+    "border": "#131313"
+  },
+  "effects": {
+    "blendMode": "screen",
+    "strokeOpacity": 0.5,
+    "strokeWidth": 0.25
+  }
+}
+</file>
+
+<file path="src/vexylicon/assets/best_base.svg">
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200">
+  <defs>
+    <!-- Reusable path definitions -->
+    <path id="borderShape" d="M 1112 418 L 1112 782 C 1112 905 1089 979 1034 1034 C 979 1089 905 1112 782 1112 L 418 1112 C 288 1112 224 1092 166 1034 C 108 976 88 912 88 782   L 88 418  C 88 288 108 224 166 166  C 224 108 288 88 418 88   L 782 88  C 909 88 977 109 1034 166 C 1091 223 1112 291 1112 418"/>
+    
+    <path id="mainShape" d="M 1087.5,418.5 C 1087.5,418.5 1087.5,782.5 1087.5,782.5 C 1087.5,898.5 1066.5,966.5 1016.5,1016.5 C 966.5,1066.5 898.5,1087.5 782.5,1087.5 C 782.5,1087.5 418.5,1087.5 418.5,1087.5 C 296.5,1087.5 237.0,1069.0 184.5,1016.5 C 132.0,964.0 113.5,904.5 113.5,782.5 C 113.5,782.5 113.5,418.5 113.5,418.5 C 113.5,296.5 132.0,237.0 184.5,184.5 C 237.0,132.0 296.5,113.5 418.5,113.5 C 418.5,113.5 782.5,113.5 782.5,113.5 C 901.5,113.5 965.0,133.0 1016.5,184.5 C 1068.0,236.0 1087.5,299.5 1087.5,418.5 Z M 1034 166 C 977 109 909 88 782 88 L 418 88 C 288 88 224 108 166 166 C 108 224 88 288 88 418 L 88 782 C 88 912 108 976 166 1034 C 224 1092 288 1112 418 1112 L 782 1112 C 905 1112 979 1089 1034 1034 C 1089 979 1112 905 1112 782 L 1112 418 C 1112 291 1091 223 1034 166 Z"/>
+
+    <!-- Meaningful gradient names -->
+    <linearGradient id="baseFill" x1="600" y1="0" x2="600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="white" stop-opacity="0.01"/>
+    </linearGradient>
+    
+    <radialGradient id="edgeGlow" cx="35" cy="-75" r="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0.01" stop-color="white" stop-opacity="0.6"/>
+      <stop offset="0.05" stop-color="white" stop-opacity="0.3"/>
+      <stop offset="0.06" stop-color="white" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="cornerHighlight" cx="990" cy="980" r="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity="0.2"/>
+      <stop offset="0.4" stop-color="white" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="white" stop-opacity="0.02"/>
+    </radialGradient>
+    <clipPath id="borderClip">
+      <use href="#borderShape" />
+    </clipPath>    
+  </defs>
+  
+  <!-- Canvas background -->
+  <rect id="canvas" width="1200" height="1200" fill="none"/>
+  
+  <g>
+    <!-- Border layer -->
+    <g>
+      <use href="#borderShape" id="border" fill="none" style="stroke: black; stroke-linejoin: round; stroke-linecap: round; stroke-opacity: 0.5; stroke-width: 0.25px;"/>
+    </g>
+    
+    <!-- Background layer -->
+    <g>
+      <use href="#borderShape" id="back" fill="url(#baseFill)" stroke="none"/>
+    </g>
+    
+    <!-- Main shape with edge glow -->
+    <g>
+      <use href="#mainShape" id="outer" fill="url(#edgeGlow)" stroke="none"/>
+    </g>
+    
+    <!-- Corner highlight -->
+    <g>
+      <use href="#mainShape" id="small" fill="url(#cornerHighlight)" stroke="none"/>
+    </g>
+    
+    <g/>
+  </g>
+</svg>
+</file>
+
+<file path="src/vexylicon/utils/__init__.py">
+#!/usr/bin/env -S uv run -s
+# this_file: src/vexylicon/utils/__init__.py
+"""Utility modules for Vexylicon."""
+
+from vexylicon.utils.path_tools import (
+    align_path_start,
+    generate_ring_paths,
+    interpolate_segment,
+    parse_dual_contour_path,
+    path_bbox,
+    round_svg_coordinates,
+    to_cubic_list,
+)
+from vexylicon.utils.svg_processor import SVGProcessor
+from vexylicon.utils.theme_loader import Theme, ThemeLoader
+
+__all__ = [
+    # svg_processor
+    "SVGProcessor",
+    # theme_loader
+    "Theme",
+    "ThemeLoader",
+    # path_tools
+    "align_path_start",
+    "generate_ring_paths",
+    "interpolate_segment",
+    "parse_dual_contour_path",
+    "path_bbox",
+    "round_svg_coordinates",
+    "to_cubic_list",
+]
+</file>
+
+<file path="src/vexylicon/utils/path_tools.py">
+#!/usr/bin/env -S uv run -s
+# this_file: src/vexylicon/utils/path_tools.py
+"""SVG path manipulation and interpolation utilities.
+
+This module provides tools for working with SVG paths, including:
+- Path parsing and analysis
+- Contour splitting and alignment
+- Path interpolation for bevel generation
+- Coordinate rounding and precision control
+"""
+
+from __future__ import annotations
+
+import re
+from typing import List, Tuple
+
+from svgpathtools import CubicBezier, Line, Path, parse_path
+
+
+def path_bbox(d: str) -> Tuple[float, float]:
+    """Return (width, height) of the path bounding box.
+    
+    Args:
+        d: SVG path data string
+        
+    Returns:
+        Tuple of (width, height) of the bounding box
+    """
+    p = parse_path(d)
+    xmin, xmax, ymin, ymax = p.bbox()
+    return xmax - xmin, ymax - ymin
+
+
+def interpolate_segment(a, b, t: float):
+    """Interpolate between two path segments (CubicBezier or Line).
+    
+    Args:
+        a: First segment (source)
+        b: Second segment (target)
+        t: Interpolation factor (0.0 to 1.0)
+        
+    Returns:
+        Interpolated segment of the same type
+        
+    Raises:
+        TypeError: If segment type is not supported
+    """
+    if isinstance(a, CubicBezier):
+        return CubicBezier(
+            a.start * (1 - t) + b.start * t,
+            a.control1 * (1 - t) + b.control1 * t,
+            a.control2 * (1 - t) + b.control2 * t,
+            a.end * (1 - t) + b.end * t,
+        )
+    if isinstance(a, Line):
+        return Line(
+            a.start * (1 - t) + b.start * t,
+            a.end * (1 - t) + b.end * t
+        )
+    raise TypeError(f"Unsupported segment type {type(a).__name__}")
+
+
+def to_cubic_list(path: Path) -> List[CubicBezier]:
+    """Convert all segments to CubicBezier representation.
+    
+    Lines are converted to degenerate cubic beziers with control points on the line.
+    
+    Args:
+        path: SVG path object
+        
+    Returns:
+        List of CubicBezier segments
+        
+    Raises:
+        TypeError: If path contains unsupported segment types
+    """
+    segs = []
+    for seg in path:
+        if isinstance(seg, Line):
+            # Represent line as a degenerate cubic (ctrl points on line)
+            segs.append(CubicBezier(seg.start, seg.start, seg.end, seg.end))
+        elif isinstance(seg, CubicBezier):
+            segs.append(seg)
+        else:
+            raise TypeError(
+                "Unsupported segment type in path; please flatten arcs first"
+            )
+    return segs
+
+
+def parse_dual_contour_path(d: str) -> Tuple[str, str]:
+    """Split a path with two contours (separated by Z M or M commands).
+    
+    This function handles SVG paths that contain exactly two contours,
+    typically representing outer and inner boundaries of a shape.
+    
+    Args:
+        d: SVG path data string with two contours
+        
+    Returns:
+        Tuple of (outer_contour, inner_contour) path strings
+        
+    Raises:
+        ValueError: If path doesn't contain exactly two contours
+    """
+    # Handle both " Z M " and " M " separations
+    if " Z M " in d:
+        parts = d.split(" Z M ")
+        if len(parts) == 2:
+            inner_contour = parts[0].strip() + " Z"
+            outer_contour = "M " + parts[1].strip()
+            return outer_contour, inner_contour
+
+    # Fallback to original " M " splitting
+    parts = d.split(" M ")
+    
+    if len(parts) != 2:
+        raise ValueError(
+            f"Expected exactly 2 contours (M commands), got {len(parts)}"
+        )
+    
+    # parts[0] is actually the inner contour, parts[1] is the outer contour
+    inner_contour = parts[0].strip()
+    outer_contour = "M " + parts[1].strip()
+    
+    return outer_contour, inner_contour
+
+
+def round_svg_coordinates(d_string: str, precision: int = 2) -> str:
+    """Round all numeric coordinates in SVG path string to specified precision.
+    
+    This helps avoid precision artifacts in generated paths.
+    
+    Args:
+        d_string: SVG path data string
+        precision: Number of decimal places (default: 2)
+        
+    Returns:
+        Path string with rounded coordinates
+    """
+    def round_match(match):
+        return str(round(float(match.group()), precision))
+    
+    # Match floating point numbers (including scientific notation)
+    return re.sub(r"-?\d+\.?\d*(?:[eE][+-]?\d+)?", round_match, d_string)
+
+
+def align_path_start(p_outer: Path, p_inner: Path) -> Path:
+    """Rotate p_outer so that its first point is closest to p_inner[0].start.
+    
+    This alignment prevents twisted interpolation between paths.
+    
+    Args:
+        p_outer: Outer path to align
+        p_inner: Inner path to align to
+        
+    Returns:
+        Rotated outer path with optimal alignment
+    """
+    target = p_inner[0].start
+    # Find segment whose start-point is nearest to target
+    idx = min(range(len(p_outer)), key=lambda i: abs(p_outer[i].start - target))
+    # Rotate segments to start from that index
+    segs = list(p_outer[idx:]) + list(p_outer[:idx])
+    return Path(*segs)
+
+
+def generate_ring_paths(
+    outer_contour: str, 
+    inner_contour: str, 
+    steps: int
+) -> List[str]:
+    """Generate intermediate ring paths by interpolating between contours.
+    
+    Creates a series of progressively thinner rings by pushing the inner
+    contour outward toward the outer contour.
+    
+    Args:
+        outer_contour: SVG path string for outer boundary
+        inner_contour: SVG path string for inner boundary
+        steps: Number of intermediate rings to generate
+        
+    Returns:
+        List of SVG path strings for the interpolated rings
+        
+    Raises:
+        ValueError: If contours have incompatible segment counts
+    """
+    # Parse both contours into Paths
+    outer_path = parse_path(outer_contour)
+    inner_path = parse_path(inner_contour)
+    
+    # Reverse outer contour for correspondence
+    outer_path_rev = outer_path.reversed()
+    
+    # Align start points to prevent twisted interpolation
+    outer_path_rev = align_path_start(outer_path_rev, inner_path)
+    
+    p_outer = to_cubic_list(outer_path_rev)
+    p_inner = to_cubic_list(inner_path)
+    
+    if len(p_outer) != len(p_inner):
+        raise ValueError(
+            "Outer and inner contours have incompatible segment counts"
+        )
+    
+    t_vals = [(i + 1) / (steps + 1) for i in range(steps)]
+    d_list: List[str] = []
+    
+    for t in t_vals:
+        # Interpolate inner contour ’ aligned reversed outer contour
+        # This makes inner contour move outward toward fixed outer contour
+        inter_segs = [
+            interpolate_segment(s_in, s_out, t) 
+            for s_in, s_out in zip(p_inner, p_outer)
+        ]
+        
+        ring_inner = Path(*inter_segs)
+        # Round coordinates to 2 decimal places to avoid precision artifacts
+        ring_inner_d = round_svg_coordinates(ring_inner.d())
+        outer_d = round_svg_coordinates(outer_path.d())
+        combined_d = f"{outer_d} M {ring_inner_d[2:]}"
+        d_list.append(combined_d)
+    
+    return d_list
+</file>
+
+<file path="src/vexylicon/utils/svg_processor.py">
+#!/usr/bin/env -S uv run -s
+# this_file: src/vexylicon/utils/svg_processor.py
+"""SVG DOM manipulation utilities using lxml.
+
+This module provides safe XML parsing and manipulation functions
+for SVG documents. All operations use proper DOM manipulation
+rather than string replacement to ensure robustness.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+from lxml import etree
+
+# SVG namespace
+SVG_NS = "http://www.w3.org/2000/svg"
+XLINK_NS = "http://www.w3.org/1999/xlink"
+
+# Note: lxml doesn't support registering default namespace with empty prefix
+# We'll handle namespaces during serialization instead
+
+
+class SVGProcessor:
+    """Handles SVG document parsing and manipulation using lxml."""
+
+    def __init__(self, svg_content: str | Path):
+        """Initialize with SVG content or file path.
+
+        Args:
+            svg_content: SVG string or path to SVG file
+
+        Raises:
+            etree.XMLSyntaxError: If SVG is malformed
+        """
+        if isinstance(svg_content, Path):
+            with open(svg_content, "rb") as f:
+                self.tree = etree.parse(f)
+        else:
+            self.tree = etree.fromstring(svg_content.encode("utf-8"))
+            if not isinstance(self.tree, etree._Element):
+                msg = "Failed to parse SVG content"
+                raise ValueError(msg)
+
+        self.root = self.tree if isinstance(self.tree, etree._Element) else self.tree.getroot()
+
+    def ns(self, tag: str) -> str:
+        """Return namespaced tag for SVG elements.
+
+        Args:
+            tag: Element tag name (e.g., 'path', 'g')
+
+        Returns:
+            Fully qualified tag with namespace
+        """
+        return f"{{{SVG_NS}}}{tag}"
+
+    def find_by_id(self, element_id: str) -> etree._Element | None:
+        """Find element by ID attribute.
+
+        Args:
+            element_id: ID to search for
+
+        Returns:
+            Element if found, None otherwise
+        """
+        return self.root.find(f".//*[@id='{element_id}']")
+
+    def find_all(self, tag: str) -> list[etree._Element]:
+        """Find all elements with given tag.
+
+        Args:
+            tag: Tag name (without namespace)
+
+        Returns:
+            List of matching elements
+        """
+        return self.root.findall(f".//{self.ns(tag)}")
+
+    def get_defs(self, create: bool = True) -> etree._Element | None:
+        """Get or create the <defs> element.
+
+        Args:
+            create: Whether to create if missing
+
+        Returns:
+            The defs element, or None if not found and create=False
+        """
+        defs = self.root.find(self.ns("defs"))
+        if defs is None and create:
+            defs = etree.SubElement(self.root, self.ns("defs"))
+            # Move defs to the beginning
+            self.root.insert(0, defs)
+        return defs
+
+    def create_element(self, tag: str, **attrs) -> etree._Element:
+        """Create a new SVG element with attributes.
+
+        Args:
+            tag: Element tag name
+            **attrs: Element attributes
+
+        Returns:
+            New element
+        """
+        elem = etree.Element(self.ns(tag))
+        for key, value in attrs.items():
+            if key == "href":
+                # Handle xlink:href for compatibility
+                elem.set(f"{{{XLINK_NS}}}href", str(value))
+                elem.set("href", str(value))  # Also set modern href
+            else:
+                elem.set(key, str(value))
+        return elem
+
+    def add_gradient(self, gradient_type: str, gradient_id: str, stops: list[dict], **attrs) -> etree._Element:
+        """Add a gradient definition to the SVG.
+
+        Args:
+            gradient_type: 'linear' or 'radial'
+            gradient_id: ID for the gradient
+            stops: List of stop definitions with offset, color, opacity
+            **attrs: Additional gradient attributes (x1, y1, cx, cy, etc.)
+
+        Returns:
+            The created gradient element
+        """
+        defs = self.get_defs()
+
+        tag = "linearGradient" if gradient_type == "linear" else "radialGradient"
+        gradient = self.create_element(tag, id=gradient_id, gradientUnits="userSpaceOnUse", **attrs)
+
+        for stop in stops:
+            stop_elem = self.create_element("stop", offset=str(stop["offset"]), stop_color=stop["color"])
+            if "opacity" in stop:
+                stop_elem.set("stop-opacity", str(stop["opacity"]))
+            gradient.append(stop_elem)
+
+        defs.append(gradient)
+        return gradient
+
+    def duplicate_element(self, elem: etree._Element, new_id: str) -> etree._Element:
+        """Create a deep copy of an element with a new ID.
+
+        Args:
+            elem: Element to duplicate
+            new_id: New ID for the copy
+
+        Returns:
+            The duplicated element
+        """
+        new_elem = etree.fromstring(etree.tostring(elem))
+        new_elem.set("id", new_id)
+        return new_elem
+
+    def get_path_data(self, elem: etree._Element) -> str:
+        """Extract path data from a path or use element.
+
+        Handles both direct path elements and use elements that
+        reference path definitions.
+
+        Args:
+            elem: Path or use element
+
+        Returns:
+            Path data string, or empty string if not found
+        """
+        if elem.tag.endswith("path"):
+            return elem.get("d", "")
+        if elem.tag.endswith("use"):
+            # Get the href attribute
+            href = elem.get("href") or elem.get(f"{{{XLINK_NS}}}href", "")
+            if href.startswith("#"):
+                ref_id = href[1:]  # Remove the #
+                ref_elem = self.find_by_id(ref_id)
+                if ref_elem is not None and ref_elem.tag.endswith("path"):
+                    return ref_elem.get("d", "")
+        return ""
+
+    def to_string(self, pretty_print: bool = True) -> str:
+        """Convert the SVG tree back to a string.
+
+        Args:
+            pretty_print: Whether to format with indentation
+
+        Returns:
+            SVG as string
+        """
+        # First get the string without XML declaration
+        svg_str = etree.tostring(self.root, encoding="unicode", pretty_print=pretty_print)
+        # Add XML declaration manually
+        return f'<?xml version="1.0" encoding="UTF-8"?>\n{svg_str}'
+
+    def write(self, output_path: Path, pretty_print: bool = True) -> None:
+        """Write the SVG to a file.
+
+        Args:
+            output_path: Where to save the SVG
+            pretty_print: Whether to format with indentation
+        """
+        output_path.write_text(self.to_string(pretty_print), encoding="utf-8")
+</file>
+
+<file path="src/vexylicon/utils/theme_loader.py">
+#!/usr/bin/env -S uv run -s
+# this_file: src/vexylicon/utils/theme_loader.py
+# ruff: noqa
+"""Theme loading and validation utilities.
+
+This module handles loading theme definitions from JSON files
+and provides validation to ensure themes are properly structured.
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any, Literal
+from dataclasses import dataclass
+
+
+@dataclass
+class GradientStop:
+    """Represents a color stop in a gradient."""
+
+    offset: float
+    color: str
+    opacity: float
+
+    def __post_init__(self) -> None:  # noqa: D401 – simple validation method
+        if not 0 <= self.offset <= 1:
+            raise ValueError(
+                "Gradient stop 'offset' must be within 0–1 range.",
+            )
+        if not 0 <= self.opacity <= 1:
+            raise ValueError(
+                "Gradient stop 'opacity' must be within 0–1 range.",
+            )
+
+
+@dataclass
+class LinearGradient:
+    """Linear gradient definition."""
+
+    type: Literal["linear"]
+    x1: float
+    y1: float
+    x2: float
+    y2: float
+    stops: list[GradientStop]
+
+    def __post_init__(self) -> None:  # noqa: D401
+        if self.type != "linear":
+            raise ValueError(
+                "LinearGradient type must be 'linear'.",
+            )
+
+
+@dataclass
+class RadialGradient:
+    """Radial gradient definition."""
+
+    type: Literal["radial"]
+    cx: float
+    cy: float
+    r: float
+    stops: list[GradientStop]
+
+    def __post_init__(self) -> None:  # noqa: D401
+        if self.type != "radial":
+            raise ValueError(
+                "RadialGradient type must be 'radial'.",
+            )
+
+
+@dataclass
+class ThemeColors:
+    """Theme color definitions."""
+
+    canvas: str
+    border: str
+
+
+@dataclass
+class ThemeEffects:
+    """Theme effect settings."""
+
+    blendMode: str = "screen"
+    strokeOpacity: float = 0.5
+    strokeWidth: float = 0.25
+
+    def __post_init__(self) -> None:  # noqa: D401
+        if not 0 <= self.strokeOpacity <= 1:
+            raise ValueError(
+                "ThemeEffects strokeOpacity must be within 0–1.",
+            )
+        if self.strokeWidth <= 0:
+            raise ValueError("ThemeEffects strokeWidth must be > 0.")
+
+
+@dataclass
+class Theme:
+    """Complete theme definition."""
+
+    name: str
+    version: str
+    gradients: dict[str, dict[str, Any]]
+    colors: ThemeColors
+    effects: ThemeEffects
+
+    # ---------------------------------------------------------------------
+    # Construction helpers
+    # ---------------------------------------------------------------------
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Theme:  # noqa: D401 – factory method
+        """Create a :class:`Theme` from a raw ``dict`` (e.g. loaded from JSON)."""
+        colors = data.get("colors", {})
+        effects = data.get("effects", {})
+
+        # Convert nested structures to dataclasses if necessary
+        if not isinstance(colors, ThemeColors):
+            colors = ThemeColors(**colors)
+        if not isinstance(effects, ThemeEffects):
+            effects = ThemeEffects(**effects)
+
+        gradients: dict[str, dict[str, Any]] = data.get("gradients", {})
+        name = data.get("name", "unnamed")
+        version = data.get("version", "0.0.0")
+        theme = cls(
+            name=name,
+            version=version,
+            gradients=gradients,
+            colors=colors,
+            effects=effects,
+        )
+        # Validate after creation
+        theme._validate_gradients()
+        return theme
+
+    # ------------------------------------------------------------------
+    # Validation helpers
+    # ------------------------------------------------------------------
+    def __post_init__(self) -> None:  # noqa: D401
+        """Post-initialisation validation and coercion."""
+        # Ensure nested dictionaries become dataclass instances when Theme is
+        # constructed directly via ``Theme(**kwargs)``.
+        if isinstance(self.colors, dict):
+            self.colors = ThemeColors(**self.colors)  # type: ignore[assignment]
+        if isinstance(self.effects, dict):
+            self.effects = ThemeEffects(**self.effects)  # type: ignore[assignment]
+        self._validate_gradients()
+
+    # private ----------------------------------------------------------------
+    def _validate_gradients(self) -> None:
+        """Validate gradient structures ensuring supported types and ranges."""
+        for name, grad in self.gradients.items():
+            grad_type = grad.get("type")
+            if grad_type == "linear":
+                required_keys = {"x1", "y1", "x2", "y2", "stops"}
+            elif grad_type == "radial":
+                required_keys = {"cx", "cy", "r", "stops"}
+            else:
+                raise ValueError(
+                    (f"Unknown gradient type '{grad_type}' in gradient '{name}'."),
+                )
+
+            missing = required_keys - set(grad.keys())
+            if missing:
+                missing_keys = ", ".join(sorted(missing))
+                raise ValueError(
+                    (f"Gradient '{name}' missing keys: {missing_keys}"),
+                )
+
+            # Validate stops
+            for stop in grad.get("stops", []):
+                try:
+                    GradientStop(**stop)  # type: ignore[arg-type]
+                except TypeError as exc:
+                    raise ValueError(
+                        (f"Invalid gradient stop in '{name}': {exc}"),
+                    ) from exc
+
+
+class ThemeLoader:
+    """Handles loading and management of theme definitions."""
+
+    def __init__(self, theme_dir: Path | None = None):
+        """Initialize theme loader.
+
+        Args:
+            theme_dir: Directory containing theme JSON files.
+                      If None, uses package assets directory.
+        """
+        if theme_dir is None:
+            # Use package assets
+            import importlib.resources
+
+            self.theme_dir = importlib.resources.files("vexylicon.assets.themes")
+        else:
+            self.theme_dir = Path(theme_dir)
+
+    def load_theme(self, theme_name: str) -> Theme:
+        """Load and validate a theme by name.
+
+        Args:
+            theme_name: Name of the theme (without .json extension)
+
+        Returns:
+            Validated Theme object
+
+        Raises:
+            FileNotFoundError: If theme file doesn't exist
+            ValidationError: If theme JSON is invalid
+        """
+        theme_path = self.theme_dir / f"{theme_name}.json"
+
+        if hasattr(self.theme_dir, "joinpath"):
+            # Handle importlib.resources path
+            theme_content = (self.theme_dir / f"{theme_name}.json").read_text()
+            theme_data = json.loads(theme_content)
+        else:
+            # Handle regular Path
+            if not theme_path.exists():
+                msg = f"Theme not found: {theme_name}"
+                raise FileNotFoundError(msg)
+
+            with open(theme_path) as f:
+                theme_data = json.load(f)
+
+        return Theme.from_dict(theme_data)
+
+    def list_themes(self) -> list[str]:
+        """List available theme names.
+
+        Returns:
+            List of theme names (without .json extension)
+        """
+        if hasattr(self.theme_dir, "iterdir"):
+            # Handle importlib.resources path
+            return [f.name[:-5] for f in self.theme_dir.iterdir() if f.name.endswith(".json")]
+        # Handle regular Path
+        return [f.stem for f in self.theme_dir.glob("*.json")]
+
+    def create_dark_variant(self, theme: Theme) -> Theme:
+        """Create a dark variant of a theme.
+
+        This creates a modified version of the theme suitable for
+        dark backgrounds by adjusting opacity values.
+
+        Args:
+            theme: Base theme to modify
+
+        Returns:
+            Dark variant of the theme
+        """
+        import copy
+
+        dark_theme = copy.deepcopy(theme)
+        dark_theme.name = f"{theme.name}-dark"
+
+        # Increase opacity slightly for dark backgrounds
+        for gradient in dark_theme.gradients.values():
+            for stop in gradient.get("stops", []):
+                if "opacity" in stop:
+                    # Increase opacity by 20% for dark mode
+                    stop["opacity"] = min(1.0, stop["opacity"] * 1.2)
+
+        return dark_theme
+</file>
+
+<file path="src/vexylicon/__init__.py">
+#!/usr/bin/env -S uv run -s
+# this_file: src/vexylicon/__init__.py
+"""Vexylicon - Create sophisticated liquid-glass SVG icon effects.
+
+This package provides tools to transform simple SVG icons into stunning
+glass-morphism designs with beveled edges and dynamic light/dark theme support.
+"""
+
+from vexylicon.__version__ import __version__
+from vexylicon.core import VexyliconGenerator, VexyliconParams
+
+__all__ = ["VexyliconGenerator", "VexyliconParams", "__version__"]
+</file>
+
+<file path="src/vexylicon/cli.py">
+#!/usr/bin/env python3
+# this_file: src/vexylicon/cli.py
+"""Command-line interface for Vexylicon.
+
+This module provides a Fire-based CLI for creating liquid-glass
+SVG effects from the command line.
+"""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+import fire
+from rich import print
+from rich.console import Console
+from rich.table import Table
+
+from vexylicon import VexyliconGenerator, VexyliconParams
+from vexylicon.core import OpacityProgression, VexyliconError
+from vexylicon.utils import ThemeLoader
+
+console = Console()
+
+
+class VexyliconCLI:
+    """Vexylicon command-line interface."""
+
+    def create(
+        self,
+        output: str = "output.svg",
+        payload: str | None = None,
+        steps: int = 24,
+        theme: str = "default",
+        opacity_start: float = 0.9,
+        opacity_end: float = 0.05,
+        opacity_progression: int = 4,
+        quality: str | None = None,
+        format: str = "svg",
+    ) -> None:
+        """Create liquid-glass icon mask with optional payload.
+
+        Args:
+            output: Output file path
+            payload: Path to payload SVG (optional)
+            steps: Number of bevel steps
+            theme: Theme name or path to theme JSON
+            opacity_start: Starting opacity for bevel
+            opacity_end: Ending opacity for bevel
+            opacity_progression: Opacity progression mode (1-4)
+            quality: Preset quality level (low/medium/high/ultra)
+            format: Output format (svg or png - png requires cairosvg)
+        """
+        try:
+            # Create parameters
+            params = VexyliconParams(
+                steps=steps,
+                opacity_start=opacity_start,
+                opacity_end=opacity_end,
+                opacity_progression=OpacityProgression(opacity_progression),
+                quality=quality,
+            )
+
+            # Create generator
+            print(f"[blue]Creating liquid-glass effect with theme: {theme}")
+            generator = VexyliconGenerator(theme=theme, params=params)
+
+            # Generate SVG
+            if payload:
+                print(f"[blue]Injecting payload from: {payload}")
+
+            svg_output = generator.generate(payload_svg=payload)
+
+            # Handle output format
+            output_path = Path(output)
+
+            if format.lower() == "svg":
+                output_path.write_text(svg_output, encoding="utf-8")
+                print(f"[green]✓ Created SVG: {output_path}")
+
+            elif format.lower() == "png":
+                # Convert to PNG using cairosvg
+                try:
+                    import cairosvg
+
+                    output_path = output_path.with_suffix(".png")
+                    cairosvg.svg2png(
+                        bytestring=svg_output.encode("utf-8"),
+                        write_to=str(output_path),
+                        output_width=1200,
+                        output_height=1200,
+                    )
+                    print(f"[green]✓ Created PNG: {output_path}")
+                except ImportError:
+                    print("[red]Error: PNG output requires cairosvg. Install with: pip install cairosvg")
+                    sys.exit(1)
+            else:
+                print(f"[red]Error: Unknown format '{format}'. Use 'svg' or 'png'.")
+                sys.exit(1)
+
+        except VexyliconError as e:
+            print(f"[red]Error: {e}")
+            sys.exit(1)
+        except Exception as e:
+            print(f"[red]Unexpected error: {e}")
+            sys.exit(1)
+
+    def batch(
+        self,
+        input_dir: str,
+        output_dir: str,
+        theme: str = "default",
+        steps: int = 24,
+        quality: str | None = None,
+        recursive: bool = False,
+    ) -> None:
+        """Process multiple SVGs in batch mode.
+
+        Args:
+            input_dir: Directory containing input SVGs
+            output_dir: Directory for output files
+            theme: Theme to apply to all SVGs
+            steps: Number of bevel steps
+            quality: Preset quality level
+            recursive: Process subdirectories recursively
+        """
+        input_path = Path(input_dir)
+        output_path = Path(output_dir)
+
+        if not input_path.exists():
+            print(f"[red]Error: Input directory does not exist: {input_dir}")
+            sys.exit(1)
+
+        # Create output directory
+        output_path.mkdir(parents=True, exist_ok=True)
+
+        # Find SVG files
+        pattern = "**/*.svg" if recursive else "*.svg"
+        svg_files = list(input_path.glob(pattern))
+
+        if not svg_files:
+            print(f"[yellow]No SVG files found in {input_dir}")
+            return
+
+        print(f"[blue]Found {len(svg_files)} SVG files to process")
+
+        # Create parameters
+        params = VexyliconParams(steps=steps, quality=quality)
+        generator = VexyliconGenerator(theme=theme, params=params)
+
+        # Process each file
+        success_count = 0
+        for svg_file in svg_files:
+            try:
+                print(f"[blue]Processing: {svg_file.name}")
+
+                # Generate output path
+                rel_path = svg_file.relative_to(input_path)
+                out_file = output_path / rel_path.with_stem(f"{rel_path.stem}_glass")
+                out_file.parent.mkdir(parents=True, exist_ok=True)
+
+                # Process file
+                svg_output = generator.generate(payload_svg=svg_file)
+                out_file.write_text(svg_output, encoding="utf-8")
+
+                success_count += 1
+                print(f"[green]✓ {svg_file.name} → {out_file.name}")
+
+            except Exception as e:
+                print(f"[red]✗ Failed to process {svg_file.name}: {e}")
+
+        print(f"\n[green]Successfully processed {success_count}/{len(svg_files)} files")
+
+    def themes(self) -> None:
+        """List available themes."""
+        loader = ThemeLoader()
+        themes = loader.list_themes()
+
+        if not themes:
+            print("[yellow]No themes found")
+            return
+
+        table = Table(title="Available Themes")
+        table.add_column("Theme Name", style="cyan")
+        table.add_column("Description", style="white")
+
+        # Add built-in themes
+        descriptions = {
+            "default": "Classic liquid-glass effect with white gradients",
+            "dark": "Enhanced opacity variant for dark backgrounds",
+        }
+
+        for theme_name in sorted(themes):
+            desc = descriptions.get(theme_name, "Custom theme")
+            table.add_row(theme_name, desc)
+
+        console.print(table)
+
+    def preview(self, svg_file: str, output: str | None = None) -> None:
+        """Generate a preview PNG of an SVG file.
+
+        Args:
+            svg_file: Path to SVG file
+            output: Output PNG path (defaults to svg_file.png)
+        """
+        try:
+            import cairosvg
+        except ImportError:
+            print("[red]Error: Preview requires cairosvg. Install with: pip install cairosvg")
+            sys.exit(1)
+
+        svg_path = Path(svg_file)
+        if not svg_path.exists():
+            print(f"[red]Error: File not found: {svg_file}")
+            sys.exit(1)
+
+        output_path = Path(output) if output else svg_path.with_suffix(".png")
+
+        try:
+            print(f"[blue]Generating preview of {svg_file}")
+            cairosvg.svg2png(url=str(svg_path), write_to=str(output_path), output_width=1200, output_height=1200)
+            print(f"[green]✓ Preview saved to: {output_path}")
+        except Exception as e:
+            print(f"[red]Error generating preview: {e}")
+            sys.exit(1)
+
+
+def main():
+    """Main entry point for the CLI."""
+    fire.Fire(VexyliconCLI)
+
+
+if __name__ == "__main__":
+    main()
+</file>
+
+<file path="src/vexylicon/core.py">
+#!/usr/bin/env -S uv run -s
+# this_file: src/vexylicon/core.py
+"""Core Vexylicon functionality.
+
+This module provides the main VexyliconGenerator class that orchestrates
+the creation of liquid-glass SVG effects with theme support.
+"""
+
+from __future__ import annotations
+
+import importlib.resources
+from dataclasses import dataclass
+from enum import IntEnum
+from pathlib import Path
+
+from lxml import etree
+
+from vexylicon.utils import (
+    SVGProcessor,
+    Theme,
+    ThemeLoader,
+    generate_ring_paths,
+    parse_dual_contour_path,
+)
+
+
+class OpacityProgression(IntEnum):
+    """Opacity progression modes for bevel steps."""
+
+    LINEAR = 1
+    DECREASING = 2
+    EXPONENTIAL = 3
+    MORE_EXPONENTIAL = 4
+
+
+@dataclass
+class VexyliconParams:
+    """Parameters for Vexylicon generation.
+
+    Attributes:
+        steps: Number of bevel steps to generate (default: 24)
+        opacity_start: Starting opacity for bevel (default: 0.9)
+        opacity_end: Ending opacity for bevel (default: 0.05)
+        opacity_progression: How opacity changes across steps (default: MORE_EXPONENTIAL)
+        quality: Preset quality level ('low', 'medium', 'high')
+    """
+
+    steps: int = 24
+    opacity_start: float = 0.9
+    opacity_end: float = 0.05
+    opacity_progression: OpacityProgression = OpacityProgression.MORE_EXPONENTIAL
+    quality: str | None = None
+
+    def __post_init__(self):
+        """Apply quality presets if specified."""
+        if self.quality:
+            quality_presets = {"low": 8, "medium": 16, "high": 24, "ultra": 32}
+            if self.quality in quality_presets:
+                self.steps = quality_presets[self.quality]
+
+
+class VexyliconError(Exception):
+    """Base exception for Vexylicon errors."""
+
+
+class InvalidSVGError(VexyliconError):
+    """Raised when input SVG is malformed or incompatible."""
+
+
+class ThemeValidationError(VexyliconError):
+    """Raised when theme JSON is invalid."""
+
+
+class VexyliconGenerator:
+    """Main class for generating liquid-glass SVG effects."""
+
+    def __init__(self, theme: Theme | str = "default", params: VexyliconParams | None = None):
+        """Initialize generator with theme and parameters.
+
+        Args:
+            theme: Theme object or name of built-in theme
+            params: Generation parameters (uses defaults if None)
+        """
+        self.params = params or VexyliconParams()
+
+        # Load theme if string provided
+        if isinstance(theme, str):
+            loader = ThemeLoader()
+            self.theme = loader.load_theme(theme)
+        else:
+            self.theme = theme
+
+        # Load base SVG from package assets
+        base_svg_path = importlib.resources.files("vexylicon.assets") / "best_base.svg"
+        self.base_svg_content = base_svg_path.read_text()
+
+    def generate(self, payload_svg: Path | str | None = None) -> str:
+        """Generate liquid-glass SVG with optional payload.
+
+        Args:
+            payload_svg: Path to payload SVG or SVG content string
+
+        Returns:
+            Generated SVG as string
+
+        Raises:
+            InvalidSVGError: If base or payload SVG is invalid
+            VexyliconError: For other generation errors
+        """
+        # Parse base SVG
+        try:
+            processor = SVGProcessor(self.base_svg_content)
+        except etree.XMLSyntaxError as e:
+            msg = f"Base SVG is malformed: {e}"
+            raise InvalidSVGError(msg) from e
+
+        # Generate bevel steps
+        self._generate_bevel_steps(processor)
+
+        # Apply theme
+        self._apply_theme(processor)
+
+        # Create theme-aware groups
+        self._create_theme_groups(processor)
+
+        # Add payload if provided
+        if payload_svg:
+            self._inject_payload(processor, payload_svg)
+
+        return processor.to_string()
+
+    def _generate_bevel_steps(self, processor: SVGProcessor) -> None:
+        """Generate the bevel step paths.
+
+        Args:
+            processor: SVG processor instance
+
+        Raises:
+            InvalidSVGError: If required paths not found
+        """
+        # Find the main shape with dual contours
+        main_shape = processor.find_by_id("mainShape")
+        if main_shape is None:
+            # Fallback to finding by tag
+            paths = processor.find_all("path")
+            if not paths:
+                msg = "No paths found in base SVG"
+                raise InvalidSVGError(msg)
+            main_shape = paths[0]  # Assume first path is main
+
+        # Get path data
+        path_data = processor.get_path_data(main_shape)
+        if not path_data:
+            msg = "Main shape has no path data"
+            raise InvalidSVGError(msg)
+
+        try:
+            outer_contour, inner_contour = parse_dual_contour_path(path_data)
+        except ValueError as e:
+            msg = f"Failed to parse dual contours: {e}"
+            raise InvalidSVGError(msg) from e
+
+        # Generate ring paths
+        ring_paths = generate_ring_paths(outer_contour, inner_contour, self.params.steps)
+
+        # Create bevel steps group
+        bevel_group = processor.create_element("g", id="bevelSteps")
+
+        # Calculate opacity values
+        opacities = self._calculate_opacities()
+
+        # Add minimal opacity to main shape
+        min_opacity = 1 / (self.params.steps + 1)
+        main_shape.set("fill-opacity", f"{min_opacity:.3f}")
+
+        # Create bevel step paths - with light and dark variants
+        for i, (path_d, opacity) in enumerate(zip(ring_paths, opacities, strict=False), 1):
+            # Create light version
+            step_light = processor.create_element(
+                "path",
+                d=path_d,
+                id=f"bevelStep-{i}-light",
+                fill="url(#baseFill-light)",
+                fill_opacity=f"{opacity:.3f}",
+                pointer_events="none",
+                **{"class": "theme-light"},
+            )
+            step_light.set("mix-blend-mode", "screen")
+            bevel_group.append(step_light)
+
+            # Create dark version
+            step_dark = processor.create_element(
+                "path",
+                d=path_d,
+                id=f"bevelStep-{i}-dark",
+                fill="url(#baseFill-dark)",
+                fill_opacity=f"{opacity:.3f}",
+                pointer_events="none",
+                **{"class": "theme-dark"},
+            )
+            step_dark.set("mix-blend-mode", "screen")
+            bevel_group.append(step_dark)
+
+        # Insert bevel group into document
+        root = processor.root
+        root.append(bevel_group)
+
+    def _calculate_opacities(self) -> list[float]:
+        """Calculate opacity values for each bevel step.
+
+        Returns:
+            List of opacity values
+        """
+        opacities = []
+        min_opacity = 1 / (self.params.steps + 1)
+
+        for i in range(self.params.steps):
+            t = (i + 1) / self.params.steps  # Linear parameter
+
+            if self.params.opacity_progression == OpacityProgression.LINEAR:
+                opacity = min_opacity + (1.0 - min_opacity) * t
+            elif self.params.opacity_progression == OpacityProgression.DECREASING:
+                opacity = min_opacity + (1.0 - min_opacity) * (1 - t**2)
+            elif self.params.opacity_progression == OpacityProgression.EXPONENTIAL:
+                opacity = min_opacity + (1.0 - min_opacity) * (t**2)
+            elif self.params.opacity_progression == OpacityProgression.MORE_EXPONENTIAL:
+                opacity = min_opacity + (1.0 - min_opacity) * (t**4)
+            else:
+                # Default to more exponential
+                opacity = min_opacity + (1.0 - min_opacity) * (t**4)
+
+            opacities.append(opacity)
+
+        return opacities
+
+    def _apply_theme(self, processor: SVGProcessor) -> None:
+        """Apply theme gradients and colors to the SVG.
+
+        Args:
+            processor: SVG processor instance
+        """
+        # Add gradients from theme - create both light and dark variants
+        for gradient_name, gradient_def in self.theme.gradients.items():
+            # Create light variant (same as original)
+            light_gradient_name = f"{gradient_name}-light"
+            if gradient_def["type"] == "linear":
+                processor.add_gradient(
+                    "linear",
+                    light_gradient_name,
+                    gradient_def["stops"],
+                    x1=gradient_def["x1"],
+                    y1=gradient_def["y1"],
+                    x2=gradient_def["x2"],
+                    y2=gradient_def["y2"],
+                )
+            elif gradient_def["type"] == "radial":
+                processor.add_gradient(
+                    "radial",
+                    light_gradient_name,
+                    gradient_def["stops"],
+                    cx=gradient_def["cx"],
+                    cy=gradient_def["cy"],
+                    r=gradient_def["r"],
+                )
+
+            # Create dark variant with adjusted opacity
+            dark_gradient_name = f"{gradient_name}-dark"
+            dark_stops = []
+            for stop in gradient_def["stops"]:
+                dark_stop = stop.copy()
+                # Increase opacity by 20% for dark mode, capped at 1.0
+                dark_stop["opacity"] = min(1.0, stop["opacity"] * 1.2)
+                dark_stops.append(dark_stop)
+
+            if gradient_def["type"] == "linear":
+                processor.add_gradient(
+                    "linear",
+                    dark_gradient_name,
+                    dark_stops,
+                    x1=gradient_def["x1"],
+                    y1=gradient_def["y1"],
+                    x2=gradient_def["x2"],
+                    y2=gradient_def["y2"],
+                )
+            elif gradient_def["type"] == "radial":
+                processor.add_gradient(
+                    "radial",
+                    dark_gradient_name,
+                    dark_stops,
+                    cx=gradient_def["cx"],
+                    cy=gradient_def["cy"],
+                    r=gradient_def["r"],
+                )
+
+        # Apply theme colors
+        canvas = processor.find_by_id("canvas")
+        if canvas is not None:
+            canvas.set("fill", self.theme.colors.canvas)
+
+        border = processor.find_by_id("border")
+        if border is not None:
+            border.set("fill", self.theme.colors.border)
+
+    def _create_theme_groups(self, processor: SVGProcessor) -> None:
+        """Create light and dark theme groups.
+
+        Args:
+            processor: SVG processor instance
+        """
+        # Create clip path for payload
+        inner_path = processor.find_by_id("inner") or processor.find_by_id("mainShape")
+        if inner_path is not None:
+            defs = processor.get_defs()
+            clip_path = processor.create_element("clipPath", id="innerClip")
+            clip_use = processor.create_element("use", href="#inner")
+            clip_path.append(clip_use)
+            defs.append(clip_path)
+
+        # Create theme-aware CSS
+        style = processor.create_element("style", type="text/css")
+        style.text = """
+            /* Theme visibility control */
+            .theme-light { display: block; }
+            .theme-dark { display: none; }
+
+            /* Data attribute theme selection */
+            [data-theme='light'] .theme-light { display: block; }
+            [data-theme='light'] .theme-dark { display: none; }
+            [data-theme='dark'] .theme-light { display: none; }
+            [data-theme='dark'] .theme-dark { display: block; }
+
+            /* Automatic theme based on system preference */
+            @media (prefers-color-scheme: light) {
+                svg:not([data-theme]) .theme-light { display: block; }
+                svg:not([data-theme]) .theme-dark { display: none; }
+            }
+            @media (prefers-color-scheme: dark) {
+                svg:not([data-theme]) .theme-light { display: none; }
+                svg:not([data-theme]) .theme-dark { display: block; }
+            }
+        """
+        processor.get_defs().append(style)
+
+    def _inject_payload(self, processor: SVGProcessor, payload_svg: Path | str) -> None:
+        """Inject payload SVG into the mask.
+
+        Args:
+            processor: SVG processor instance
+            payload_svg: Path to payload SVG or SVG content
+
+        Raises:
+            InvalidSVGError: If payload SVG is invalid
+        """
+        # Create payload group
+        payload_group = processor.create_element("g", id="payload", clip_path="url(#innerClip)")
+
+        # Parse payload SVG
+        try:
+            if isinstance(payload_svg, str | Path):
+                payload_path = Path(payload_svg) if isinstance(payload_svg, str) else payload_svg
+                payload_processor = SVGProcessor(payload_path) if payload_path.exists() else SVGProcessor(payload_svg)
+            else:
+                payload_processor = SVGProcessor(payload_svg)
+        except etree.XMLSyntaxError as e:
+            msg = f"Payload SVG is malformed: {e}"
+            raise InvalidSVGError(msg) from e
+
+        # Import payload content into main document
+        payload_root = payload_processor.root
+        for child in list(payload_root):
+            # Skip certain elements like defs
+            tag = child.tag if isinstance(child.tag, str) else str(child.tag)
+            if not tag.endswith("defs"):
+                payload_group.append(child)
+
+        # Find back element and inject payload there
+        back_elem = processor.find_by_id("back")
+        if back_elem is not None:
+            parent = back_elem.getparent()
+            idx = list(parent).index(back_elem)
+            parent.insert(idx + 1, payload_group)
+        else:
+            # Fallback: append to root
+            processor.root.append(payload_group)
+</file>
+
+<file path="testdata/payload.svg">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" version="1.1" viewBox="0 0 1200 1200">
+  <!-- Generator: Adobe Illustrator 29.7.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 14)  -->
+  <polyline points="985.3 306.2 1037.5 306.2 1037.5 892.8 163.1 892.8 163.1 306.2 215.2 306.2" fill="#b61c1c"/>
+  <path d="M215.2,847.9c128.4-31.2,256.7-31.2,385.1,0V283.4c-128.4-31.2-256.7-31.2-385.1,0,0,0,0,564.6,0,564.6Z" fill="#ea9e65"/>
+  <path d="M870.9,263.9c38.1,3.8,76.3,10.3,114.4,19.5v564.6c-128.4-31.2-256.7-31.2-385.1,0V283.4" fill="#c9824d"/>
+  <path d="M600.3,847.9c58.8-102.5,150-159.8,270.6-175.9V107.4c-120.6,16.1-211.8,73.4-270.6,175.9v564.6Z" fill="#ea9e65"/>
+  <path d="M215.2,857.9c-2.2,0-4.4-.7-6.1-2.1-2.4-1.9-3.8-4.8-3.8-7.8V283.4c0-4.6,3.1-8.6,7.6-9.7,129.3-31.4,260.4-31.4,389.7,0,4.5,1.1,7.6,5.1,7.6,9.7v564.5c0,3.1-1.4,5.9-3.8,7.8-2.4,1.9-5.5,2.6-8.5,1.8-126.2-30.6-254.2-30.6-380.4,0-.8.2-1.6.3-2.3.3ZM407.8,814.7c61,0,122,6.9,182.6,20.7V291.2c-121.2-28.2-244-28.2-365.2,0v544.2c60.6-13.8,121.6-20.7,182.6-20.7Z"/>
+  <path d="M985.3,857.9c-.8,0-1.6,0-2.3-.3-126.2-30.6-254.2-30.6-380.4,0-3,.7-6.1,0-8.5-1.8-2.4-1.9-3.8-4.8-3.8-7.8V283.4c0-5.5,4.5-9.9,9.9-9.9s9.9,4.5,9.9,9.9v552c121.2-27.5,243.9-27.5,365.2,0V291.2c-35.1-8.2-70.5-14.1-105.5-17.5-5.5-.5-9.4-5.4-8.9-10.9.5-5.5,5.3-9.5,10.9-8.9,38.4,3.8,77.4,10.4,115.8,19.8,4.5,1.1,7.6,5.1,7.6,9.7v564.5c0,3.1-1.4,5.9-3.8,7.8-1.8,1.4-3.9,2.1-6.2,2.1Z"/>
+  <path d="M1037.5,902.8H163.1c-5.5,0-9.9-4.4-9.9-9.9V306.2c0-5.5,4.5-9.9,9.9-9.9h52.2c5.5,0,9.9,4.5,9.9,9.9s-4.5,9.9-9.9,9.9h-42.2v566.8h854.5V316.1h-42.2c-5.5,0-9.9-4.5-9.9-9.9s4.4-9.9,9.9-9.9h52.2c5.5,0,9.9,4.5,9.9,9.9v586.7c0,5.5-4.4,9.9-9.9,9.9Z"/>
+  <path d="M600.3,857.9c-.8,0-1.7-.1-2.6-.3-4.4-1.2-7.4-5.1-7.4-9.6V283.4c0-1.7.5-3.4,1.3-4.9,59.2-103.3,152.7-164.1,277.9-180.8,2.9-.4,5.7.5,7.9,2.4,2.2,1.9,3.4,4.6,3.4,7.5v564.6c0,5-3.7,9.2-8.6,9.8-118.8,15.9-207.3,73.4-263.3,171-1.8,3.1-5.1,5-8.6,5ZM610.2,286v527.6c57.9-83.3,142.1-133.8,250.7-150.2V118.9c-112.2,17.8-196.5,74-250.7,167.1Z"/>
+  <path d="M669.2,331.7c-2.7,0-5.4-1.1-7.3-3.2-3.7-4.1-3.4-10.3.6-14,38.9-35.5,86-61.5,139.9-77.3,5.3-1.6,10.8,1.5,12.3,6.7,1.5,5.3-1.5,10.8-6.8,12.3-51,14.9-95.4,39.4-132,72.9-1.9,1.7-4.3,2.6-6.7,2.6Z"/>
+  <path d="M669.2,436.2c-2.7,0-5.4-1.1-7.3-3.2-3.7-4.1-3.4-10.3.6-14,38.9-35.5,86-61.5,139.9-77.3,5.3-1.6,10.8,1.5,12.3,6.7,1.5,5.3-1.5,10.8-6.8,12.3-51,14.9-95.4,39.4-132,72.9-1.9,1.8-4.3,2.6-6.7,2.6Z"/>
+  <path d="M669.2,540.7c-2.7,0-5.4-1.1-7.3-3.2-3.7-4.1-3.4-10.3.6-14,38.9-35.5,86-61.5,139.9-77.3,5.3-1.6,10.8,1.5,12.3,6.7,1.5,5.3-1.5,10.8-6.8,12.3-51,14.9-95.4,39.4-132,72.9-1.9,1.7-4.3,2.6-6.7,2.6Z"/>
+  <path d="M600.3,902.8c-5.5,0-9.9-4.4-9.9-9.9v-54.4c0-5.5,4.5-9.9,9.9-9.9s9.9,4.4,9.9,9.9v54.4c0,5.5-4.5,9.9-9.9,9.9Z"/>
+  <path d="M669.2,645.3c-2.7,0-5.4-1.1-7.3-3.2-3.7-4.1-3.4-10.3.6-14,38.9-35.5,85.9-61.5,139.9-77.3,5.3-1.5,10.8,1.5,12.3,6.8,1.5,5.3-1.5,10.8-6.8,12.3-51,14.9-95.4,39.4-132,72.9-1.9,1.7-4.3,2.6-6.7,2.6Z"/>
+  <path d="M281.6,405.4c-4.8,0-9-3.5-9.8-8.4-.9-5.4,2.8-10.5,8.3-11.4,84.3-13.4,169.8-13.5,254-.2,5.4.9,9.1,5.9,8.3,11.4-.9,5.4-6,9.1-11.4,8.3-82.2-12.9-165.6-12.9-247.8.2-.5,0-1.1.1-1.6.1Z"/>
+  <path d="M281.6,510c-4.8,0-9-3.5-9.8-8.4-.9-5.4,2.8-10.5,8.3-11.4,84.3-13.4,169.7-13.5,254-.2,5.4.9,9.1,5.9,8.3,11.4-.9,5.4-6,9.1-11.4,8.3-82.2-12.9-165.6-12.9-247.8.2-.5,0-1.1.1-1.6.1Z"/>
+  <path d="M281.6,614.5c-4.8,0-9-3.5-9.8-8.4-.9-5.4,2.8-10.5,8.3-11.4,84.3-13.4,169.8-13.5,254-.2,5.4.9,9.1,5.9,8.3,11.4-.8,5.4-6,9.1-11.4,8.3-82.2-12.9-165.6-12.9-247.8.2-.5,0-1.1.1-1.6.1Z"/>
+  <path d="M281.6,719.1c-4.8,0-9-3.5-9.8-8.4-.9-5.4,2.8-10.5,8.3-11.4,84.4-13.4,169.9-13.5,254.3-.2,5.4.9,9.1,6,8.3,11.4-.8,5.4-5.9,9.1-11.4,8.3-82.3-13-165.8-12.9-248.1.2-.5,0-1.1.1-1.6.1Z"/>
+</svg>
+</file>
+
+<file path="testdata/test.html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Effect Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        .test-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .test-item {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .background {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .glass-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .bg-red { background: linear-gradient(45deg, #ff6b6b, #ee5a24); }
+        .bg-blue { background: linear-gradient(45deg, #74b9ff, #0984e3); }
+        .bg-green { background: linear-gradient(45deg, #00b894, #00a085); }
+        .bg-purple { background: linear-gradient(45deg, #a29bfe, #6c5ce7); }
+        .bg-dark { background: linear-gradient(45deg, #2d3436, #636e72); }
+        .bg-light { background: linear-gradient(45deg, #ddd, #fff); }
+        .bg-pattern {
+            background: 
+                radial-gradient(circle at 25px 25px, #ff6b6b 2px, transparent 2px),
+                radial-gradient(circle at 75px 75px, #74b9ff 2px, transparent 2px);
+            background-color: #f1f2f6;
+            background-size: 100px 100px;
+        }
+        .bg-image {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="15" fill="%23ff6b6b"/><circle cx="75" cy="25" r="15" fill="%2374b9ff"/><circle cx="25" cy="75" r="15" fill="%2300b894"/><circle cx="75" cy="75" r="15" fill="%23a29bfe"/></svg>');
+            background-size: 50px 50px;
+        }
+        .label {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .description {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-align: center;
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>Glass Effect Demonstration</h1>
+    <div class="description">
+        The glass effect creates a transparent overlay that lightens whatever background is behind it.
+        Notice how the edges are brighter (simulating light refraction) and the center is mostly transparent.
+        The effect works with solid colors, gradients, and complex patterns.
+    </div>
+    
+    <div class="test-container">
+        <div>
+            <div class="test-item">
+                <div class="background bg-red"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200">
+                </svg>
+            </div>
+            <div class="label">Red Gradient</div>
+        </div>
+        
+        <div>
+            <div class="test-item">
+                <div class="background bg-blue"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200">
+                </svg>
+            </div>
+            <div class="label">Blue Gradient</div>
+        </div>
+        
+        <div>
+            <div class="test-item">
+                <div class="background bg-green"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200">
+                </svg>
+            </div>
+            <div class="label">Green Gradient</div>
+        </div>
+        
+        <div>
+            <div class="test-item">
+                <div class="background bg-purple"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200">
+                </svg>
+            </div>
+            <div class="label">Purple Gradient</div>
+        </div>
+        
+        <div>
+            <div class="test-item">
+                <div class="background bg-dark"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200">
+                </svg>
+            </div>
+            <div class="label">Dark Background</div>
+        </div>
+        
+        <div>
+            <div class="test-item">
+                <div class="background bg-light"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200">
+                </svg>
+            </div>
+            <div class="label">Light Background</div>
+        </div>
+        
+        <div>
+            <div class="test-item">
+                <div class="background bg-pattern"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200">
+                </svg>
+            </div>
+            <div class="label">Dotted Pattern</div>
+        </div>
+        
+        <div>
+            <div class="test-item">
+                <div class="background bg-image"></div>
+                <svg class="glass-overlay" viewBox="0 0 1200 1200">
+                </svg>
+            </div>
+            <div class="label">Geometric Pattern</div>
+        </div>
+    </div>
+    
+    <script>
+        // Load the glass effect SVG and embed it
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('best.svg');
+                let svgText = await response.text();
+
+                // Replace all glass overlay placeholders
+                const overlays = document.querySelectorAll('.glass-overlay');
+                overlays.forEach((overlay, index) => {
+                    // Make IDs unique for each instance
+                    let instanceSvgText = svgText.replace(/id="([^"]+)"/g, (match, id) => {
+                        return `id="${id}-${index}"`;
+                    });
+                    instanceSvgText = instanceSvgText.replace(/href="#([^"]+)"/g, (match, href) => {
+                        return `href="#${href}-${index}"`;
+                    });
+                    instanceSvgText = instanceSvgText.replace(/url\(#([^"]+)\)/g, (match, url) => {
+                        return `url(#${url}-${index})`;
+                    });
+
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = instanceSvgText;
+                    const svgElement = tempDiv.querySelector('svg');
+
+                    if (svgElement) {
+                        // Apply clip-path to the container
+                        const testItem = overlay.closest('.test-item');
+                        if (testItem) {
+                            testItem.style.clipPath = `url(#glassClip-${index})`;
+                        }
+
+                        svgElement.setAttribute('viewBox', '0 0 1200 1200');
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.style.display = 'block';
+                        svgElement.setAttribute('class', 'glass-overlay');
+                        overlay.parentNode.replaceChild(svgElement, overlay);
+                    }
+                });
+            } catch (error) {
+                console.error('Failed to load glass effect SVG:', error);
+                // Fallback: show placeholder text
+                document.querySelectorAll('.glass-overlay').forEach(el => {
+                    el.innerHTML = '<text x="50%" y="50%" text-anchor="middle" fill="rgba(255,255,255,0.5)">Glass Effect</text>';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+</file>
+
+<file path="tests/test_core.py">
+#!/usr/bin/env -S uv run -s
+# this_file: tests/test_core.py
+"""Tests for core Vexylicon functionality."""
+
+import pytest
+
+from vexylicon import VexyliconGenerator, VexyliconParams
+from vexylicon.core import InvalidSVGError, OpacityProgression
+
+
+def test_vexylicon_generator_creation():
+    """Test basic generator creation."""
+    generator = VexyliconGenerator()
+    assert generator is not None
+    assert generator.theme.name == "default"
+    assert generator.params.steps == 24
+
+
+def test_vexylicon_params():
+    """Test parameter configuration."""
+    params = VexyliconParams(
+        steps=16, opacity_start=0.8, opacity_end=0.1, opacity_progression=OpacityProgression.LINEAR
+    )
+    assert params.steps == 16
+    assert params.opacity_start == 0.8
+    assert params.opacity_end == 0.1
+    assert params.opacity_progression == OpacityProgression.LINEAR
+
+
+def test_quality_presets():
+    """Test quality preset application."""
+    params_low = VexyliconParams(quality="low")
+    assert params_low.steps == 8
+
+    params_high = VexyliconParams(quality="high")
+    assert params_high.steps == 24
+
+    params_ultra = VexyliconParams(quality="ultra")
+    assert params_ultra.steps == 32
+
+
+def test_basic_generation():
+    """Test basic SVG generation without payload."""
+    generator = VexyliconGenerator()
+    result = generator.generate()
+
+    # Check it's valid SVG
+    assert result.startswith("<?xml")
+    assert "<svg" in result
+    assert "</svg>" in result
+
+    # Check for expected elements
+    assert 'id="bevelSteps"' in result
+    assert 'mix-blend-mode="screen"' in result
+
+
+def test_invalid_svg_handling():
+    """Test handling of invalid SVG input."""
+    generator = VexyliconGenerator()
+
+    # Test with invalid payload
+    with pytest.raises(InvalidSVGError):
+        generator.generate(payload_svg="<not valid xml>")
+
+
+def test_opacity_calculation():
+    """Test opacity calculation for different modes."""
+    params = VexyliconParams(steps=4, opacity_progression=OpacityProgression.LINEAR)
+    generator = VexyliconGenerator(params=params)
+
+    opacities = generator._calculate_opacities()
+    assert len(opacities) == 4
+    assert all(0 < op <= 1 for op in opacities)
+
+    # Test that opacities increase (for linear mode)
+    assert opacities == sorted(opacities)
+</file>
+
+<file path=".cursorindexingignore">
+# Don't index SpecStory auto-save files, but allow explicit context inclusion via @ references
+.specstory/**
+</file>
+
+<file path="CHANGELOG.md">
+# Changelog
+
+All notable changes to Vexylicon will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+- Theme-aware gradient generation with automatic light/dark variants
+- CSS media queries for `prefers-color-scheme` support
+- Proper duplication of gradients with `-light` and `-dark` suffixes
+- Dark mode opacity adjustment (+20% for better visibility)
+
+### Fixed
+- Ruff configuration already using correct `exclude` key (not `extend-exclude`)
+
+### TODO
+- Adopt Loguru for structured logging
+- Improve payload masking for HTML/SVG backgrounds
+- Gradio-lite web interface for browser-based usage
+- Comprehensive test suite with >90% coverage
+- PyPI package publication
+
+## [0.1.0] - 2025-01-18
+
+### Added
+- Initial package structure with modern Python packaging (pyproject.toml)
+- Core `VexyliconGenerator` class for creating liquid-glass effects
+- Theme system with JSON-based theme definitions
+- SVG manipulation using lxml (no string manipulation)
+- Path interpolation utilities extracted from icon_blender.py
+- Fire-based CLI with commands:
+  - `create`: Generate single SVG with glass effect
+  - `batch`: Process multiple SVGs
+  - `themes`: List available themes
+  - `preview`: Generate PNG preview (requires cairosvg)
+- Support for payload injection with clipPath masking
+- Configurable opacity progression modes (linear, exponential, etc.)
+- Quality presets (low=8, medium=16, high=24, ultra=32 steps)
+- Comprehensive error handling with custom exceptions
+- Type hints throughout the codebase
+- Basic test structure
+
+### Technical Stack
+- **Core**: Python 3.11+
+- **SVG Processing**: lxml, svgpathtools
+- **CLI**: Fire
+- **Validation**: Pydantic
+- **UI**: Rich (terminal output)
+- **Assets**: importlib.resources
+
+### Known Issues
+- Payload injection works but may need refinement for complex SVGs
+
+### Migration Notes
+- Consolidated icon_blender.py (glass mode only) and icon_masker.py functionality
+- Removed non-glass modes from icon_blender
+- Standardized on best_base.svg as the canonical base template
+- Theme colors and gradients now defined in JSON rather than hardcoded
+</file>
+
+<file path="cleanup.sh">
+#!/usr/bin/env bash
+
+# Notice before redirecting output
+echo "Starting cleanup process... All output will be logged to cleanup.log"
+
+# Redirect all subsequent output to cleanup.txt
+exec >cleanup.txt 2>&1
+
+echo "=== Cleanup started at $(date) ==="
+
+# Check if uv is available, install if not
+if ! command -v uv >/dev/null 2>&1; then
+    echo "uv not found, installing with pip..."
+    python -m pip install uv
+fi
+
+echo "python -m uv sync --all-extras"
+python -m uv sync --all-extras
+echo "python -m uv run hatch clean"
+python -m uv run hatch clean
+echo "python -m uv run hatch build"
+python -m uv run hatch build
+echo "python -m uzpy run -e src"
+python -m uzpy run -e src
+
+echo "find . -name *.py -exec python -m uv run autoflake -i {} +"
+for p in src tests; do find "$p" -name "*.py" -exec python -m uv run autoflake -i {} +; done
+echo "find . -name *.py -exec python -m uv run pyupgrade --py311-plus {} +"
+for p in src tests; do find "$p" -name "*.py" -exec python -m uv run pyupgrade --py311-plus {} +; done
+echo "find . -name *.py -exec python -m uv run ruff check --output-format=github --fix --unsafe-fixes {} +"
+for p in src tests; do find "$p" -name "*.py" -exec python -m uv run ruff check --output-format=github --fix --unsafe-fixes {} +; done
+echo "find . -name *.py -exec python -m uv run ruff format --respect-gitignore --target-version py311 {} +"
+for p in src tests; do find "$p" -name "*.py" -exec python -m uv run ruff format --respect-gitignore --target-version py311 {} +; done
+echo "python -m uv run ty check"
+python -m uv run ty check
+echo "python -m uv run mypy --config-file pyproject.toml src/imgcolorshine tests"
+python -m uv run mypy --config-file pyproject.toml src/imgcolorshine tests
+if command -v npx >/dev/null 2>&1; then
+    echo "npx repomix -i varia,.specstory,AGENT.md,CLAUDE.md,PLAN.md,SPEC.md,llms.txt,.cursorrules,docs -o llms.txt ."
+    npx repomix -i varia,.specstory,AGENT.md,CLAUDE.md,PLAN.md,SPEC.md,llms.txt,.cursorrules,docs,.log -o llms.txt .
+else
+    echo "npx not found, skipping repomix"
+fi
+echo "python -m uv run hatch test"
+python -m uv run hatch test
+
+echo "=== Cleanup completed at $(date) ==="
+</file>
+
+<file path="cleanup.txt">
+=== Cleanup started at Tue Jun 17 19:50:31 CEST 2025 ===
+python -m uv sync --all-extras
+Resolved 73 packages in 1.70s
+   Building vexylicon @ file:///Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+      Built vexylicon @ file:///Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+Prepared 1 package in 965ms
+Uninstalled 5 packages in 30ms
+Installed 1 package in 2ms
+ - annotated-types==0.7.0
+ - pydantic==2.11.7
+ - pydantic-core==2.33.2
+ - typing-inspection==0.4.1
+ ~ vexylicon==0.1.dev1+g2f76a63.d20250617 (from file:///Users/adam/Developer/vcs/github.fontlaborg/vexylicon)
+python -m uv run hatch clean
+python -m uv run hatch build
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ sdist â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+dist/vexylicon-0.1.dev1+g2f76a63.d20250617.tar.gz
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ wheel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+dist/vexylicon-0.1.dev1+g2f76a63.d20250617-py3-none-any.whl
+python -m uzpy run -e src
+
+uzpy - Modern Python Usage Tracker
+Edit path: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+Reference path: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+Exclude patterns: src
+Workers: 4
+Cache: enabled
+
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m51[0m | Discovering files...
+[1mINFO    [0m | [36muzpy.discovery[0m:[36m121[0m | Scanning directory: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+[1mINFO    [0m | [36muzpy.discovery[0m:[36m121[0m | Scanning directory: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+[1mINFO    [0m | [36muzpy.discovery[0m:[36m284[0m | Found 4 edit files and 4 reference files
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m66[0m | Found 4 edit files and 4 reference files
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m69[0m | Parsing edit files for constructs...
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m88[0m | Found 11 total constructs
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m91[0m | Finding references...
+[1mINFO    [0m | [36muzpy.analyzer.hybrid_analyzer[0m:[36m81[0m | Hybrid analyzer initialized (Rope: True, Jedi: True)
+[1mINFO    [0m | [36muzpy.discovery[0m:[36m121[0m | Scanning directory: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+[1mINFO    [0m | [36muzpy.analyzer.parallel_analyzer[0m:[36m97[0m | Analyzing 11 constructs in parallel with 16 workers
+2025-06-17 19:50:49.184 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_version, analyzing...
+2025-06-17 19:50:49.184 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_version
+2025-06-17 19:50:49.188 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_package, analyzing...
+2025-06-17 19:50:49.188 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_package
+2025-06-17 19:50:49.209 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_vexylicon_params, analyzing...
+2025-06-17 19:50:49.209 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_vexylicon_params
+2025-06-17 19:50:49.217 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.218 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.218 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.218 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.218 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.219 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_version
+2025-06-17 19:50:49.220 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_basic_generation, analyzing...
+2025-06-17 19:50:49.221 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_basic_generation
+2025-06-17 19:50:49.224 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_package
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: type object 'ConstructType' has no attribute 'VARIABLE'
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_package
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_package
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_package
+2025-06-17 19:50:49.227 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:140 - Skipping Rope analysis for module Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_package
+2025-06-17 19:50:49.227 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_package
+2025-06-17 19:50:49.227 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:150 - No results found for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_package
+2025-06-17 19:50:49.227 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 0 references
+2025-06-17 19:50:49.233 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_vexylicon_generator_creation, analyzing...
+2025-06-17 19:50:49.233 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_vexylicon_generator_creation
+2025-06-17 19:50:49.241 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_vexylicon_params
+2025-06-17 19:50:49.245 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.245 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_version
+2025-06-17 19:50:49.245 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.245 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_version
+2025-06-17 19:50:49.253 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_basic_generation
+2025-06-17 19:50:49.256 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_invalid_svg_handling, analyzing...
+2025-06-17 19:50:49.256 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_invalid_svg_handling
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_vexylicon_params
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_vexylicon_params
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_vexylicon_generator_creation
+2025-06-17 19:50:49.275 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_quality_presets, analyzing...
+2025-06-17 19:50:49.275 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_quality_presets
+2025-06-17 19:50:49.277 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.277 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_basic_generation
+2025-06-17 19:50:49.277 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.277 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_basic_generation
+2025-06-17 19:50:49.279 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_core, analyzing...
+2025-06-17 19:50:49.279 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_core
+2025-06-17 19:50:49.282 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_opacity_calculation, analyzing...
+2025-06-17 19:50:49.282 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_opacity_calculation
+2025-06-17 19:50:49.282 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_path_tools, analyzing...
+2025-06-17 19:50:49.282 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_path_tools
+2025-06-17 19:50:49.285 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_svg_processor, analyzing...
+2025-06-17 19:50:49.285 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_svg_processor
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_vexylicon_generator_creation
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_vexylicon_generator_creation
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.290 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.290 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.290 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.290 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.291 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_invalid_svg_handling
+2025-06-17 19:50:49.307 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_quality_presets
+2025-06-17 19:50:49.313 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.313 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_core
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: type object 'ConstructType' has no attribute 'VARIABLE'
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_core
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_core
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_core
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:140 - Skipping Rope analysis for module Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_core
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_core
+2025-06-17 19:50:49.316 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:150 - No results found for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_core
+2025-06-17 19:50:49.316 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 0 references
+2025-06-17 19:50:49.318 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.318 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.318 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_opacity_calculation
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_invalid_svg_handling
+2025-06-17 19:50:49.320 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.320 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_invalid_svg_handling
+2025-06-17 19:50:49.323 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_path_tools
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: type object 'ConstructType' has no attribute 'VARIABLE'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_path_tools
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:140 - Skipping Rope analysis for module Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:150 - No results found for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 0 references
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_svg_processor
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: type object 'ConstructType' has no attribute 'VARIABLE'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_svg_processor
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:140 - Skipping Rope analysis for module Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:150 - No results found for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 0 references
+2025-06-17 19:50:49.330 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.331 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_quality_presets
+2025-06-17 19:50:49.331 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.331 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_quality_presets
+2025-06-17 19:50:49.339 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.339 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_opacity_calculation
+2025-06-17 19:50:49.339 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.339 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_opacity_calculation
+2025-06-17 19:50:49.617 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_version at line 4, column 4
+2025-06-17 19:50:49.647 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_version
+2025-06-17 19:50:49.647 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_version
+2025-06-17 19:50:49.647 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_version at offset 40
+2025-06-17 19:50:49.649 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_basic_generation at line 42, column 4
+2025-06-17 19:50:49.652 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_vexylicon_params at line 19, column 4
+2025-06-17 19:50:49.661 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_version
+2025-06-17 19:50:49.661 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_version
+2025-06-17 19:50:49.661 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_version
+2025-06-17 19:50:49.661 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 1/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 2/11 constructs analyzed
+2025-06-17 19:50:49.666 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_vexylicon_generator_creation at line 11, column 4
+2025-06-17 19:50:49.677 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_basic_generation
+2025-06-17 19:50:49.677 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_basic_generation
+2025-06-17 19:50:49.678 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_basic_generation at offset 1203
+2025-06-17 19:50:49.682 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_invalid_svg_handling at line 57, column 4
+2025-06-17 19:50:49.682 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_vexylicon_params
+2025-06-17 19:50:49.683 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_vexylicon_params
+2025-06-17 19:50:49.683 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_vexylicon_params at offset 494
+2025-06-17 19:50:49.693 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_basic_generation
+2025-06-17 19:50:49.693 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_basic_generation
+2025-06-17 19:50:49.693 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_basic_generation
+2025-06-17 19:50:49.693 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_vexylicon_generator_creation
+2025-06-17 19:50:49.694 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+2025-06-17 19:50:49.694 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_vexylicon_generator_creation
+2025-06-17 19:50:49.694 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_vexylicon_generator_creation at offset 261
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 3/11 constructs analyzed
+2025-06-17 19:50:49.698 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_quality_presets at line 30, column 4
+2025-06-17 19:50:49.700 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_vexylicon_params
+2025-06-17 19:50:49.700 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_vexylicon_params
+2025-06-17 19:50:49.700 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_vexylicon_params
+2025-06-17 19:50:49.700 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 4/11 constructs analyzed
+2025-06-17 19:50:49.701 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_opacity_calculation at line 66, column 4
+2025-06-17 19:50:49.708 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_invalid_svg_handling
+2025-06-17 19:50:49.709 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_invalid_svg_handling
+2025-06-17 19:50:49.709 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_invalid_svg_handling at offset 1605
+2025-06-17 19:50:49.710 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_vexylicon_generator_creation
+2025-06-17 19:50:49.710 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_vexylicon_generator_creation
+2025-06-17 19:50:49.710 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_vexylicon_generator_creation
+2025-06-17 19:50:49.710 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 5/11 constructs analyzed
+2025-06-17 19:50:49.724 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_invalid_svg_handling
+2025-06-17 19:50:49.724 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_invalid_svg_handling
+2025-06-17 19:50:49.724 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_invalid_svg_handling
+2025-06-17 19:50:49.724 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+2025-06-17 19:50:49.725 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_quality_presets
+2025-06-17 19:50:49.725 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_quality_presets
+2025-06-17 19:50:49.725 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_quality_presets at offset 874
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 6/11 constructs analyzed
+2025-06-17 19:50:49.727 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_opacity_calculation
+2025-06-17 19:50:49.727 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_opacity_calculation
+2025-06-17 19:50:49.728 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_opacity_calculation at offset 1855
+2025-06-17 19:50:49.740 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_quality_presets
+2025-06-17 19:50:49.740 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_quality_presets
+2025-06-17 19:50:49.740 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_quality_presets
+2025-06-17 19:50:49.741 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 7/11 constructs analyzed
+2025-06-17 19:50:49.742 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_opacity_calculation
+2025-06-17 19:50:49.743 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_opacity_calculation
+2025-06-17 19:50:49.743 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_opacity_calculation
+2025-06-17 19:50:49.743 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 8/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 9/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 10/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 11/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.analyzer.parallel_analyzer[0m:[36m139[0m | Parallel analysis complete: 11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m117[0m | Found usages for 7/11 constructs
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m118[0m | Total references found: 7
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m122[0m | Updating docstrings...
+[1mINFO    [0m | [36muzpy.modifier.libcst_modifier[0m:[36m507[0m | Will modify 2 files
+[1mINFO    [0m | [36muzpy.modifier.libcst_modifier[0m:[36m465[0m | Updated docstrings in /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py
+[1mINFO    [0m | [36muzpy.modifier.libcst_modifier[0m:[36m465[0m | Updated docstrings in /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m133[0m | Successfully updated 2/2 files
+â § Analyzing codebase...
+
+
+         Analysis Summary         
+â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”³â”�â”�â”�â”�â”�â”�â”�â”“
+â”ƒ Metric                 â”ƒ Value â”ƒ
+â”¡â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â•‡â”�â”�â”�â”�â”�â”�â”�â”©
+â”‚ Total Constructs       â”‚ 11    â”‚
+â”‚ Constructs with Usages â”‚ 7     â”‚
+â”‚ Total References Found â”‚ 7     â”‚
+â”‚ Usage Coverage         â”‚ 63.6% â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”˜
+                                                             
+                     Top Used Constructs                     
+â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”³â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”³â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”“
+â”ƒ Construct                         â”ƒ Type     â”ƒ References â”ƒ
+â”¡â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â•‡â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â•‡â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”�â”©
+â”‚ test_version                      â”‚ function â”‚ 1          â”‚
+â”‚ test_basic_generation             â”‚ function â”‚ 1          â”‚
+â”‚ test_vexylicon_params             â”‚ function â”‚ 1          â”‚
+â”‚ test_vexylicon_generator_creation â”‚ function â”‚ 1          â”‚
+â”‚ test_invalid_svg_handling         â”‚ function â”‚ 1          â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+find . -name *.py -exec python -m uv run autoflake -i {} +
+find . -name *.py -exec python -m uv run pyupgrade --py311-plus {} +
+Rewriting src/vexylicon/__version__.py
+src/vexylicon/utils/path_tools.py is non-utf-8 (not supported)
+find . -name *.py -exec python -m uv run ruff check --output-format=github --fix --unsafe-fixes {} +
+::error title=Ruff (UP035),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=5,endLine=8,endColumn=36::src/vexylicon/__version__.py:8:5: UP035 `typing.Tuple` is deprecated, use `tuple` instead
+::error title=Ruff (F401),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=24,endLine=8,endColumn=29::src/vexylicon/__version__.py:8:24: F401 `typing.Tuple` imported but unused
+::error title=Ruff (F401),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=31,endLine=8,endColumn=36::src/vexylicon/__version__.py:8:31: F401 `typing.Union` imported but unused
+::error title=Ruff (A004),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=15,col=18,endLine=15,endColumn=23::src/vexylicon/cli.py:15:18: A004 Import `print` is shadowing a Python builtin
+::error title=Ruff (A002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=39,col=9,endLine=39,endColumn=15::src/vexylicon/cli.py:39:9: A002 Function argument `format` is shadowing a Python builtin
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=84,col=21,endLine=84,endColumn=36::src/vexylicon/cli.py:84:21: PLC0415 `import` should be at the top-level of a file
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=115,col=9,endLine=115,endColumn=18::src/vexylicon/cli.py:115:9: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=115,col=9,endLine=115,endColumn=18::src/vexylicon/cli.py:115:9: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=207,col=13,endLine=207,endColumn=28::src/vexylicon/cli.py:207:13: PLC0415 `import` should be at the top-level of a file
+::error title=Ruff (E902),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/path_tools.py,line=1,col=1,endLine=1,endColumn=1::src/vexylicon/utils/path_tools.py:1:1: E902 stream did not contain valid UTF-8
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=80,col=24,endLine=80,endColumn=30::src/vexylicon/utils/svg_processor.py:80:24: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=80,col=24,endLine=80,endColumn=30::src/vexylicon/utils/svg_processor.py:80:24: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=180,col=25,endLine=180,endColumn=37::src/vexylicon/utils/svg_processor.py:180:25: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=180,col=25,endLine=180,endColumn=37::src/vexylicon/utils/svg_processor.py:180:25: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=194,col=40,endLine=194,endColumn=52::src/vexylicon/utils/svg_processor.py:194:40: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=194,col=40,endLine=194,endColumn=52::src/vexylicon/utils/svg_processor.py:194:40: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (ARG001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/vexylicon.py,line=27,col=35,endLine=27,endColumn=41::src/vexylicon/vexylicon.py:27:35: ARG001 Unused function argument: `config`
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py,line=8,col=5,endLine=8,endColumn=21::tests/test_package.py:8:5: PLC0415 `import` should be at the top-level of a file
+find . -name *.py -exec python -m uv run ruff format --respect-gitignore --target-version py311 {} +
+error: Failed to read src/vexylicon/utils/path_tools.py: stream did not contain valid UTF-8
+1 file reformatted, 7 files left unchanged
+2 files reformatted, 2 files left unchanged
+python -m uv run ty check
+WARN ty is pre-release software and not ready for production use. Expect to encounter bugs, missing features, and fatal errors.
+error[unresolved-import]: Cannot resolve imported module `cairosvg`
+  --> src/vexylicon/cli.py:84:28
+   |
+82 |                 # Convert to PNG using cairosvg
+83 |                 try:
+84 |                     import cairosvg
+   |                            ^^^^^^^^
+85 |
+86 |                     output_path = output_path.with_suffix(".png")
+   |
+info: make sure your Python environment is properly configured: https://github.com/astral-sh/ty/blob/main/docs/README.md#python-environment
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Cannot resolve imported module `cairosvg`
+   --> src/vexylicon/cli.py:207:20
+    |
+205 |         """
+206 |         try:
+207 |             import cairosvg
+    |                    ^^^^^^^^
+208 |         except ImportError:
+209 |             print("[red]Error: Preview requires cairosvg. Install with: pip install cairosvg")
+    |
+info: make sure your Python environment is properly configured: https://github.com/astral-sh/ty/blob/main/docs/README.md#python-environment
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `lxml` has no member `etree`
+  --> src/vexylicon/core.py:16:18
+   |
+14 | from pathlib import Path
+15 |
+16 | from lxml import etree
+   |                  ^^^^^
+17 |
+18 | from vexylicon.utils import (
+   |
+info: rule `unresolved-import` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `append` on type `Unknown | None` is possibly unbound
+   --> src/vexylicon/core.py:317:13
+    |
+315 |             clip_use = processor.create_element("use", href="#inner")
+316 |             clip_path.append(clip_use)
+317 |             defs.append(clip_path)
+    |             ^^^^^^^^^^^
+318 |
+319 |         # Create theme-aware CSS
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `append` on type `Unknown | None` is possibly unbound
+   --> src/vexylicon/core.py:342:9
+    |
+340 |             }
+341 |         """
+342 |         processor.get_defs().append(style)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+343 |
+344 |     def _inject_payload(self, processor: SVGProcessor, payload_svg: Path | str) -> None:
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `align_path_start`
+ --> src/vexylicon/utils/__init__.py:6:5
+  |
+5 | from vexylicon.utils.path_tools import (
+6 |     align_path_start,
+  |     ^^^^^^^^^^^^^^^^
+7 |     generate_ring_paths,
+8 |     interpolate_segment,
+  |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `generate_ring_paths`
+ --> src/vexylicon/utils/__init__.py:7:5
+  |
+5 | from vexylicon.utils.path_tools import (
+6 |     align_path_start,
+7 |     generate_ring_paths,
+  |     ^^^^^^^^^^^^^^^^^^^
+8 |     interpolate_segment,
+9 |     parse_dual_contour_path,
+  |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `interpolate_segment`
+  --> src/vexylicon/utils/__init__.py:8:5
+   |
+ 6 |     align_path_start,
+ 7 |     generate_ring_paths,
+ 8 |     interpolate_segment,
+   |     ^^^^^^^^^^^^^^^^^^^
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `parse_dual_contour_path`
+  --> src/vexylicon/utils/__init__.py:9:5
+   |
+ 7 |     generate_ring_paths,
+ 8 |     interpolate_segment,
+ 9 |     parse_dual_contour_path,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `path_bbox`
+  --> src/vexylicon/utils/__init__.py:10:5
+   |
+ 8 |     interpolate_segment,
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+   |     ^^^^^^^^^
+11 |     round_svg_coordinates,
+12 |     to_cubic_list,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `round_svg_coordinates`
+  --> src/vexylicon/utils/__init__.py:11:5
+   |
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+   |     ^^^^^^^^^^^^^^^^^^^^^
+12 |     to_cubic_list,
+13 | )
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `to_cubic_list`
+  --> src/vexylicon/utils/__init__.py:12:5
+   |
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+12 |     to_cubic_list,
+   |     ^^^^^^^^^^^^^
+13 | )
+14 | from vexylicon.utils.svg_processor import SVGProcessor
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[io]: Failed to read file: stream did not contain valid UTF-8
+--> src/vexylicon/utils/path_tools.py:1:1
+ |
+ |
+
+error[unresolved-import]: Module `lxml` has no member `etree`
+  --> src/vexylicon/utils/svg_processor.py:14:18
+   |
+12 | from pathlib import Path
+13 |
+14 | from lxml import etree
+   |                  ^^^^^
+15 |
+16 | # SVG namespace
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[missing-argument]: No arguments provided for required parameters `canvas`, `border`
+   --> src/vexylicon/utils/theme_loader.py:118:22
+    |
+116 |         # Convert nested structures to dataclasses if necessary
+117 |         if not isinstance(colors, ThemeColors):
+118 |             colors = ThemeColors(**colors)
+    |                      ^^^^^^^^^^^^^^^^^^^^^
+119 |         if not isinstance(effects, ThemeEffects):
+120 |             effects = ThemeEffects(**effects)
+    |
+info: rule `missing-argument` is enabled by default
+
+Found 15 diagnostics
+python -m uv run mypy --config-file pyproject.toml src/imgcolorshine tests
+mypy: can't read file 'src/imgcolorshine': No such file or directory
+npx repomix -i varia,.specstory,AGENT.md,CLAUDE.md,PLAN.md,SPEC.md,llms.txt,.cursorrules,docs -o llms.txt .
+
+ðŸ“¦ Repomix v0.3.7
+
+No custom config found at repomix.config.json or global config at /Users/adam/.config/repomix/repomix.config.json.
+You can add a config file for additional settings. Please check https://github.com/yamadashy/repomix for more information.
+â ™ Collecting files...
+[2K[1A[2K[Gâ ¹ Collect file... (6/31) src/vexylicon/utils/__init__.py
+</file>
+
+<file path="pyrightconfig.json">
+{
+  "include": [
+    "**/*.py"
+  ],
+  "exclude": [
+    "src",
+    "**/node_modules",
+    "**/__pycache__"
+  ],
+  "reportMissingImports": false,
+  "reportMissingTypeStubs": false,
+  "pythonVersion": "3.10"
+}
+</file>
+
+<file path="TODO.md">
+# TODO
+
+- [ ] **Fix Ruff configuration**  
+      – Replace obsolete `extend-exclude` key with `exclude` or `extend` in `pyproject.toml` (see PLAN) :contentReference[oaicite:0]{index=0}
+- [ ] **Adopt Loguru for structured logging** following recommended pattern and `serialize=True` option :contentReference[oaicite:1]{index=1}
+- [ ] **Refactor theme‑aware mask generation** to duplicate gradients for `light`/`dark` variants and switch via CSS `prefers-color-scheme` and `data-theme` attributes :contentReference[oaicite:2]{index=2}
+- [ ] **Improve payload masking**  
+      – Clip arbitrary HTML/SVG backgrounds with the existing `innerClip` (`clipPath`) and overlay SVG with `mix-blend-mode: screen` :contentReference[oaicite:3]{index=3}
+- [ ] **Gradio Lite demo**  
+      – Add `docs/index.html` loading `@gradio/lite` from CDN; expose a single Python function that wraps `VexyliconGenerator` (see PLAN) :contentReference[oaicite:4]{index=4}
+- [ ] **End‑to‑end tests** with PyTest & snapshot SVGs to reach ≥ 90 % coverage.
+- [ ] **Continuous Integration enhancements**  
+      – Add Ruff format & test steps already defined in `.github/workflows` to pre‑commit.  
+- [ ] **Documentation**  
+      – Update `README.md` with usage, Gradio Lite GIF, and dark/light screenshots.
+</file>
+
+<file path=".github/workflows/push.yml">
+name: Build & Test
+
+on:
+  push:
+    branches: [main]
+    tags-ignore: ["v*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Ruff lint
+        uses: astral-sh/ruff-action@v3
+        with:
+          version: "latest"
+          args: "check --output-format=github"
+
+      - name: Run Ruff Format
+        uses: astral-sh/ruff-action@v3
+        with:
+          version: "latest"
+          args: "format --check --respect-gitignore"
+
+  test:
+    name: Run Tests
+    needs: quality
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+        os: [ubuntu-latest]
+      fail-fast: true
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-suffix: ${{ matrix.os }}-${{ matrix.python-version }}
+
+      - name: Install test dependencies
+        run: |
+          uv pip install --system --upgrade pip
+          uv pip install --system ".[test]"
+
+      - name: Run tests with Pytest
+        run: uv run pytest -n auto --maxfail=1 --disable-warnings --cov-report=xml --cov-config=pyproject.toml --cov=src/vexylicon --cov=tests tests/
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.python-version }}-${{ matrix.os }}
+          path: coverage.xml
+
+  build:
+    name: Build Distribution
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Install build tools
+        run: uv pip install build hatchling hatch-vcs
+
+      - name: Build distributions
+        run: uv run python -m build --outdir dist
+
+      - name: Upload distribution artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist/
+          retention-days: 5
+</file>
+
+<file path=".github/workflows/release.yml">
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    name: Release to PyPI
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/vexylicon
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Install build tools
+        run: uv pip install build hatchling hatch-vcs
+
+      - name: Build distributions
+        run: uv run python -m build --outdir dist
+
+      - name: Verify distribution files
+        run: |
+          ls -la dist/
+          test -n "$(find dist -name '*.whl')" || (echo "Wheel file missing" && exit 1)
+          test -n "$(find dist -name '*.tar.gz')" || (echo "Source distribution missing" && exit 1)
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+</file>
+
+<file path="src/vexylicon/vexylicon.py">
+#!/usr/bin/env python3
+"""vexylicon:
+
+Created by Fontlab Ltd.
+"""
+
+import logging
+from dataclasses import dataclass
+from typing import Any
+
+__version__ = "0.1.0"
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class Config:
+    """Configuration settings for vexylicon."""
+
+    name: str
+    value: str | int | float
+    options: dict[str, Any] | None = None
+
+
+def process_data(data: list[Any], config: Config | None = None, *, debug: bool = False) -> dict[str, Any]:
+    """Process the input data according to configuration.
+
+    Args:
+        data: Input data to process
+        config: Optional configuration settings
+        debug: Enable debug mode
+
+    Returns:
+        Processed data as a dictionary
+
+    Raises:
+        ValueError: If input data is invalid
+    """
+    if debug:
+        logger.setLevel(logging.DEBUG)
+        logger.debug("Debug mode enabled")
+
+    if not data:
+        msg = "Input data cannot be empty"
+        raise ValueError(msg)
+
+    # TODO: Implement data processing logic
+    result: dict[str, Any] = {}
+    return result
+
+
+def main() -> None:
+    """Main entry point for vexylicon."""
+    try:
+        # Example usage
+        config = Config(name="default", value="test", options={"key": "value"})
+        result = process_data([], config=config)
+        logger.info("Processing completed: %s", result)
+
+    except Exception as e:
+        logger.error("An error occurred: %s", str(e))
+        raise
+
+
+if __name__ == "__main__":
+    main()
+</file>
+
+<file path="tests/test_package.py">
+"""Test suite for vexylicon."""
+
+
+def test_version():
+    """Verify package exposes version."""
+    import vexylicon
+
+    assert vexylicon.__version__
+</file>
+
+<file path=".gitignore">
+*_autogen/
+.DS_Store
+__version__.py
+__pycache__/
+_Chutzpah*
+_deps
+_NCrunch_*
+_pkginfo.txt
+_Pvt_Extensions
+_ReSharper*/
+_TeamCity*
+_UpgradeReport_Files/
+!?*.[Cc]ache/
+!.axoCover/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!**/[Pp]ackages/build/
+!Directory.Build.rsp
+.*crunch*.local.xml
+.axoCover/*
+.builds
+.cr/personal
+.fake/
+.history/
+.ionide/
+.localhistory/
+.mfractor/
+.ntvs_analysis.dat
+.paket/paket.exe
+.sass-cache/
+.vs/
+.vscode
+.vscode/*
+.vshistory/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Bb]in/
+[Bb]uild[Ll]og.*
+[Dd]ebug/
+[Dd]ebugPS/
+[Dd]ebugPublic/
+[Ee]xpress/
+[Ll]og/
+[Ll]ogs/
+[Oo]bj/
+[Rr]elease/
+[Rr]eleasePS/
+[Rr]eleases/
+[Tt]est[Rr]esult*/
+[Ww][Ii][Nn]32/
+*_h.h
+*_i.c
+*_p.c
+*_wpftmp.csproj
+*- [Bb]ackup ([0-9]).rdl
+*- [Bb]ackup ([0-9][0-9]).rdl
+*- [Bb]ackup.rdl
+*.[Cc]ache
+*.[Pp]ublish.xml
+*.[Rr]e[Ss]harper
+*.a
+*.app
+*.appx
+*.appxbundle
+*.appxupload
+*.aps
+*.azurePubxml
+*.bim_*.settings
+*.bim.layout
+*.binlog
+*.btm.cs
+*.btp.cs
+*.build.csdef
+*.cab
+*.cachefile
+*.code-workspace
+*.coverage
+*.coveragexml
+*.d
+*.dbmdl
+*.dbproj.schemaview
+*.dll
+*.dotCover
+*.DotSettings.user
+*.dsp
+*.dsw
+*.dylib
+*.e2e
+*.exe
+*.gch
+*.GhostDoc.xml
+*.gpState
+*.ilk
+*.iobj
+*.ipdb
+*.jfm
+*.jmconfig
+*.la
+*.lai
+*.ldf
+*.lib
+*.lo
+*.log
+*.mdf
+*.meta
+*.mm.*
+*.mod
+*.msi
+*.msix
+*.msm
+*.msp
+*.ncb
+*.ndf
+*.nuget.props
+*.nuget.targets
+*.nupkg
+*.nvuser
+*.o
+*.obj
+*.odx.cs
+*.opendb
+*.opensdf
+*.opt
+*.out
+*.pch
+*.pdb
+*.pfx
+*.pgc
+*.pgd
+*.pidb
+*.plg
+*.psess
+*.publishproj
+*.publishsettings
+*.pubxml
+*.pyc
+*.rdl.data
+*.rptproj.bak
+*.rptproj.rsuser
+*.rsp
+*.rsuser
+*.sap
+*.sbr
+*.scc
+*.sdf
+*.sln.docstates
+*.sln.iml
+*.slo
+*.smod
+*.snupkg
+*.so
+*.suo
+*.svclog
+*.tlb
+*.tlh
+*.tli
+*.tlog
+*.tmp
+*.tmp_proj
+*.tss
+*.user
+*.userosscache
+*.userprefs
+*.vbp
+*.vbw
+*.VC.db
+*.VC.VC.opendb
+*.VisualState.xml
+*.vsp
+*.vspscc
+*.vspx
+*.vssscc
+*.xsd.cs
+**/[Pp]ackages/*
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.HTMLClient/GeneratedArtifacts
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
+*~
+~$*
+$tf/
+AppPackages/
+artifacts/
+ASALocalRun/
+AutoTest.Net/
+Backup*/
+BenchmarkDotNet.Artifacts/
+bld/
+BundleArtifacts/
+ClientBin/
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles
+CMakeLists.txt.user
+CMakeScripts
+CMakeUserPresets.json
+compile_commands.json
+coverage*.info
+coverage*.json
+coverage*.xml
+csx/
+CTestTestfile.cmake
+dlldata.c
+DocProject/buildhelp/
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/*.HxC
+DocProject/Help/*.HxT
+DocProject/Help/html
+DocProject/Help/Html2
+ecf/
+FakesAssemblies/
+FodyWeavers.xsd
+Generated_Code/
+Generated\ Files/
+healthchecksdb
+install_manifest.txt
+ipch/
+Makefile
+MigrationBackup/
+mono_crash.*
+nCrunchTemp_*
+node_modules/
+nunit-*.xml
+OpenCover/
+orleans.codegen.cs
+Package.StoreAssociation.xml
+paket-files/
+project.fragment.lock.json
+project.lock.json
+publish/
+PublishScripts/
+rcf/
+ScaffoldingReadMe.txt
+ServiceFabricBackup/
+StyleCopReport.xml
+Testing
+TestResult.xml
+UpgradeLog*.htm
+UpgradeLog*.XML
+x64/
+x86/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Distribution / packaging
+!dist/.gitkeep
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+.ruff_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project specific
+__version__.py
+_private
+VERSION.txt
+</file>
+
+<file path=".pre-commit-config.yaml">
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.4
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+        args: [--respect-gitignore]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+      - id: debug-statements
+      - id: check-case-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+</file>
+
+<file path="LICENSE">
+MIT License
+
+Copyright (c) 2025 Fontlab Ltd.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</file>
+
+<file path="package.toml">
+# Package configuration
+[package]
+include_cli = true        # Include CLI boilerplate
+include_logging = true    # Include logging setup
+use_pydantic = true      # Use Pydantic for data validation
+use_rich = true          # Use Rich for terminal output
+
+[features]
+mkdocs = false           # Enable MkDocs documentation
+vcs = true              # Initialize Git repository
+github_actions = true   # Add GitHub Actions workflows
+</file>
+
+<file path="pyproject.toml">
+# this_file: pyproject.toml
+#==============================================================================
+# VEXYLICON PACKAGE CONFIGURATION
+# This pyproject.toml defines the package metadata, dependencies, build system,
+# and development environment for the vexylicon package.
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# PROJECT METADATA
+# Core package information used by PyPI and package managers.
+#------------------------------------------------------------------------------
+[project]
+name = 'vexylicon' # Package name on PyPI
+description = 'Create sophisticated liquid-glass SVG icon effects with theme-aware capabilities' # Short description
+readme = 'README.md' # Path to README file
+requires-python = '>=3.11' # Minimum Python version
+keywords = [
+    'svg',
+    'icons', 
+    'glass-effect',
+    'theme',
+    'graphics',
+    'liquid-glass',
+    'icon-mask'
+] # Keywords for PyPI search
+dynamic = ["version"] # Fields set dynamically at build time
+
+# PyPI classifiers for package categorization
+classifiers = [
+    'Development Status :: 4 - Beta', # Package maturity level
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: Implementation :: CPython',
+    'Programming Language :: Python :: Implementation :: PyPy',
+    'Operating System :: OS Independent',
+    'License :: OSI Approved :: MIT License',
+    'Intended Audience :: Developers',
+]
+
+dependencies = [
+    'lxml>=4.9.0',
+    'svgpathtools>=1.6.0',
+    'fire>=0.5.0',
+    'rich>=13.0.0',
+]
+
+# Author information
+[[project.authors]]
+name = 'Fontlab Ltd.'
+email = 'info@fontlab.org'
+
+# License information
+[project.license]
+text = 'MIT'
+
+# Project URLs
+[project.urls]
+Documentation = 'https://github.com/fontlaborg/vexylicon#readme'
+Issues = 'https://github.com/fontlaborg/vexylicon/issues'
+Source = 'https://github.com/fontlaborg/vexylicon'
+
+#------------------------------------------------------------------------------
+# OPTIONAL DEPENDENCIES
+# Additional dependencies for optional features, development, and testing.
+#------------------------------------------------------------------------------
+[project.optional-dependencies]
+
+# Development tools
+dev = [
+    'pre-commit>=4.1.0', # Pre-commit hook manager - Keep pre-commit as is, update if newer pre-commit version is required
+    'ruff>=0.9.7', # Linting and formatting - Keep ruff as is, update if newer ruff version is required
+    'mypy>=1.15.0', # Type checking - Keep mypy as is, update if newer mypy version is required
+    'absolufy-imports>=0.3.1', # Convert relative imports to absolute - Keep absolufy-imports as is, update if newer absolufy-imports version is required
+    'pyupgrade>=3.19.1', # Upgrade Python syntax - Keep pyupgrade as is, update if newer pyupgrade version is required
+    'isort>=6.0.1', # Sort imports - Keep isort as is, update if newer isort version is required
+]
+
+# Testing tools and frameworks
+test = [
+    'pytest>=8.3.4', # Testing framework - Keep pytest as is, update if newer pytest version is required
+    'pytest-cov>=6.0.0', # Coverage plugin for pytest - Keep pytest-cov as is, update if newer pytest-cov version is required
+    'pytest-xdist>=3.6.1', # Parallel test execution - Keep pytest-xdist as is, update if newer pytest-xdist version is required
+    'pytest-benchmark[histogram]>=5.1.0', # Benchmarking plugin - Keep pytest-benchmark as is, update if newer pytest-benchmark version is required
+    'pytest-asyncio>=0.25.3', # Async test support - Keep pytest-asyncio as is, update if newer pytest-asyncio version is required
+    'coverage[toml]>=7.6.12',
+]
+
+docs = [
+    "sphinx>=7.2.6",
+    "sphinx-rtd-theme>=2.0.0",
+    "sphinx-autodoc-typehints>=2.0.0",
+    "myst-parser>=3.0.0", # Markdown support in Sphinx
+]
+
+# All optional dependencies combined
+all = [
+]
+
+#------------------------------------------------------------------------------
+# COMMAND-LINE SCRIPTS
+# Entry points for command-line executables installed with the package.
+#------------------------------------------------------------------------------
+[project.scripts]
+vexylicon = "vexylicon.cli:main"
+
+#------------------------------------------------------------------------------
+# BUILD SYSTEM CONFIGURATION
+# Defines the tools required to build the package and the build backend.
+#------------------------------------------------------------------------------
+[build-system]
+# Hatchling is a modern build backend for Python packaging
+# hatch-vcs integrates with version control systems for versioning
+requires = [
+    'hatchling>=1.27.0', # Keep hatchling as is, update if newer hatchling version is required
+    'hatch-vcs>=0.4.0', # Keep hatch-vcs as is, update if newer hatch-vcs version is required
+]
+build-backend = 'hatchling.build' # Specifies Hatchling as the build backend
+
+
+#------------------------------------------------------------------------------
+# HATCH BUILD CONFIGURATION
+# Configures the build process, specifying which packages to include and
+# how to handle versioning.
+#------------------------------------------------------------------------------
+[tool.hatch.build]
+# Include package data files
+include = [
+    "src/vexylicon/py.typed", # For better type checking support
+    "src/vexylicon/assets/**/*", # Include SVG assets and theme files
+]
+exclude = ["**/__pycache__", "**/.pytest_cache", "**/.mypy_cache"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vexylicon"]
+reproducible = true
+
+
+# Version control system hook configuration
+# Automatically updates the version file from git tags
+[tool.hatch.build.hooks.vcs]
+version-file = "src/vexylicon/__version__.py"
+
+# Version source configuration
+[tool.hatch.version]
+source = 'vcs' # Get version from git tags or other VCS info
+
+# Metadata handling configuration
+[tool.hatch.metadata]
+allow-direct-references = true # Allow direct references in metadata (useful for local dependencies)
+
+
+#------------------------------------------------------------------------------
+# DEVELOPMENT ENVIRONMENTS
+
+[tool.hatch.envs.default]
+features = ['dev', 'test', 'all']
+dependencies = [
+]
+
+# Commands available in the default environment
+[tool.hatch.envs.default.scripts]
+# Run tests with optional arguments
+test = 'pytest {args:tests}'
+# Run tests with coverage reporting
+test-cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=src/vexylicon --cov=tests {args:tests}"
+# Run type checking
+type-check = "mypy src/vexylicon tests"
+# Run linting and formatting
+lint = ["ruff check src/vexylicon tests", "ruff format --respect-gitignore src/vexylicon tests"]
+# Format and fix style issues
+fmt = ["ruff format --respect-gitignore src/vexylicon tests", "ruff check --fix src/vexylicon tests"]
+fix = ["ruff check --fix --unsafe-fixes src/vexylicon tests", "ruff format --respect-gitignore src/vexylicon tests"]
+
+# Matrix configuration to test across multiple Python versions
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.10", "3.11", "3.12"]
+
+#------------------------------------------------------------------------------
+# SPECIALIZED ENVIRONMENTS
+# Additional environments for specific development tasks.
+#------------------------------------------------------------------------------
+
+# Dedicated environment for linting and code quality checks
+[tool.hatch.envs.lint]
+detached = true # Create a separate, isolated environment
+features = ['dev'] # Use dev extras  dependencies 
+
+# Linting environment commands
+[tool.hatch.envs.lint.scripts]
+# Type checking with automatic type installation
+typing = "mypy --install-types --non-interactive {args:src/vexylicon tests}"
+# Check style and format code
+style = ["ruff check {args:.}", "ruff format --respect-gitignore {args:.}"]
+# Format and fix style issues
+fmt = ["ruff format --respect-gitignore {args:.}", "ruff check --fix {args:.}"]
+fix = ["ruff check --fix --unsafe-fixes {args:.}", "ruff format --respect-gitignore {args:.}"]
+# Run all ops
+all = ["style", "typing", "fix"]
+
+# Dedicated environment for testing
+[tool.hatch.envs.test]
+features = ['test'] # Use test extras as dependencies
+
+# Testing environment commands
+[tool.hatch.envs.test.scripts]
+# Run tests in parallel
+test = "python -m pytest -n auto {args:tests}"
+# Run tests with coverage in parallel
+test-cov = "python -m pytest -n auto --cov-report=term-missing --cov-config=pyproject.toml --cov=src/vexylicon --cov=tests {args:tests}"
+# Run benchmarks
+bench = "python -m pytest -v -p no:briefcase tests/test_benchmark.py --benchmark-only"
+# Run benchmarks and save results
+bench-save = "python -m pytest -v -p no:briefcase tests/test_benchmark.py --benchmark-only --benchmark-json=benchmark/results.json"
+
+# Documentation environment
+[tool.hatch.envs.docs]
+features = ['docs']
+
+# Documentation environment commands
+[tool.hatch.envs.docs.scripts]
+build = "sphinx-build -b html docs/source docs/build"
+
+# GitHub Actions workflow configuration
+[tool.hatch.envs.ci]
+features = ['test']
+
+
+[tool.hatch.envs.ci.scripts]
+test = "pytest --cov=src/vexylicon --cov-report=xml"
+
+
+#------------------------------------------------------------------------------
+# CODE QUALITY TOOLS
+# Configuration for linting, formatting, and code quality enforcement.
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# COVERAGE CONFIGURATION
+# Settings for test coverage measurement and reporting.
+#------------------------------------------------------------------------------
+
+# Path mapping for coverage in different environments
+[tool.coverage.paths]
+vexylicon = ["src/vexylicon", "*/vexylicon/src/vexylicon"]
+tests = ["tests", "*/vexylicon/tests"]
+
+# Coverage report configuration
+[tool.coverage.report]
+# Lines to exclude from coverage reporting
+exclude_lines = [
+    'no cov', # Custom marker to skip coverage
+    'if __name__ == .__main__.:', # Script execution guard
+    'if TYPE_CHECKING:', # Type checking imports and code
+    'pass', # Empty pass statements
+    'raise NotImplementedError', # Unimplemented method placeholders
+    'raise ImportError', # Import error handling
+    'except ImportError', # Import error handling
+    'except KeyError', # Common error handling
+    'except AttributeError', # Common error handling
+    'except NotImplementedError', # Common error handling
+]
+
+[tool.coverage.run]
+source_pkgs = ["vexylicon", "tests"]
+branch = true # Measure branch coverage (if/else statements)
+parallel = true # Support parallel test execution
+omit = [
+    "src/vexylicon/__about__.py",
+]
+
+#------------------------------------------------------------------------------
+# MYPY CONFIGURATION
+# Configuration for type checking with mypy.
+#------------------------------------------------------------------------------
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+#------------------------------------------------------------------------------
+# PYTEST CONFIGURATION
+# Configuration for pytest, including markers, options, and benchmark settings.
+#------------------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+addopts = "-v --durations=10 -p no:briefcase"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+console_output_style = "progress"
+filterwarnings = ["ignore::DeprecationWarning", "ignore::UserWarning"]
+log_cli = true
+log_cli_level = "INFO"
+markers = [
+    "benchmark: marks tests as benchmarks (select with '-m benchmark')",
+    "unit: mark a test as a unit test",
+    "integration: mark a test as an integration test",
+    "permutation: tests for permutation functionality", 
+    "parameter: tests for parameter parsing",
+    "prompt: tests for prompt parsing",
+]
+norecursedirs = [
+    ".*",
+    "build",
+    "dist", 
+    "venv",
+    "__pycache__",
+    "*.egg-info",
+    "_private",
+]
+python_classes = ["Test*"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+testpaths = ["tests"]
+
+[tool.pytest-benchmark]
+min_rounds = 100
+min_time = 0.1
+histogram = true
+storage = "file"
+save-data = true
+compare = [
+    "min",    # Minimum time
+    "max",    # Maximum time
+    "mean",   # Mean time
+    "stddev", # Standard deviation
+    "median", # Median time
+    "iqr",    # Inter-quartile range
+    "ops",    # Operations per second
+    "rounds", # Number of rounds
+]
+
+#------------------------------------------------------------------------------
+# RUFF CONFIGURATION
+# Configuration for Ruff, including linter and formatter settings.
+#------------------------------------------------------------------------------ 
+
+# Ruff linter and formatter configuration
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+# Linting rules configuration
+[tool.ruff.lint]
+# Rule sets to enable, organized by category
+select = [
+    # flake8 plugins and extensions
+    'A', # flake8-builtins: checks for shadowed builtins
+    'ARG', # flake8-unused-arguments: checks for unused function arguments
+    'ASYNC', # flake8-async: checks for async/await issues
+    'B', # flake8-bugbear: finds likely bugs and design problems
+    'C', # flake8-comprehensions: helps write better list/dict comprehensions
+    'DTZ', # flake8-datetimez: checks for datetime timezone issues
+    'E', # pycodestyle errors: PEP 8 style guide errors
+    'EM', # flake8-errmsg: checks for better error messages
+    'F', # pyflakes: detects various errors
+    'FBT', # flake8-boolean-trap: checks for boolean traps in function signatures
+    'I', # isort: sorts imports
+    'ICN', # flake8-import-conventions: checks for import conventions
+    'ISC', # flake8-implicit-str-concat: checks for implicit string concatenation
+    'LOG', # flake8-logging: checks for logging issues
+    'N', # pep8-naming: checks naming conventions
+    'PLC', # pylint convention: checks for convention issues
+    'PLE', # pylint error: checks for errors
+    'PLR', # pylint refactor: suggests refactors
+    'PLW', # pylint warning: checks for suspicious code
+    'PT', # flake8-pytest-style: checks pytest-specific style
+    'PTH', # flake8-use-pathlib: checks for stdlib path usage vs pathlib
+    'PYI', # flake8-pyi: checks stub files
+    'RET', # flake8-return: checks return statement consistency
+    'RSE', # flake8-raise: checks raise statements
+    'RUF', # Ruff-specific rules
+    'S', # flake8-bandit: checks for security issues
+    'SIM', # flake8-simplify: checks for code simplification opportunities
+    'T', # flake8-print: checks for print statements
+    'TCH', # flake8-type-checking: helps with type-checking
+    'TID', # flake8-tidy-imports: checks for tidy import statements
+    'UP', # pyupgrade: checks for opportunities to use newer Python features
+    'W', # pycodestyle warnings: PEP 8 style guide warnings
+    'YTT', # flake8-2020: checks for misuse of sys.version or sys.version_info
+
+]
+# Rules to ignore (with reasons)
+ignore = [
+    'B027', # Empty method in abstract base class - sometimes needed for interfaces
+    'C901', # Function is too complex - sometimes complexity is necessary
+    'FBT003', # Boolean positional argument in function definition - sometimes unavoidable
+    'PLR0911', # Too many return statements - sometimes needed for readability
+    'PLR0912', # Too many branches - sometimes needed for complex logic
+    'PLR0913', # Too many arguments - sometimes needed in APIs
+    'PLR0915', # Too many statements - sometimes needed for comprehensive functions
+    'PLR1714', # Consider merging multiple comparisons - sometimes less readable
+    'PLW0603', # Using the global statement - sometimes necessary
+    'PT013', # Pytest explicit test parameter - sometimes clearer
+    'PTH123', # Path traversal - sometimes needed
+    'PYI056', # Calling open() in pyi file - sometimes needed in type stubs
+    'S105', # Possible hardcoded password - often false positives
+    'S106', # Possible hardcoded password - often false positives
+    'S107', # Possible hardcoded password - often false positives
+    'S110', # try-except-pass - sometimes valid for suppressing exceptions
+    'SIM102'
+    # Nested if statements - sometimes more readable than combined conditions
+]
+# Rules that should not be automatically fixed
+unfixable = [
+    'F401', # Don't automatically remove unused imports - may be needed later
+
+]
+# Configure exclude to ignore specific directories
+exclude = [".git", ".venv", "venv", "dist", "build"]
+
+# isort configuration within Ruff
+[tool.ruff.lint.isort]
+known-first-party = ['vexylicon'] # Treat as first-party imports for sorting
+
+# flake8-tidy-imports configuration within Ruff
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = 'all' # Ban all relative imports for consistency
+
+# Per-file rule exceptions
+[tool.ruff.lint.per-file-ignores]
+# Tests can use magic values, assertions, and relative imports
+'tests/**/*' = [
+    'PLR2004', # Allow magic values in tests for readability
+    'S101', # Allow assertions in tests
+    'TID252'
+    # Allow relative imports in tests for convenience
+]
+</file>
+
+<file path="README.md">
+# Vexylicon
+
+A Python package for creating sophisticated liquid-glass SVG icon effects with theme-aware capabilities.
+
+## Project Status
+
+🚧 **Alpha Release** - Core functionality working, theme system and web interface in development.
+
+## Overview
+
+Vexylicon transforms SVG icons into stunning glass-morphism designs with beveled edges. It takes a specially formatted base SVG with dual contours and generates smooth, progressive ring shapes that create a convincing 3D glass effect.
+
+## Current Features
+
+✅ **Working**
+- Glass effect generation with configurable bevel steps
+- Payload SVG injection with clipPath masking
+- CLI with create, batch, themes, and preview commands
+- Quality presets (low=8, medium=16, high=24, ultra=32 steps)
+- Multiple opacity progression modes
+- JSON-based theme system
+
+⚠️ **In Development**
+- Theme-aware light/dark mode switching
+- Proper gradient duplication for themes
+- Gradio-lite web interface
+
+## Installation
+
+From source (recommended during alpha):
+
+```bash
+git clone https://github.com/fontlaborg/vexylicon
+cd vexylicon
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -e .
+```
+
+## Quick Start
+
+### Basic Usage
+
+Generate a glass effect icon:
+
+```bash
+vexylicon create --output my-icon.svg
+```
+
+With custom payload SVG:
+
+```bash
+vexylicon create --output my-icon.svg --payload logo.svg --quality high
+```
+
+### Python API
+
+```python
+from vexylicon import VexyliconGenerator, VexyliconParams
+
+# Basic usage
+generator = VexyliconGenerator()
+svg_output = generator.generate()
+
+# With payload
+svg_output = generator.generate(payload_svg="logo.svg")
+
+# Custom parameters
+params = VexyliconParams(steps=16, quality="medium")
+generator = VexyliconGenerator(params=params)
+```
+
+## CLI Commands
+
+### `create` - Generate a single icon
+
+```bash
+vexylicon create [OPTIONS]
+
+Options:
+  --output TEXT              Output file path (default: output.svg)
+  --payload TEXT             Path to payload SVG to inject
+  --steps INTEGER            Number of bevel steps (default: 24)
+  --quality TEXT             Preset: low/medium/high/ultra
+  --opacity-progression INT  Opacity mode 1-4 (default: 4)
+  --format TEXT              Output format: svg or png
+```
+
+### `batch` - Process multiple SVGs
+
+```bash
+vexylicon batch INPUT_DIR OUTPUT_DIR [OPTIONS]
+```
+
+### `themes` - List available themes
+
+```bash
+vexylicon themes
+```
+
+### `preview` - Generate PNG preview (requires cairosvg)
+
+```bash
+vexylicon preview SVG_FILE [--output OUTPUT_PATH]
+```
+
+## How It Works
+
+1. **Base SVG**: Uses `best_base.svg` as the template with dual contours
+2. **Path Interpolation**: Generates intermediate rings between inner and outer contours
+3. **Opacity Progression**: Applies mathematical opacity (linear to quartic)
+4. **Glass Effect**: Uses `mix-blend-mode: screen` for transparency
+5. **Payload Injection**: Optional SVG artwork clipped to inner shape
+
+### Opacity Progression Modes
+
+1. **Linear**: Even distribution
+2. **Decreasing**: Reverse exponential
+3. **Exponential**: Quadratic progression
+4. **More Exponential**: Quartic progression (default, best glass effect)
+
+## Architecture
+
+```
+vexylicon/
+├── core.py              # VexyliconGenerator class
+├── cli.py               # Fire-based CLI
+├── utils/
+│   ├── svg_processor.py # lxml-based SVG manipulation
+│   ├── path_tools.py    # Path interpolation from icon_blender.py
+│   └── theme_loader.py  # JSON theme validation
+└── assets/
+    ├── best_base.svg    # Base template
+    └── themes/          # Theme definitions
+```
+
+## Known Limitations
+
+- Theme switching CSS not fully implemented
+- Light/dark gradient variants need proper duplication
+- Complex SVG payloads may need manual adjustment
+- Web interface pending (Gradio-lite planned)
+
+## Development
+
+### Setup
+
+```bash
+# Install with dev dependencies
+pip install -e ".[dev]"
+
+# Run tests
+pytest
+
+# Code quality
+black src tests
+ruff check src tests
+mypy src
+```
+
+### Contributing
+
+The project needs help with:
+1. Completing theme-aware gradient generation
+2. Building the Gradio-lite web interface
+3. Writing comprehensive tests
+4. Improving documentation
+
+## Technical Stack
+
+- **Python 3.11+** (required)
+- **lxml** - Robust XML/SVG manipulation
+- **svgpathtools** - Path interpolation
+- **pydantic** - Theme validation
+- **fire** - CLI framework
+- **rich** - Terminal formatting
+
+## Roadmap
+
+See [TODO.md](TODO.md) for detailed plans:
+
+1. Fix theme system (gradient duplication)
+2. Add CSS for light/dark switching
+3. Create Gradio-lite web interface
+4. Achieve >90% test coverage
+5. Publish to PyPI
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file
+
+## Author
+
+Developed by Fontlab Ltd.
+
+## Acknowledgments
+
+Based on the original `icon_blender.py` and `icon_masker.py` scripts, refactored into a modern Python package.
+</file>
+
+</files>

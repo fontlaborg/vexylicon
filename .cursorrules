@@ -1,64 +1,161 @@
-# When you write code
+# Vexylicon Development Guidelines
 
-- Iterate gradually, avoiding major changes
-- Minimize confirmations and checks
-- Preserve existing code/structure unless necessary
-- Use constants over magic numbers
-- Check for existing solutions in the codebase before starting
-- Check often the coherence of the code you’re writing with the rest of the code.
-- Focus on minimal viable increments and ship early
-- Write explanatory docstrings/comments that explain what and WHY this does, explain where and how the code is used/referred to elsewhere in the code
-- Analyze code line-by-line
-- Handle failures gracefully with retries, fallbacks, user guidance
-- Address edge cases, validate assumptions, catch errors early
-- Let the computer do the work, minimize user decisions
-- Reduce cognitive load, beautify code
-- Modularize repeated logic into concise, single-purpose functions
-- Favor flat over nested structures
-- Consistently keep, document, update and consult the holistic overview mental image of the codebase. 
+## Project Overview
 
-## Keep track of paths
+Vexylicon is a Python package for creating sophisticated liquid-glass SVG icon effects. It transforms SVG icons with dual contours into glass-morphism designs with beveled edges and theme support.
 
-In each source file, maintain the up-to-date `this_file` record that shows the path of the current file relative to project root. Place the `this_file` record near the top of the file, as a comment after the shebangs, or in the YAML Markdown frontmatter.
+**Current Status**: Alpha release - core glass effect working, theme system needs completion, web interface pending.
 
-## When you write Python
+## Architecture Overview
 
+```
+vexylicon/
+├── core.py              # VexyliconGenerator - main glass effect engine
+├── cli.py               # Fire-based CLI interface
+├── utils/
+│   ├── svg_processor.py # lxml-based SVG DOM manipulation (NO string operations)
+│   ├── path_tools.py    # Path interpolation algorithms from icon_blender.py
+│   └── theme_loader.py  # Pydantic-based theme validation
+└── assets/
+    ├── best_base.svg    # Canonical base template with dual contours
+    └── themes/
+        └── default.json # Theme definitions
+```
+
+## Core Workflow
+
+1. **Input**: `best_base.svg` (1200x1200 with dual contours) + optional payload SVG
+2. **Processing**:
+   - Parse dual contours (outer and inner paths)
+   - Generate N interpolated rings (default 24)
+   - Apply opacity progression (quartic by default)
+   - Add `mix-blend-mode: screen` for glass effect
+   - Inject payload with clipPath masking
+3. **Output**: Glass effect SVG with optional theme variants
+
+## Development Principles
+
+### Code Quality
 - Use `uv pip`, never `pip`
-- Use `python -m` when running code
-- PEP 8: Use consistent formatting and naming
-- Write clear, descriptive names for functions and variables
-- PEP 20: Keep code simple and explicit. Prioritize readability over cleverness
-- Use type hints in their simplest form (list, dict, | for unions)
-- PEP 257: Write clear, imperative docstrings
-- Use f-strings. Use structural pattern matching where appropriate
-- ALWAYS add "verbose" mode logugu-based logging, & debug-log
-- For CLI Python scripts, use fire & rich, and start the script with
+- Type hints on all public functions
+- Docstrings in NumPy style
+- Test coverage >90%
+- Black formatting, ruff linting
 
-```
-#!/usr/bin/env -S uv run -s
-# /// script
-# dependencies = ["PKG1", "PKG2"]
-# ///
-# this_file: PATH_TO_CURRENT_FILE
-```
+### SVG Processing Rules
+- **ALWAYS use lxml** for XML manipulation
+- **NEVER use string replacement** for SVG operations
+- Preserve namespaces and attributes
+- Round coordinates to 2 decimal places
 
-Work in rounds: 
+### Key Implementation Details
 
-- Create `PLAN.md` as a detailed flat plan with `[ ]` items. 
-- Identify the most important TODO items, and create `TODO.md` with `[ ]` items. 
-- Implement the changes. 
-- Update `PLAN.md` and `TODO.md` as you go. 
-- After each round of changes, update `CHANGELOG.md` with the changes.
-- Update `README.md` to reflect the changes.
+1. **Path Interpolation**: 
+   - Reverse outer contour for proper alignment
+   - Convert Line segments to degenerate CubicBeziers
+   - Ensure segment count compatibility
 
-Ask before extending/refactoring existing code in a way that may add complexity or break things.
+2. **Opacity Progression**:
+   - Mode 1: Linear
+   - Mode 2: Decreasing (reverse exponential)
+   - Mode 3: Exponential (quadratic)
+   - Mode 4: More exponential (quartic) - DEFAULT
 
-When you’re finished, print "Wait, but" to go back, think & reflect, revise & improvement what you’ve done (but don’t invent functionality freely). Repeat this. But stick to the goal of "minimal viable next version". Lead two experts: "Ideot" for creative, unorthodox ideas, and "Critin" to critique flawed thinking and moderate for balanced discussions. The three of you shall illuminate knowledge with concise, beautiful responses, process methodically for clear answers, collaborate step-by-step, sharing thoughts and adapting. If errors are found, step back and focus on accuracy and progress.
+3. **Theme System** (needs completion):
+   - Duplicate gradients with -light/-dark suffixes
+   - Adjust opacity for dark variants (+20%)
+   - Add CSS for prefers-color-scheme
 
-## After Python changes run:
+## Current Issues
 
-```
-fd -e py -x autoflake {}; fd -e py -x pyupgrade --py311-plus {}; fd -e py -x ruff check --output-format=github --fix --unsafe-fixes {}; fd -e py -x ruff format --respect-gitignore --target-version py311 {}; python -m pytest;
-```
+1. **Theme Implementation Incomplete**:
+   - Gradients not properly duplicated
+   - CSS for theme switching missing
+   - Theme groups created but not functional
 
-Be creative, diligent, critical, relentless & funny!
+2. **Payload Masking**:
+   - Works but needs refinement for complex SVGs
+   - ViewBox handling could be improved
+
+3. **Missing Features**:
+   - No Gradio-lite web interface yet
+   - Limited test coverage
+   - No progress indicators for batch mode
+
+## Development Workflow
+
+1. **Before Changes**:
+   - Read existing code thoroughly
+   - Check PLAN.md and TODO.md
+   - Understand the dual-contour SVG format
+
+2. **Making Changes**:
+   - Work in small, testable increments
+   - Update CHANGELOG.md after each feature
+   - Keep TODO.md current
+
+3. **After Changes**:
+   ```bash
+   # Format and lint
+   black src tests
+   ruff check --fix src tests
+   
+   # Run tests
+   pytest
+   
+   # Type check
+   mypy src
+   ```
+
+## Priority Tasks
+
+1. **Fix Theme System**:
+   - Implement `_duplicate_gradients_for_themes()`
+   - Add proper CSS with media queries
+   - Test light/dark switching
+
+2. **Gradio-lite Interface**:
+   - Minimal dependencies (may need to vendor svgpathtools)
+   - Handle Pyodide limitations
+   - Focus on core features only
+
+3. **Testing**:
+   - Unit tests for all path_tools functions
+   - Integration tests for full pipeline
+   - Snapshot tests for SVG output
+
+## Technical Constraints
+
+- **Python 3.11+** required
+- **Minimal dependencies**: lxml, svgpathtools, fire, pydantic, rich
+- **No string manipulation** for SVG operations
+- **Gradio-lite limitations**: Some packages won't work in browser
+
+## File Path Tracking
+
+Always include `# this_file: path/to/file.py` at the top of each Python file.
+
+## Logging Guidelines
+
+When adding logging (pending):
+- Use loguru for structured logging
+- Add `--verbose` flag to CLI
+- Log at DEBUG level for development
+- Include timing information for optimization
+
+## Error Handling
+
+- Custom exceptions: `VexyliconError`, `InvalidSVGError`, `ThemeValidationError`
+- Provide actionable error messages
+- Suggest fixes for common issues
+- Validate inputs early
+
+## Remember
+
+- Focus on core functionality, not fancy features
+- Glass effect quality is the top priority
+- Keep dependencies minimal
+- Test with real SVG files
+- Document edge cases
+
+$END$

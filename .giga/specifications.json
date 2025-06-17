@@ -1,0 +1,18 @@
+[
+  {
+    "fileName": "main-overview.mdc",
+    "description": "Complete system overview documenting the SVG icon transformation system, including the overall architecture, component interactions, and high-level workflow"
+  },
+  {
+    "fileName": "svg-bevel-algorithm.mdc",
+    "description": "Detailed documentation of the SVG bevel generation algorithm, including path interpolation, opacity progression calculations, and glass effect implementation"
+  },
+  {
+    "fileName": "mask-transformation.mdc",
+    "description": "Comprehensive documentation of the theme-aware mask creation process, including gradient modifications, clipPath handling, and payload injection mechanisms"
+  },
+  {
+    "fileName": "data-flow.mdc",
+    "description": "Documentation of the data flow between components, including how SVG data is processed, transformed, and modified through the various stages of the icon transformation pipeline"
+  }
+]

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200">
+  <defs>
+    <!-- Reusable path definitions -->
+    <path id="borderShape" d="M 1112 418 L 1112 782 C 1112 905 1089 979 1034 1034 C 979 1089 905 1112 782 1112 L 418 1112 C 288 1112 224 1092 166 1034 C 108 976 88 912 88 782   L 88 418  C 88 288 108 224 166 166  C 224 108 288 88 418 88   L 782 88  C 909 88 977 109 1034 166 C 1091 223 1112 291 1112 418"/>
+    
+    <path id="mainShape" d="M 1087.5,418.5 C 1087.5,418.5 1087.5,782.5 1087.5,782.5 C 1087.5,898.5 1066.5,966.5 1016.5,1016.5 C 966.5,1066.5 898.5,1087.5 782.5,1087.5 C 782.5,1087.5 418.5,1087.5 418.5,1087.5 C 296.5,1087.5 237.0,1069.0 184.5,1016.5 C 132.0,964.0 113.5,904.5 113.5,782.5 C 113.5,782.5 113.5,418.5 113.5,418.5 C 113.5,296.5 132.0,237.0 184.5,184.5 C 237.0,132.0 296.5,113.5 418.5,113.5 C 418.5,113.5 782.5,113.5 782.5,113.5 C 901.5,113.5 965.0,133.0 1016.5,184.5 C 1068.0,236.0 1087.5,299.5 1087.5,418.5 Z M 1034 166 C 977 109 909 88 782 88 L 418 88 C 288 88 224 108 166 166 C 108 224 88 288 88 418 L 88 782 C 88 912 108 976 166 1034 C 224 1092 288 1112 418 1112 L 782 1112 C 905 1112 979 1089 1034 1034 C 1089 979 1112 905 1112 782 L 1112 418 C 1112 291 1091 223 1034 166 Z"/>
+
+    <!-- Meaningful gradient names -->
+    <linearGradient id="baseFill" x1="600" y1="0" x2="600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="white" stop-opacity="0.01"/>
+    </linearGradient>
+    
+    <radialGradient id="edgeGlow" cx="35" cy="-75" r="1200" gradientUnits="userSpaceOnUse">
+      <stop offset="0.01" stop-color="white" stop-opacity="0.6"/>
+      <stop offset="0.05" stop-color="white" stop-opacity="0.3"/>
+      <stop offset="0.06" stop-color="white" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="cornerHighlight" cx="990" cy="980" r="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="white" stop-opacity="0.2"/>
+      <stop offset="0.4" stop-color="white" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="white" stop-opacity="0.02"/>
+    </radialGradient>
+    <clipPath id="borderClip">
+      <use href="#borderShape" />
+    </clipPath>    
+  </defs>
+  
+  <!-- Canvas background -->
+  <rect id="canvas" width="1200" height="1200" fill="none"/>
+  
+  <g>
+    <!-- Border layer -->
+    <g>
+      <use href="#borderShape" id="border" fill="none" style="stroke: black; stroke-linejoin: round; stroke-linecap: round; stroke-opacity: 0.5; stroke-width: 0.25px;"/>
+    </g>
+    
+    <!-- Background layer -->
+    <g>
+      <use href="#borderShape" id="back" fill="url(#baseFill)" stroke="none"/>
+    </g>
+    
+    <!-- Main shape with edge glow -->
+    <g>
+      <use href="#mainShape" id="outer" fill="url(#edgeGlow)" stroke="none"/>
+    </g>
+    
+    <!-- Corner highlight -->
+    <g>
+      <use href="#mainShape" id="small" fill="url(#cornerHighlight)" stroke="none"/>
+    </g>
+    
+    <g/>
+  </g>
+</svg>

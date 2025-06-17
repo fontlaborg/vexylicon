@@ -1,0 +1,49 @@
+{
+  "name": "default",
+  "version": "1.0",
+  "gradients": {
+    "baseFill": {
+      "type": "linear",
+      "x1": 600,
+      "y1": 0,
+      "x2": 600,
+      "y2": 1000,
+      "stops": [
+        {"offset": 0, "color": "white", "opacity": 0.12},
+        {"offset": 1, "color": "white", "opacity": 0.02}
+      ]
+    },
+    "edgeGlow": {
+      "type": "radial",
+      "cx": 35,
+      "cy": -75,
+      "r": 1200,
+      "stops": [
+        {"offset": 0.01, "color": "white", "opacity": 0.6},
+        {"offset": 0.05, "color": "white", "opacity": 0.3},
+        {"offset": 0.06, "color": "white", "opacity": 0.2},
+        {"offset": 1, "color": "white", "opacity": 0}
+      ]
+    },
+    "cornerHighlight": {
+      "type": "radial",
+      "cx": 990,
+      "cy": 980,
+      "r": 256,
+      "stops": [
+        {"offset": 0, "color": "white", "opacity": 0.2},
+        {"offset": 0.4, "color": "white", "opacity": 0.1},
+        {"offset": 1, "color": "white", "opacity": 0.02}
+      ]
+    }
+  },
+  "colors": {
+    "canvas": "none",
+    "border": "none"
+  },
+  "effects": {
+    "blendMode": "screen",
+    "strokeOpacity": 0.5,
+    "strokeWidth": 0.25
+  }
+}

@@ -1,0 +1,564 @@
+=== Cleanup started at Tue Jun 17 19:50:31 CEST 2025 ===
+python -m uv sync --all-extras
+Resolved 73 packages in 1.70s
+   Building vexylicon @ file:///Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+      Built vexylicon @ file:///Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+Prepared 1 package in 965ms
+Uninstalled 5 packages in 30ms
+Installed 1 package in 2ms
+ - annotated-types==0.7.0
+ - pydantic==2.11.7
+ - pydantic-core==2.33.2
+ - typing-inspection==0.4.1
+ ~ vexylicon==0.1.dev1+g2f76a63.d20250617 (from file:///Users/adam/Developer/vcs/github.fontlaborg/vexylicon)
+python -m uv run hatch clean
+python -m uv run hatch build
+─────────────────────────────────────────────────────────── sdist ───────────────────────────────────────────────────────────
+dist/vexylicon-0.1.dev1+g2f76a63.d20250617.tar.gz
+─────────────────────────────────────────────────────────── wheel ───────────────────────────────────────────────────────────
+dist/vexylicon-0.1.dev1+g2f76a63.d20250617-py3-none-any.whl
+python -m uzpy run -e src
+
+uzpy - Modern Python Usage Tracker
+Edit path: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+Reference path: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+Exclude patterns: src
+Workers: 4
+Cache: enabled
+
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m51[0m | Discovering files...
+[1mINFO    [0m | [36muzpy.discovery[0m:[36m121[0m | Scanning directory: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+[1mINFO    [0m | [36muzpy.discovery[0m:[36m121[0m | Scanning directory: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+[1mINFO    [0m | [36muzpy.discovery[0m:[36m284[0m | Found 4 edit files and 4 reference files
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m66[0m | Found 4 edit files and 4 reference files
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m69[0m | Parsing edit files for constructs...
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m88[0m | Found 11 total constructs
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m91[0m | Finding references...
+[1mINFO    [0m | [36muzpy.analyzer.hybrid_analyzer[0m:[36m81[0m | Hybrid analyzer initialized (Rope: True, Jedi: True)
+[1mINFO    [0m | [36muzpy.discovery[0m:[36m121[0m | Scanning directory: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+[1mINFO    [0m | [36muzpy.analyzer.parallel_analyzer[0m:[36m97[0m | Analyzing 11 constructs in parallel with 16 workers
+2025-06-17 19:50:49.184 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_version, analyzing...
+2025-06-17 19:50:49.184 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_version
+2025-06-17 19:50:49.188 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_package, analyzing...
+2025-06-17 19:50:49.188 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_package
+2025-06-17 19:50:49.209 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_vexylicon_params, analyzing...
+2025-06-17 19:50:49.209 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_vexylicon_params
+2025-06-17 19:50:49.217 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.218 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.218 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.218 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.218 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.219 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_version
+2025-06-17 19:50:49.220 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_basic_generation, analyzing...
+2025-06-17 19:50:49.221 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_basic_generation
+2025-06-17 19:50:49.224 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.225 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_package
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: type object 'ConstructType' has no attribute 'VARIABLE'
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_package
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_package
+2025-06-17 19:50:49.226 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_package
+2025-06-17 19:50:49.227 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:140 - Skipping Rope analysis for module Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_package
+2025-06-17 19:50:49.227 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_package
+2025-06-17 19:50:49.227 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:150 - No results found for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_package
+2025-06-17 19:50:49.227 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 0 references
+2025-06-17 19:50:49.233 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_vexylicon_generator_creation, analyzing...
+2025-06-17 19:50:49.233 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_vexylicon_generator_creation
+2025-06-17 19:50:49.241 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.242 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_vexylicon_params
+2025-06-17 19:50:49.245 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.245 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_version
+2025-06-17 19:50:49.245 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.245 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_version
+2025-06-17 19:50:49.253 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.254 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_basic_generation
+2025-06-17 19:50:49.256 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_invalid_svg_handling, analyzing...
+2025-06-17 19:50:49.256 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_invalid_svg_handling
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_vexylicon_params
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_vexylicon_params
+2025-06-17 19:50:49.267 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.268 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_vexylicon_generator_creation
+2025-06-17 19:50:49.275 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_quality_presets, analyzing...
+2025-06-17 19:50:49.275 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_quality_presets
+2025-06-17 19:50:49.277 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.277 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_basic_generation
+2025-06-17 19:50:49.277 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.277 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_basic_generation
+2025-06-17 19:50:49.279 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_core, analyzing...
+2025-06-17 19:50:49.279 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_core
+2025-06-17 19:50:49.282 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_opacity_calculation, analyzing...
+2025-06-17 19:50:49.282 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_opacity_calculation
+2025-06-17 19:50:49.282 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_path_tools, analyzing...
+2025-06-17 19:50:49.282 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_path_tools
+2025-06-17 19:50:49.285 | DEBUG    | uzpy.analyzer.cached_analyzer:find_usages:104 - Cache miss for test_svg_processor, analyzing...
+2025-06-17 19:50:49.285 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:101 - Running Ruff analysis for test_svg_processor
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_vexylicon_generator_creation
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_vexylicon_generator_creation
+2025-06-17 19:50:49.289 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.290 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.290 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.290 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.290 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.291 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_invalid_svg_handling
+2025-06-17 19:50:49.307 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.308 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_quality_presets
+2025-06-17 19:50:49.313 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.313 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_core
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: type object 'ConstructType' has no attribute 'VARIABLE'
+2025-06-17 19:50:49.314 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_core
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_core
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_core
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:140 - Skipping Rope analysis for module Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_core
+2025-06-17 19:50:49.315 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_core
+2025-06-17 19:50:49.316 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:150 - No results found for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_core
+2025-06-17 19:50:49.316 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 0 references
+2025-06-17 19:50:49.318 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.318 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.318 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_opacity_calculation
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.319 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_invalid_svg_handling
+2025-06-17 19:50:49.320 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.320 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_invalid_svg_handling
+2025-06-17 19:50:49.323 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_path_tools
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: type object 'ConstructType' has no attribute 'VARIABLE'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_path_tools
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.324 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:140 - Skipping Rope analysis for module Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:150 - No results found for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_path_tools
+2025-06-17 19:50:49.325 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 0 references
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_svg_processor.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.ruff_analyzer:_file_uses_construct:176 - Failed to read /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_path_tools.py: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:106 - Ruff found 0 references
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:112 - Running ast-grep analysis for test_svg_processor
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: type object 'ConstructType' has no attribute 'VARIABLE'
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_svg_processor
+2025-06-17 19:50:49.328 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:140 - Skipping Rope analysis for module Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 0 references for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:150 - No results found for Users.adam.Developer.vcs.github.fontlaborg.vexylicon.tests.test_svg_processor
+2025-06-17 19:50:49.329 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 0 references
+2025-06-17 19:50:49.330 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.331 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_quality_presets
+2025-06-17 19:50:49.331 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.331 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_quality_presets
+2025-06-17 19:50:49.339 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:121 - ast-grep analysis failed: 'list' object has no attribute 'get'
+2025-06-17 19:50:49.339 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:127 - Running Pyright analysis for test_opacity_calculation
+2025-06-17 19:50:49.339 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:135 - Pyright analysis failed: 'Construct' object has no attribute 'module_path'
+2025-06-17 19:50:49.339 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:140 - Using traditional analyzer fallback for test_opacity_calculation
+2025-06-17 19:50:49.617 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_version at line 4, column 4
+2025-06-17 19:50:49.647 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_version
+2025-06-17 19:50:49.647 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_version
+2025-06-17 19:50:49.647 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_version at offset 40
+2025-06-17 19:50:49.649 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_basic_generation at line 42, column 4
+2025-06-17 19:50:49.652 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_vexylicon_params at line 19, column 4
+2025-06-17 19:50:49.661 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_version
+2025-06-17 19:50:49.661 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_version
+2025-06-17 19:50:49.661 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_version
+2025-06-17 19:50:49.661 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 1/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 2/11 constructs analyzed
+2025-06-17 19:50:49.666 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_vexylicon_generator_creation at line 11, column 4
+2025-06-17 19:50:49.677 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_basic_generation
+2025-06-17 19:50:49.677 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_basic_generation
+2025-06-17 19:50:49.678 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_basic_generation at offset 1203
+2025-06-17 19:50:49.682 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_invalid_svg_handling at line 57, column 4
+2025-06-17 19:50:49.682 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_vexylicon_params
+2025-06-17 19:50:49.683 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_vexylicon_params
+2025-06-17 19:50:49.683 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_vexylicon_params at offset 494
+2025-06-17 19:50:49.693 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_basic_generation
+2025-06-17 19:50:49.693 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_basic_generation
+2025-06-17 19:50:49.693 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_basic_generation
+2025-06-17 19:50:49.693 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_vexylicon_generator_creation
+2025-06-17 19:50:49.694 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+2025-06-17 19:50:49.694 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_vexylicon_generator_creation
+2025-06-17 19:50:49.694 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_vexylicon_generator_creation at offset 261
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 3/11 constructs analyzed
+2025-06-17 19:50:49.698 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_quality_presets at line 30, column 4
+2025-06-17 19:50:49.700 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_vexylicon_params
+2025-06-17 19:50:49.700 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_vexylicon_params
+2025-06-17 19:50:49.700 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_vexylicon_params
+2025-06-17 19:50:49.700 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 4/11 constructs analyzed
+2025-06-17 19:50:49.701 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:91 - Finding references for test_opacity_calculation at line 66, column 4
+2025-06-17 19:50:49.708 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_invalid_svg_handling
+2025-06-17 19:50:49.709 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_invalid_svg_handling
+2025-06-17 19:50:49.709 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_invalid_svg_handling at offset 1605
+2025-06-17 19:50:49.710 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_vexylicon_generator_creation
+2025-06-17 19:50:49.710 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_vexylicon_generator_creation
+2025-06-17 19:50:49.710 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_vexylicon_generator_creation
+2025-06-17 19:50:49.710 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 5/11 constructs analyzed
+2025-06-17 19:50:49.724 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_invalid_svg_handling
+2025-06-17 19:50:49.724 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_invalid_svg_handling
+2025-06-17 19:50:49.724 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_invalid_svg_handling
+2025-06-17 19:50:49.724 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+2025-06-17 19:50:49.725 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_quality_presets
+2025-06-17 19:50:49.725 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_quality_presets
+2025-06-17 19:50:49.725 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_quality_presets at offset 874
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 6/11 constructs analyzed
+2025-06-17 19:50:49.727 | DEBUG    | uzpy.analyzer.jedi_analyzer:find_usages:121 - Found 1 usage references for test_opacity_calculation
+2025-06-17 19:50:49.727 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:112 - Jedi found 1 references for test_opacity_calculation
+2025-06-17 19:50:49.728 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:161 - Finding usages of test_opacity_calculation at offset 1855
+2025-06-17 19:50:49.740 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_quality_presets
+2025-06-17 19:50:49.740 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_quality_presets
+2025-06-17 19:50:49.740 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_quality_presets
+2025-06-17 19:50:49.741 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 7/11 constructs analyzed
+2025-06-17 19:50:49.742 | DEBUG    | uzpy.analyzer.rope_analyzer:find_usages:179 - Found 1 usage references for test_opacity_calculation
+2025-06-17 19:50:49.743 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:121 - Rope found 1 references for test_opacity_calculation
+2025-06-17 19:50:49.743 | DEBUG    | uzpy.analyzer.hybrid_analyzer:find_usages:138 - Using intersection of results for test_opacity_calculation
+2025-06-17 19:50:49.743 | DEBUG    | uzpy.analyzer.modern_hybrid_analyzer:find_usages:145 - Traditional fallback found 1 references
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 8/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 9/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 10/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m109[0m | Progress: 11/11 constructs analyzed
+[1mINFO    [0m | [36muzpy.analyzer.parallel_analyzer[0m:[36m139[0m | Parallel analysis complete: 11 constructs analyzed
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m117[0m | Found usages for 7/11 constructs
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m118[0m | Total references found: 7
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m122[0m | Updating docstrings...
+[1mINFO    [0m | [36muzpy.modifier.libcst_modifier[0m:[36m507[0m | Will modify 2 files
+[1mINFO    [0m | [36muzpy.modifier.libcst_modifier[0m:[36m465[0m | Updated docstrings in /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py
+[1mINFO    [0m | [36muzpy.modifier.libcst_modifier[0m:[36m465[0m | Updated docstrings in /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_core.py
+[1mINFO    [0m | [36muzpy.pipeline[0m:[36m133[0m | Successfully updated 2/2 files
+⠧ Analyzing codebase...
+
+
+         Analysis Summary         
+┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+┃ Metric                 ┃ Value ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+│ Total Constructs       │ 11    │
+│ Constructs with Usages │ 7     │
+│ Total References Found │ 7     │
+│ Usage Coverage         │ 63.6% │
+└────────────────────────┴───────┘
+                                                             
+                     Top Used Constructs                     
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Construct                         ┃ Type     ┃ References ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ test_version                      │ function │ 1          │
+│ test_basic_generation             │ function │ 1          │
+│ test_vexylicon_params             │ function │ 1          │
+│ test_vexylicon_generator_creation │ function │ 1          │
+│ test_invalid_svg_handling         │ function │ 1          │
+└───────────────────────────────────┴──────────┴────────────┘
+find . -name *.py -exec python -m uv run autoflake -i {} +
+find . -name *.py -exec python -m uv run pyupgrade --py311-plus {} +
+Rewriting src/vexylicon/__version__.py
+src/vexylicon/utils/path_tools.py is non-utf-8 (not supported)
+find . -name *.py -exec python -m uv run ruff check --output-format=github --fix --unsafe-fixes {} +
+::error title=Ruff (UP035),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=5,endLine=8,endColumn=36::src/vexylicon/__version__.py:8:5: UP035 `typing.Tuple` is deprecated, use `tuple` instead
+::error title=Ruff (F401),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=24,endLine=8,endColumn=29::src/vexylicon/__version__.py:8:24: F401 `typing.Tuple` imported but unused
+::error title=Ruff (F401),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/__version__.py,line=8,col=31,endLine=8,endColumn=36::src/vexylicon/__version__.py:8:31: F401 `typing.Union` imported but unused
+::error title=Ruff (A004),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=15,col=18,endLine=15,endColumn=23::src/vexylicon/cli.py:15:18: A004 Import `print` is shadowing a Python builtin
+::error title=Ruff (A002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=39,col=9,endLine=39,endColumn=15::src/vexylicon/cli.py:39:9: A002 Function argument `format` is shadowing a Python builtin
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=84,col=21,endLine=84,endColumn=36::src/vexylicon/cli.py:84:21: PLC0415 `import` should be at the top-level of a file
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=115,col=9,endLine=115,endColumn=18::src/vexylicon/cli.py:115:9: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=115,col=9,endLine=115,endColumn=18::src/vexylicon/cli.py:115:9: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/cli.py,line=207,col=13,endLine=207,endColumn=28::src/vexylicon/cli.py:207:13: PLC0415 `import` should be at the top-level of a file
+::error title=Ruff (E902),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/path_tools.py,line=1,col=1,endLine=1,endColumn=1::src/vexylicon/utils/path_tools.py:1:1: E902 stream did not contain valid UTF-8
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=80,col=24,endLine=80,endColumn=30::src/vexylicon/utils/svg_processor.py:80:24: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=80,col=24,endLine=80,endColumn=30::src/vexylicon/utils/svg_processor.py:80:24: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=180,col=25,endLine=180,endColumn=37::src/vexylicon/utils/svg_processor.py:180:25: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=180,col=25,endLine=180,endColumn=37::src/vexylicon/utils/svg_processor.py:180:25: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (FBT001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=194,col=40,endLine=194,endColumn=52::src/vexylicon/utils/svg_processor.py:194:40: FBT001 Boolean-typed positional argument in function definition
+::error title=Ruff (FBT002),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/utils/svg_processor.py,line=194,col=40,endLine=194,endColumn=52::src/vexylicon/utils/svg_processor.py:194:40: FBT002 Boolean default positional argument in function definition
+::error title=Ruff (ARG001),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/src/vexylicon/vexylicon.py,line=27,col=35,endLine=27,endColumn=41::src/vexylicon/vexylicon.py:27:35: ARG001 Unused function argument: `config`
+::error title=Ruff (PLC0415),file=/Users/adam/Developer/vcs/github.fontlaborg/vexylicon/tests/test_package.py,line=8,col=5,endLine=8,endColumn=21::tests/test_package.py:8:5: PLC0415 `import` should be at the top-level of a file
+find . -name *.py -exec python -m uv run ruff format --respect-gitignore --target-version py311 {} +
+error: Failed to read src/vexylicon/utils/path_tools.py: stream did not contain valid UTF-8
+1 file reformatted, 7 files left unchanged
+2 files reformatted, 2 files left unchanged
+python -m uv run ty check
+WARN ty is pre-release software and not ready for production use. Expect to encounter bugs, missing features, and fatal errors.
+error[unresolved-import]: Cannot resolve imported module `cairosvg`
+  --> src/vexylicon/cli.py:84:28
+   |
+82 |                 # Convert to PNG using cairosvg
+83 |                 try:
+84 |                     import cairosvg
+   |                            ^^^^^^^^
+85 |
+86 |                     output_path = output_path.with_suffix(".png")
+   |
+info: make sure your Python environment is properly configured: https://github.com/astral-sh/ty/blob/main/docs/README.md#python-environment
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Cannot resolve imported module `cairosvg`
+   --> src/vexylicon/cli.py:207:20
+    |
+205 |         """
+206 |         try:
+207 |             import cairosvg
+    |                    ^^^^^^^^
+208 |         except ImportError:
+209 |             print("[red]Error: Preview requires cairosvg. Install with: pip install cairosvg")
+    |
+info: make sure your Python environment is properly configured: https://github.com/astral-sh/ty/blob/main/docs/README.md#python-environment
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `lxml` has no member `etree`
+  --> src/vexylicon/core.py:16:18
+   |
+14 | from pathlib import Path
+15 |
+16 | from lxml import etree
+   |                  ^^^^^
+17 |
+18 | from vexylicon.utils import (
+   |
+info: rule `unresolved-import` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `append` on type `Unknown | None` is possibly unbound
+   --> src/vexylicon/core.py:317:13
+    |
+315 |             clip_use = processor.create_element("use", href="#inner")
+316 |             clip_path.append(clip_use)
+317 |             defs.append(clip_path)
+    |             ^^^^^^^^^^^
+318 |
+319 |         # Create theme-aware CSS
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+warning[possibly-unbound-attribute]: Attribute `append` on type `Unknown | None` is possibly unbound
+   --> src/vexylicon/core.py:342:9
+    |
+340 |             }
+341 |         """
+342 |         processor.get_defs().append(style)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+343 |
+344 |     def _inject_payload(self, processor: SVGProcessor, payload_svg: Path | str) -> None:
+    |
+info: rule `possibly-unbound-attribute` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `align_path_start`
+ --> src/vexylicon/utils/__init__.py:6:5
+  |
+5 | from vexylicon.utils.path_tools import (
+6 |     align_path_start,
+  |     ^^^^^^^^^^^^^^^^
+7 |     generate_ring_paths,
+8 |     interpolate_segment,
+  |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `generate_ring_paths`
+ --> src/vexylicon/utils/__init__.py:7:5
+  |
+5 | from vexylicon.utils.path_tools import (
+6 |     align_path_start,
+7 |     generate_ring_paths,
+  |     ^^^^^^^^^^^^^^^^^^^
+8 |     interpolate_segment,
+9 |     parse_dual_contour_path,
+  |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `interpolate_segment`
+  --> src/vexylicon/utils/__init__.py:8:5
+   |
+ 6 |     align_path_start,
+ 7 |     generate_ring_paths,
+ 8 |     interpolate_segment,
+   |     ^^^^^^^^^^^^^^^^^^^
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `parse_dual_contour_path`
+  --> src/vexylicon/utils/__init__.py:9:5
+   |
+ 7 |     generate_ring_paths,
+ 8 |     interpolate_segment,
+ 9 |     parse_dual_contour_path,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `path_bbox`
+  --> src/vexylicon/utils/__init__.py:10:5
+   |
+ 8 |     interpolate_segment,
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+   |     ^^^^^^^^^
+11 |     round_svg_coordinates,
+12 |     to_cubic_list,
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `round_svg_coordinates`
+  --> src/vexylicon/utils/__init__.py:11:5
+   |
+ 9 |     parse_dual_contour_path,
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+   |     ^^^^^^^^^^^^^^^^^^^^^
+12 |     to_cubic_list,
+13 | )
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[unresolved-import]: Module `vexylicon.utils.path_tools` has no member `to_cubic_list`
+  --> src/vexylicon/utils/__init__.py:12:5
+   |
+10 |     path_bbox,
+11 |     round_svg_coordinates,
+12 |     to_cubic_list,
+   |     ^^^^^^^^^^^^^
+13 | )
+14 | from vexylicon.utils.svg_processor import SVGProcessor
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[io]: Failed to read file: stream did not contain valid UTF-8
+--> src/vexylicon/utils/path_tools.py:1:1
+ |
+ |
+
+error[unresolved-import]: Module `lxml` has no member `etree`
+  --> src/vexylicon/utils/svg_processor.py:14:18
+   |
+12 | from pathlib import Path
+13 |
+14 | from lxml import etree
+   |                  ^^^^^
+15 |
+16 | # SVG namespace
+   |
+info: rule `unresolved-import` is enabled by default
+
+error[missing-argument]: No arguments provided for required parameters `canvas`, `border`
+   --> src/vexylicon/utils/theme_loader.py:118:22
+    |
+116 |         # Convert nested structures to dataclasses if necessary
+117 |         if not isinstance(colors, ThemeColors):
+118 |             colors = ThemeColors(**colors)
+    |                      ^^^^^^^^^^^^^^^^^^^^^
+119 |         if not isinstance(effects, ThemeEffects):
+120 |             effects = ThemeEffects(**effects)
+    |
+info: rule `missing-argument` is enabled by default
+
+Found 15 diagnostics
+python -m uv run mypy --config-file pyproject.toml src/imgcolorshine tests
+mypy: can't read file 'src/imgcolorshine': No such file or directory
+npx repomix -i varia,.specstory,AGENT.md,CLAUDE.md,PLAN.md,SPEC.md,llms.txt,.cursorrules,docs -o llms.txt .
+
+📦 Repomix v0.3.7
+
+No custom config found at repomix.config.json or global config at /Users/adam/.config/repomix/repomix.config.json.
+You can add a config file for additional settings. Please check https://github.com/yamadashy/repomix for more information.
+⠙ Collecting files...
+[2K[1A[2K[G⠹ Collect file... (6/31) src/vexylicon/utils/__init__.py
+[2K[1A[2K[G⠸ Running security check...
+[2K[1A[2K[G⠼ Processing files...
+[2K[1A[2K[G⠴ Writing output file...
+[2K[1A[2K[G⠦ Calculating metrics...
+[2K[1A[2K[G⠧ Calculating metrics...
+[2K[1A[2K[G⠇ Calculating metrics...
+[2K[1A[2K[G⠏ Calculating metrics... (14/29) testdata/payload.svg
+[2K[1A[2K[G✔ Packing completed successfully!
+
+📈 Top 5 Files by Character Count and Token Count:
+──────────────────────────────────────────────────
+1.  cleanup.txt (52,387 chars, 17,701 tokens, 39.2%)
+2.  pyproject.toml (17,520 chars, 4,138 tokens, 9.2%)
+3.  src/vexylicon/core.py (13,755 chars, 2,962 tokens, 6.6%)
+4.  src/vexylicon/utils/theme_loader.py (8,313 chars, 1,773 tokens, 3.9%)
+5.  testdata/test.html (7,816 chars, 1,838 tokens, 4.1%)
+
+🔎 Security Check:
+──────────────────
+✔ No suspicious files detected.
+
+📊 Pack Summary:
+────────────────
+  Total Files: 29 files
+  Total Chars: 159,777 chars
+ Total Tokens: 46,108 tokens
+       Output: llms.txt
+     Security: ✔ No suspicious files detected
+
+🎉 All Done!
+Your repository has been successfully packed.
+
+💡 Repomix is now available in your browser! Try it at https://repomix.com
+python -m uv run hatch test
+Checking dependencies
+Syncing dependencies
+============================= test session starts ==============================
+platform darwin -- Python 3.12.8, pytest-8.4.0, pluggy-1.6.0 -- /Users/adam/Developer/vcs/github.fontlaborg/vexylicon/.venv/bin/python3
+cachedir: .pytest_cache
+benchmark: 5.1.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /Users/adam/Developer/vcs/github.fontlaborg/vexylicon
+configfile: pyproject.toml
+plugins: xdist-3.7.0, cov-6.2.1, benchmark-5.1.0, asyncio-1.0.0
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 7 items
+
+tests/test_core.py::test_vexylicon_generator_creation PASSED             [ 14%]
+tests/test_core.py::test_vexylicon_params PASSED                         [ 28%]
+tests/test_core.py::test_quality_presets PASSED                          [ 42%]
+tests/test_core.py::test_basic_generation PASSED                         [ 57%]
+tests/test_core.py::test_invalid_svg_handling PASSED                     [ 71%]
+tests/test_core.py::test_opacity_calculation PASSED                      [ 85%]
+tests/test_package.py::test_version PASSED                               [100%]
+
+============================= slowest 10 durations =============================
+0.01s call     tests/test_core.py::test_basic_generation
+0.01s call     tests/test_core.py::test_invalid_svg_handling
+
+(8 durations < 0.005s hidden.  Use -vv to show these durations.)
+============================== 7 passed in 0.66s ===============================
+=== Cleanup completed at Tue Jun 17 19:50:58 CEST 2025 ===

@@ -45,3 +45,6 @@ echo "python -m uv run hatch test"
 python -m uv run hatch test
 
 echo "=== Cleanup completed at $(date) ==="
+
+python ./testdata/example.py
+fd -e svg -x svg2png-adam.sh {} 1200

@@ -1,137 +1,267 @@
 # Vexylicon
 
-A Python package for creating SVG icon effects inspired by Apple’s liquid glass.
+Vexylicon is a Python package that empowers you to create stunning SVG icon effects inspired by Apple’s modern "liquid glass" design language. If you've admired the translucent, subtly three-dimensional icons on recent Apple platforms, Vexylicon helps you achieve that same polished look for your own SVG icons and logos.
 
-Apple’s 2025 “Liquid Glass” design language brings real‑time translucency, dynamic light refraction and subtle depth cues to every Apple platform.
+## What it Does
 
-Vexylicon lets you generate those same glassy, tactile layers for any icon or logo, straight from Python.
+Vexylicon algorithmically generates these sophisticated visual effects:
 
-- **Vexylicon** takes a _dual‑contour_ SVG (e.g. `best_base.svg`) and algorithmically extrudes it into up to 32 concentric “glass rings”, each with progressive opacity and optional blur.
-- It embeds Apple‑style **Liquid Glass gradients** and groups so your artwork looks native in iOS 26, macOS Tahoe and watchOS 12.
-- A JSON **theme system** and CLI/Python API let you swap gradients, duplicate them for light/dark variants, batch‑process folders, or inject any payload artwork inside the beveled mask.
-- Built with modern Python 3.11+, `svgpathtools`, `lxml`, Fire CLI and Rich logging .
+*   **Beveled Glass Layers:** It takes a specially prepared dual-contour SVG (an SVG with an outer shape and an inner hole) and extrudes it into a series of concentric "glass rings." These rings build up to create a believable sense of depth and volume.
+*   **Apple-Inspired Gradients:** The generated icons automatically incorporate gradients similar to those used in Apple's Liquid Glass style, ensuring your artwork feels native on platforms like iOS, macOS, and watchOS.
+*   **Theme Customization:** A flexible JSON-based theme system allows you to define your own color schemes and gradient styles. Vexylicon can also automatically generate light and dark variants of themes.
+*   **Payload Injection:** You can embed your existing logos, symbols, or any other SVG artwork inside the beveled glass mask, seamlessly integrating them into the effect.
+*   **Vector Quality:** All effects are generated as vector graphics, meaning your icons will scale crisply to any size without loss of quality, perfect for Retina/XDR displays.
+*   **Optional Blur:** Add a subtle blur to the glass rings for a softer, more diffused appearance.
 
-## 1. What & Why
+## Who It's For
 
-### 1.1. Liquid Glass in Apple’s 2025 OS family
+*   **Designers:** Quickly apply a modern, sophisticated glass effect to your icon designs without manual vector manipulation.
+*   **Developers:** Programmatically generate icons that match the latest UI trends, especially for applications targeting Apple ecosystems.
+*   **Anyone wanting to elevate their SVG icons:** If you want to add a touch of elegance and depth to your digital assets, Vexylicon provides a powerful tool to do so.
 
-Apple introduced **Liquid Glass** at WWDC 25 as the new cross‑platform material that “reflects and refracts its surroundings while staying out of the way of content” ([apple.com][1]). It’s now the default chrome for navigation bars, sidebars and widgets across iOS 26, iPadOS 26, macOS Tahoe and visionOS 26 ([theverge.com][2], [developer.apple.com][3]). Developers can apply the effect with the SwiftUI `.glassEffect()` modifier ([developer.apple.com][4], [developer.apple.com][5]), and Apple’s HIG adds guidelines for contrast, depth and accessibility ([developer.apple.com][6], [developer.apple.com][7]). Early reviews praise its “hyper‑real, almost tactile” feel ([creativebloq.com][8]), while noting performance/battery trade‑offs Apple is actively tuning in beta 2 ([macrumors.com][9]).
+## Why It's Useful
 
-### 1.2. Why Vexylicon helps
+*   **Adds Visual Appeal:** Creates icons with a tactile, hyper-realistic feel that stands out.
+*   **Maintains Scalability:** Unlike raster effects, your icons remain sharp and editable vectors.
+*   **Automates Variants:** Easily generate light and dark mode versions of your icons from a single theme definition.
+*   **Consistent Styling:** Achieve a uniform and professional look across your icon set.
+*   **Saves Time:** Automates a complex visual effect that would be time-consuming to create manually.
 
-Vexylicon helps you:
+## Installation
 
-- **Adds believable volume** through mathematically‑interpolated bevel rings (no raster layers).
-- **Keeps vectors editable** so icons scale crisply on Retina/XDR displays.
-- **Generates light/dark gradient variants** (or your own themes) automatically.
+Vexylicon requires **Python 3.11+**.
 
-The name “Vexylicon” combines “vector”, “silicon” (glass) and “icon”.
-
-## 2. How Vexylicon Works — Under the Hood
-
-### 2.1. Dual‑Contour Base Template
-
-`assets/best_base.svg` contains two closed paths: an outer border and an inner hole — both share identical segment counts. A `<use>` reference draws the contour multiple times so gradients can be reused without duplicating geometry.
-
-### 2.2. Path Analysis & Interpolation
-
-`utils/path_tools.py` parses the two contours, converts every segment to cubic Béziers, and **rotates** the outer path so its first point is nearest the inner start point (`align_path_start`) — this prevents “twisting” when interpolating. `generate_ring_paths()` then linearly interpolates **N** intermediate rings (quality presets map to 8 / 16 / 24 / 32 steps) and rounds all coordinates for minimal SVG size.
-
-### 2.3. Opacity Progression
-
-`core.VexyliconGenerator._calculate_opacities()` supports four curves:
-
-| Mode | Math | Visual feel | | -- | -- | | | 1 | `t` | Flat, frosted | | 2 | `1 – t²` | Vintage macOS Aqua | | 3 | `t²` | Moderate depth | | 4 (default) | `t⁴` | Deep, crystal‑like |
-
-Each ring gets `fill-opacity` plus `mix-blend-mode: screen` so underlying content tints the highlight—identical to Apple’s live refractive pass ([developer.apple.com][10]).
-
-### 2.4. Theme Injection
-
-`utils/theme_loader.py` validates JSON themes with dataclasses; `core._apply_theme()` materialises gradients via DOM editing (`SVGProcessor.add_gradient`). A helper can auto‑generate dark variants by boosting stop alpha 20 % .
-
-### 2.5. Optional Payload
-
-Any SVG (or path to one) can be clipped to the inner contour via `clipPath #borderClip`, letting you drop brand artwork, illustrations, even animated SVGs beneath the beveled glass. Example: the included `glass_payload_ultra.png` shows a multi‑color butterfly payload at _ultra_ quality.
-
-## 3. Installation
+You can install Vexylicon using pip:
 
 ```bash
-pip install vexylicon        # PyPI (once released)
-# OR
-git clone https://github.com/fontlaborg/vexylicon
+# Once released on PyPI (check project status for availability)
+pip install vexylicon
+```
+
+Alternatively, you can install it directly from the source for the latest version:
+
+```bash
+git clone https://github.com/fontlaborg/vexylicon.git
+cd vexylicon
 pip install -e .
 ```
+Vexylicon has a small dependency stack, primarily `lxml` for SVG processing and `python-fire` for the CLI. For PNG export, `cairosvg` is required.
 
-Requires Python 3.11+ and the small C‑free dependency stack listed in _pyproject.toml_.
+## How to Use (Command Line Interface - CLI)
 
-## 4. CLI Usage
+The `vexylicon` command-line tool is the easiest way to get started.
 
+**1. Basic Usage:**
+To generate a glass effect icon from the default base SVG (included with the package) and save it as `output.svg`:
 ```bash
-# Generate a 1200 × 1200 SVG with default theme
-vexylicon create --output icon.svg
+vexylicon create --output my_icon.svg
+```
 
-# High‑quality, dark variant with blur and embedded logo
+**2. Common Options:**
+You can customize the output with various options:
+```bash
 vexylicon create \
     --output logo_glass.svg \
-    --payload assets/my_logo.svg \
+    --payload path/to/your_logo.svg \
     --quality ultra \
     --theme default-dark \
-    --blur 4
+    --blur 2.0
 ```
+*   `--output <filename>`: Specifies the output file name.
+*   `--payload <path_to_svg>`: Path to an SVG file you want to embed within the glass effect.
+*   `--quality <level>`: Sets the number of bevel steps. Options: `low` (8), `medium` (16), `high` (24), `ultra` (32).
+*   `--theme <name_or_path>`: Specifies the theme. Use a built-in theme name (e.g., `default`, `dark`) or a path to a custom theme JSON file.
+*   `--steps <number>`: Manually set the number of bevel steps, overriding `--quality`.
+*   `--blur <value>`: Applies a Gaussian blur effect to the bevel steps (e.g., `1.0`, `2.5`).
 
-Other sub‑commands:
+**3. Other CLI Commands:**
+*   `vexylicon batch <input_dir> <output_dir> [options]`: Process multiple SVG files from an input directory and save them to an output directory.
+*   `vexylicon themes`: List available built-in and custom themes.
+*   `vexylicon preview <input_svg> [output_png]`: Generate a PNG preview of a Vexylicon SVG (requires `cairosvg`).
+*   `vexylicon shape2base <input_svg> [output_base_svg]`: A utility to help convert a simple, flat SVG shape into the dual-contour base template required by Vexylicon.
 
-| Command | Purpose | | | | | `batch` | Recursively process folders of SVGs. | | `themes` | List built‑in & custom themes. | | `preview` | Rasterise any generated SVG to PNG (uses CairoSVG). |
+## How to Use (Python API)
 
-## 5. Python API
+For more control or integration into your Python projects, use the Vexylicon API:
 
 ```python
+from pathlib import Path
 from vexylicon import VexyliconGenerator, VexyliconParams
+from vexylicon.core import OpacityProgression # For opacity_progression enum
 
-params = VexyliconParams(steps=32, blur=2.0, opacity_progression=4)
-gen    = VexyliconGenerator(theme="default", params=params)
+# 1. Configure parameters for the generation
+params = VexyliconParams(
+    steps=32,  # Corresponds to 'ultra' quality
+    blur=2.0,
+    opacity_progression=OpacityProgression.MORE_EXPONENTIAL, # Default, deep crystal-like
+    # opacity_start=0.9, # Default
+    # opacity_end=0.05   # Default
+)
 
-glass_svg = gen.generate(payload_svg="brand.svg")
-Path("brand_liquid.svg").write_text(glass_svg, encoding="utf-8")
+# 2. Initialize the generator with a theme and parameters
+#    Themes can be names of built-in themes or a path to a custom theme JSON file.
+generator = VexyliconGenerator(theme="default", params=params)
+
+# 3. Generate the SVG
+#    You can provide a path to an SVG file to be used as a payload.
+payload_svg_path = "path/to/your_brand_logo.svg" # Optional
+# payload_svg_path = None # If no payload
+
+try:
+    glass_svg_content = generator.generate(payload_svg=payload_svg_path)
+
+    # 4. Save the output
+    output_file = Path("brand_liquid_icon.svg")
+    output_file.write_text(glass_svg_content, encoding="utf-8")
+    print(f"Successfully generated {output_file}")
+
+except Exception as e:
+    print(f"An error occurred: {e}")
+
 ```
 
-## 6. Custom Themes
+## How Vexylicon Works: A Technical Deep Dive
 
-1. Copy `assets/themes/default.json` and change stops, blend modes, stroke widths, etc.
-2. Place the file in `~/.config/vexylicon/themes/` or pass the path directly:
+This section describes the internal workings of Vexylicon, its architecture, and key algorithms.
 
-```bash
-vexylicon create --theme my_theme.json
-```
+### Core Architecture
 
-The loader validates gradient structure and exposes `ThemeLoader.create_dark_variant()` to auto‑tune opacity for dark mode.
+Vexylicon's functionality is primarily organized into a core generation engine, a command-line interface, and several utility modules:
 
-## 7. Performance Notes
+*   **`src/vexylicon/core.py`**: Contains `VexyliconGenerator`, the main class responsible for orchestrating the SVG effect generation. It takes parameters and a theme, processes a base SVG, and outputs the final glass-effect SVG.
+*   **`src/vexylicon/cli.py`**: Implements the command-line interface using `python-fire`. It parses arguments and calls `VexyliconGenerator` and other utilities.
+*   **`src/vexylicon/utils/`**:
+    *   **`svg_processor.py`**: Provides the `SVGProcessor` class, which is a wrapper around `lxml` for robust and safe manipulation of SVG XML documents. **Crucially, Vexylicon avoids direct string manipulation of SVG content, relying on `lxml`'s DOM capabilities.**
+    *   **`path_tools.py`**: Includes functions for SVG path data manipulation, such as `parse_dual_contour_path` (to separate the two paths from a compound path string) and `generate_ring_paths` (to interpolate intermediate paths between the outer and inner contours). It also handles path alignment to prevent twisting during interpolation.
+    *   **`theme_loader.py`**: Defines `ThemeLoader` for loading and validating theme JSON files. It uses Pydantic for data validation and can discover themes from predefined user directories or load them from a direct path.
+    *   **`base_builder.py`**: Contains `BaseSVGBuilder`, a utility to help create the necessary dual-contour base SVG from a simpler single-path SVG.
+*   **`src/vexylicon/assets/`**:
+    *   `best_base.svg`: The canonical dual-contour SVG template. This file is crucial as it defines the expected input structure for the glass effect generation, including named elements like `#mainShape`, `#borderShape`, and gradient placeholders.
+    *   `themes/default.json`: An example theme file showcasing the JSON structure for defining colors and gradients.
 
-Apple recommends masking expensive blur to small regions and caching `GlassEffectContainer`s ([developer.apple.com][11]); Vexylicon’s SVGs rasterise in _Safari_ and _Quartz_ with GPU compositing, matching those guidelines. On iPhone 16 Pro the default 24‑step icon measures \~55 KB and renders at 120 fps ([lifewire.com][12]).
+### Generation Process (`VexyliconGenerator.generate`)
 
-## 8. Roadmap
+1.  **Initialization**: The `VexyliconGenerator` is initialized with `VexyliconParams` (controlling steps, blur, opacity) and a `Theme` object (loaded by `ThemeLoader`). It also loads the content of `assets/best_base.svg`.
 
-- Add a **Gradio‑Lite** web playground.
-- Ship extra themes (vibrant accent tints, Glassmorphism neon).
-- Support union‑splitting so any **single‑contour** logo can be auto‑converted to a dual‑contour base.
+2.  **Base SVG Parsing**: An `SVGProcessor` instance is created with the `base_svg_content`.
 
-## 9. License & Credits
+3.  **Bevel Step Generation (`_generate_bevel_steps`)**:
+    *   The main dual-contour path data is extracted from the `#mainShape` element (or the first `<path>` if not found by ID) in the base SVG.
+    *   `parse_dual_contour_path` separates this into an `outer_contour` and an `inner_contour`.
+    *   `generate_ring_paths` interpolates `N` intermediate paths (where `N` is `params.steps`) between the `outer_contour` and `inner_contour`. This function ensures paths are aligned (e.g., by rotating the outer path so its start point is nearest the inner start point) to prevent twisting. All path segments are typically converted to cubic Béziers for smooth interpolation.
+    *   A group element `<g id="bevelSteps">` is created.
+    *   Opacity values for each ring are calculated by `_calculate_opacities` based on the `params.opacity_progression` mode (Linear, Decreasing, Exponential, More Exponential).
+    *   For each interpolated ring path:
+        *   A new `<path>` element is created.
+        *   It's assigned an `id` (e.g., `bevelStep-i`).
+        *   `fill` is set to `url(#edgeGlow)` (or another themeable gradient).
+        *   `fill-opacity` is set to the calculated opacity for that ring.
+        *   `mix-blend-mode` is set to `screen` to achieve the characteristic glass highlight effect.
+        *   If `params.blur > 0`, an SVG blur filter (`<feGaussianBlur>`) is defined in `<defs>` (if not already present for that blur value) and applied to the path via the `filter` attribute.
+        *   The new path is appended to the `bevelSteps` group.
+    *   The `bevelSteps` group is appended to the SVG root.
+    *   A similar process is applied for the `#smallShape` if present, creating `#smallBevelSteps` typically using a `#cornerHighlight` gradient.
 
-Vexylicon is MIT‑licensed and built by **Fontlab Ltd.**. Inspired by Apple’s Liquid Glass material ([developer.apple.com][3], [developer.apple.com][13]) and countless designers exploring modern glassmorphism.
+4.  **Theme Application (`_apply_theme`)**:
+    *   Gradients defined in the loaded `Theme` object (e.g., `edgeGlow`, `cornerHighlight`) are added to the SVG's `<defs>` section by `SVGProcessor.add_gradient`.
+    *   Theme colors (e.g., for canvas background, border) are applied to corresponding elements if they exist (e.g., `#canvas`, `#border`).
 
-Happy glass‑crafting 🎉!
+5.  **Theme-Aware Grouping (`_create_theme_groups`)**: This step primarily ensures that necessary structures like clip paths are correctly defined. For example, a `<clipPath id="borderClip">` using `#borderShape` is created/verified in `<defs>`. This clip path is essential for the payload injection.
 
-[1]: https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/?utm_source=chatgpt.com 'Apple introduces a delightful and elegant new software design'
-[2]: https://www.theverge.com/news/682636/apple-liquid-glass-design-theme-wwdc-2025?utm_source=chatgpt.com "Apple's new design language is Liquid Glass - The Verge"
-[3]: https://developer.apple.com/documentation/technologyoverviews/liquid-glass?utm_source=chatgpt.com 'Liquid Glass | Apple Developer Documentation'
-[4]: https://developer.apple.com/documentation/SwiftUI/View/glassEffect%28_%3Ain%3AisEnabled%3A%29?utm_source=chatgpt.com 'glassEffect(_:in:isEnabled:) | Apple Developer Documentation'
-[5]: https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views?utm_source=chatgpt.com 'Applying Liquid Glass to custom views - Apple Developer'
-[6]: https://developer.apple.com/design/human-interface-guidelines/materials?utm_source=chatgpt.com 'Materials | Apple Developer Documentation'
-[7]: https://developer.apple.com/design/human-interface-guidelines?utm_source=chatgpt.com 'Human Interface Guidelines | Apple Developer Documentation'
-[8]: https://www.creativebloq.com/tech/you-can-hate-ios-26-and-liquid-glass-but-the-steve-jobs-nostalgia-needs-to-stop?utm_source=chatgpt.com 'The hard truth is Steve Jobs would have loved iOS 26 and Liquid Glass'
-[9]: https://www.macrumors.com/2025/06/13/apple-seeds-revised-ios-26-developer-beta/?utm_source=chatgpt.com 'Apple Seeds Revised iOS 26 Developer Beta to Fix Battery Issue'
-[10]: https://developer.apple.com/videos/play/wwdc2025/219/?utm_source=chatgpt.com 'Meet Liquid Glass - WWDC25 - Videos - Apple Developer'
-[11]: https://developer.apple.com/videos/play/wwdc2025/256?utm_source=chatgpt.com "What's new in SwiftUI - WWDC25 - Videos - Apple Developer"
-[12]: https://www.lifewire.com/apple-liquid-glass-redesign-usability-11756024?utm_source=chatgpt.com "Apple's Liquid Glass Looks Slick-But Is It Actually More User-Friendly?"
-[13]: https://developer.apple.com/documentation/updates/wwdc2025?utm_source=chatgpt.com 'WWDC25 | Apple Developer Documentation'
+6.  **Payload Injection (`_inject_payload`)**:
+    *   If a `payload_svg` is provided (as a path or string):
+        *   It's parsed into a new `SVGProcessor` instance.
+        *   A `<g id="payload">` element is created in the main SVG.
+        *   This group is assigned `clip-path="url(#borderClip)"` to confine the payload within the inner boundary of the glass effect.
+        *   The content (excluding `<defs>`) from the `payload_svg`'s root is imported into this `payload` group.
+        *   The `payload` group is inserted into the main SVG, typically before the `#back` element or appended to the root.
+
+7.  **Output**: The `SVGProcessor` serializes the modified `lxml` tree back into an SVG string.
+
+### Key Technical Choices & Constraints
+
+*   **lxml for SVG Manipulation**: All SVG modifications are done via the `lxml` library. This ensures correctness and avoids common pitfalls of string-based XML manipulation.
+*   **`svgpathtools` for Path Math**: While `lxml` handles the XML structure, `svgpathtools` (or similar path mathematics libraries, possibly vendored or used carefully) is likely involved in `path_tools.py` for operations like path parsing, length calculations, and interpolation of Bézier curves.
+*   **Dual-Contour Requirement**: The core algorithm relies on a base SVG that has two defined contours (an outer boundary and an inner hole) with compatible path structures for interpolation. The `shape2base` command helps create these.
+*   **Python 3.11+**: The codebase utilizes features and typing syntax available in Python 3.11 or newer.
+*   **Minimal Dependencies**: The project aims to keep its dependency list small: `lxml`, `fire`, `pydantic`, `rich`. `svgpathtools` is a key component for path operations. `cairosvg` is an optional extra for PNG output.
+
+## Coding and Contribution Guidelines
+
+We welcome contributions to Vexylicon! Please adhere to the following guidelines. These are largely derived from the project's `CLAUDE.md` and `AGENT.md` files.
+
+### Code Quality & Style
+
+*   **Dependency Management**: Use `uv pip` for managing Python environments and dependencies.
+*   **Type Hinting**: All public functions and methods must have full type hints.
+*   **Docstrings**: Use NumPy style for docstrings.
+*   **Formatting**: Code must be formatted with `black`.
+*   **Linting**: Code must pass `ruff check --fix`.
+*   **Testing**: Aim for >90% test coverage. Write tests for new features and bug fixes.
+*   **Python Version**: Ensure compatibility with Python 3.11 and newer.
+*   **File Path Comments**: Include a comment like `# this_file: src/vexylicon/utils/svg_processor.py` at the top of each Python file.
+
+### SVG Processing Rules
+
+*   **Always use `lxml`**: For any reading, modification, or writing of SVG files.
+*   **Never use string replacement**: For SVG content manipulation. This is error-prone.
+*   **Preserve Namespaces and Attributes**: Be mindful of existing SVG structure.
+*   **Coordinate Precision**: Round floating-point coordinates in SVG output to a reasonable number of decimal places (e.g., 2 or 3) to keep file sizes manageable without sacrificing visual quality.
+
+### Error Handling
+
+*   Use the defined custom exceptions where appropriate: `VexyliconError`, `InvalidSVGError`, `ThemeValidationError`.
+*   Provide clear and actionable error messages.
+
+### Development Workflow
+
+1.  **Understand the Task**: Before coding, thoroughly read the existing code, relevant issues, `PLAN.md`, and `TODO.md`. Ensure you understand the dual-contour SVG format.
+2.  **Branching**: Create a new branch for your feature or bug fix.
+3.  **Incremental Development**: Work in small, testable increments.
+4.  **Testing**: Write tests as you develop. Run `pytest` frequently.
+5.  **Documentation**: Update docstrings, `README.md` (if applicable), and `CHANGELOG.md` for any user-facing changes or significant internal modifications. Keep `TODO.md` current if you identify further tasks.
+6.  **Pre-commit Checks**: Before committing, run:
+    ```bash
+    black src tests
+    ruff check --fix src tests
+    pytest
+    mypy src
+    ```
+7.  **Commit Messages**: Write clear and concise commit messages.
+8.  **Pull Request**: Submit a pull request to the main repository. Describe your changes and link any relevant issues.
+
+### Reporting Bugs
+
+*   Please report bugs via GitHub Issues.
+*   Include:
+    *   Vexylicon version (e.g., from `pip show vexylicon`, or commit hash if from source).
+    *   Python version.
+    *   Operating system.
+    *   Steps to reproduce the bug.
+    *   Expected behavior.
+    *   Actual behavior (including any error messages or incorrect output SVGs).
+    *   Input files (base SVG, payload SVG, theme JSON if custom) if relevant and shareable.
+
+### Suggesting Features
+
+*   Feature requests are also welcome via GitHub Issues.
+*   Provide a clear description of the proposed feature and why it would be useful.
+
+## Roadmap Highlights
+
+The following are some of the planned enhancements for Vexylicon:
+
+*   **Gradio-Lite Web Playground:** An interactive web interface for trying out Vexylicon directly in the browser.
+*   **Additional Themes:** Shipping more built-in themes, including vibrant accent tints and Glassmorphism neon styles.
+*   **Single-Contour Conversion:** Enhanced `shape2base` or new tools to automatically convert single-contour logos/icons into the required dual-contour base by intelligently creating an inner path.
+
+## License
+
+Vexylicon is open-source software licensed under the **MIT License**.
+It is created and maintained by **Fontlab Ltd.**
+
+---
+
+Inspired by Apple’s Liquid Glass material and the broader design community exploring glassmorphism.
+
+Happy glass-crafting! 🎉
